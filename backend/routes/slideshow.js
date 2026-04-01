@@ -7,29 +7,9 @@ const Slideshow = require('../models/Slideshow');
 const { protect } = require('../middleware/auth');
 
 // Configure multer for file uploads
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/slideshow/')
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, 'slide_' + uniqueSuffix + path.extname(file.originalname))
-  }
-});
+const { upload, deleteFile } = require('../middleware/upload');
 
-const upload = multer({
-  storage,
-  limits: {
-    fileSize: parseInt(process.env.MAX_FILE_SIZE) || 50 * 1024 * 1024 // 50MB default
-  },
-  fileFilter: (req, file, cb) => {
-    if (file.mimetype.startsWith('image/')) {
-      cb(null, true);
-    } else {
-      cb(new Error('Only image files are allowed'));
-    }
-  }
-});
+// upload is now imported from middleware/upload.js
 
 // GET /api/slideshow - Get all active slides ordered by order field
 router.get('/', async (req, res) => {
@@ -129,7 +109,7 @@ router.post('/', protect, upload.single('image'), async (req, res) => {
     }
 
     const slideData = {
-      image: `/uploads/slideshow/${req.file.filename}`,
+      image: req.file.path,
       order: slideOrder,
       isActive: isActive === 'true' || isActive === true
     };
@@ -176,35 +156,19 @@ router.put('/:id', protect, upload.single('image'), async (req, res) => {
 
     // Handle image removal flag
     if (req.body.removeImage === 'true') {
-      // Delete old image file if it exists
+      // Delete old image file if it exists from Cloudinary
       if (slide.image) {
-        const oldFilePath = path.join('uploads/slideshow/', path.basename(slide.image));
-        if (fs.existsSync(oldFilePath)) {
-          try {
-            fs.unlinkSync(oldFilePath);
-            console.log('Deleted slideshow image (user requested removal):', oldFilePath);
-          } catch (err) {
-            console.error('Error deleting slideshow image:', err);
-          }
-        }
+        await deleteFile(slide.image);
       }
       updateData.image = '';
     }
     // Update image if new one is uploaded
     else if (req.file) {
-      // Delete old image file if it exists
+      // Delete old image file if it exists from Cloudinary
       if (slide.image) {
-        const oldFilePath = path.join('uploads/slideshow/', path.basename(slide.image));
-        if (fs.existsSync(oldFilePath)) {
-          try {
-            fs.unlinkSync(oldFilePath);
-            console.log('Deleted old slideshow image:', oldFilePath);
-          } catch (err) {
-            console.error('Error deleting old slideshow image:', err);
-          }
-        }
+        await deleteFile(slide.image);
       }
-      updateData.image = `/uploads/slideshow/${req.file.filename}`;
+      updateData.image = req.file.path;
     }
 
     const updatedSlide = await Slideshow.findByIdAndUpdate(
@@ -239,17 +203,9 @@ router.delete('/:id', protect, async (req, res) => {
       });
     }
 
-    // Delete the physical file if it exists
+    // Delete the physical file from Cloudinary if it exists
     if (slide.image) {
-      const filePath = path.join('uploads/slideshow/', path.basename(slide.image));
-      if (fs.existsSync(filePath)) {
-        try {
-          fs.unlinkSync(filePath);
-          console.log('Deleted file:', filePath);
-        } catch (err) {
-          console.error('Error deleting file:', err);
-        }
-      }
+      await deleteFile(slide.image);
     }
 
     await Slideshow.findByIdAndDelete(req.params.id);

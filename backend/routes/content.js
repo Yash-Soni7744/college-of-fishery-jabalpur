@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const Content = require('../models/Content');
 const { protect, adminOnly } = require('../middleware/auth');
+const { upload, deleteFile } = require('../middleware/upload');
 
 const router = express.Router();
 
@@ -199,21 +200,13 @@ router.delete('/:id', protect, adminOnly, async (req, res) => {
       });
     }
 
-    // Delete all associated image files
+    // Delete all associated image files from Cloudinary
     if (content.images && content.images.length > 0) {
-      content.images.forEach(imagePath => {
+      for (const imagePath of content.images) {
         if (imagePath) {
-          const filePath = path.join('uploads/images/', path.basename(imagePath));
-          if (fs.existsSync(filePath)) {
-            try {
-              fs.unlinkSync(filePath);
-              console.log('Deleted image file:', filePath);
-            } catch (err) {
-              console.error('Error deleting image file:', err);
-            }
-          }
+          await deleteFile(imagePath);
         }
-      });
+      }
     }
 
     await Content.findByIdAndDelete(req.params.id);

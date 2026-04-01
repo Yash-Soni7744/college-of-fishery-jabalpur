@@ -7,46 +7,7 @@ const Incubation = require('../models/Incubation');
 const { protect, adminOnly } = require('../middleware/auth');
 const { queueEmail } = require('../services/emailQueue');
 
-// Configure multer for file uploads
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    if (file.fieldname === 'image') {
-      cb(null, 'uploads/images/');
-    } else if (file.fieldname === 'businessPlan') {
-      cb(null, 'uploads/incubation/');
-    } else {
-      cb(null, 'uploads/documents/');
-    }
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, file.fieldname + '_' + uniqueSuffix + path.extname(file.originalname));
-  }
-});
-
-const upload = multer({
-  storage: storage,
-  fileFilter: (req, file, cb) => {
-    if (file.fieldname === 'image') {
-      if (file.mimetype.startsWith('image/')) {
-        cb(null, true);
-      } else {
-        cb(new Error('Only image files are allowed for profile pictures!'), false);
-      }
-    } else {
-      if (file.mimetype === 'application/pdf' || 
-          file.mimetype === 'application/msword' ||
-          file.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-        cb(null, true);
-      } else {
-        cb(new Error('Only PDF and DOC files are allowed!'), false);
-      }
-    }
-  },
-  limits: {
-    fileSize: parseInt(process.env.MAX_FILE_SIZE) || 50 * 1024 * 1024 // 50MB default
-  }
-});
+const { upload, deleteFile } = require('../middleware/upload');
 
 const router = express.Router();
 
@@ -323,30 +284,14 @@ router.delete('/:id', protect, adminOnly, async (req, res) => {
       });
     }
 
-    // Delete the physical image file if it exists
+    // Delete the physical image file from Cloudinary if it exists
     if (incubationItem.image) {
-      const imagePath = path.join('uploads/images/', path.basename(incubationItem.image));
-      if (fs.existsSync(imagePath)) {
-        try {
-          fs.unlinkSync(imagePath);
-          console.log('Deleted image file:', imagePath);
-        } catch (err) {
-          console.error('Error deleting image file:', err);
-        }
-      }
+      await deleteFile(incubationItem.image);
     }
 
-    // Delete the physical document file if it exists
-    if (incubationItem.filename) {
-      const docPath = path.join('uploads/incubation/', incubationItem.filename);
-      if (fs.existsSync(docPath)) {
-        try {
-          fs.unlinkSync(docPath);
-          console.log('Deleted document file:', docPath);
-        } catch (err) {
-          console.error('Error deleting document file:', err);
-        }
-      }
+    // Delete the physical document file from Cloudinary if it exists
+    if (incubationItem.document || incubationItem.filename) {
+      await deleteFile(incubationItem.document || incubationItem.filename);
     }
 
     await Incubation.findByIdAndDelete(req.params.id);
@@ -393,7 +338,7 @@ router.post('/register', upload.single('businessPlan'), async (req, res) => {
 
     // Email to admin
     const adminMailOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
       to: process.env.ADMIN_EMAIL,
       subject: `New Incubation Program Registration - ${name}`,
       html: `
@@ -494,7 +439,7 @@ router.post('/register', upload.single('businessPlan'), async (req, res) => {
 
     // Email to applicant (confirmation)
     const applicantMailOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
       to: email,
       subject: 'Incubation Program Registration Received',
       html: `

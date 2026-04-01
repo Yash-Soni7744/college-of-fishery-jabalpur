@@ -12,43 +12,7 @@ router.get('/test', (req, res) => {
   res.json({ message: 'Placement route is working!', timestamp: new Date().toISOString() })
 })
 
-// Configure multer for file uploads
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadPath = path.join(__dirname, '../uploads/resumes')
-    if (!fs.existsSync(uploadPath)) {
-      fs.mkdirSync(uploadPath, { recursive: true })
-    }
-    cb(null, uploadPath)
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname))
-  }
-})
-
-const fileFilter = (req, file, cb) => {
-  // Accept only PDF and Word documents
-  const allowedTypes = [
-    'application/pdf',
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-  ]
-  
-  if (allowedTypes.includes(file.mimetype)) {
-    cb(null, true)
-  } else {
-    cb(new Error('Only PDF and Word documents are allowed'), false)
-  }
-}
-
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: parseInt(process.env.MAX_FILE_SIZE) || 50 * 1024 * 1024 // 50MB default
-  },
-  fileFilter: fileFilter
-})
+const { upload, deleteFile } = require('../middleware/upload');
 
 
 
@@ -387,7 +351,7 @@ router.post('/submit', upload.single('resume'), async (req, res) => {
 
     // Admin email options
     const adminMailOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
       to: process.env.ADMIN_EMAIL,
       subject: adminEmailTemplate.subject,
       html: adminEmailTemplate.html,
@@ -401,7 +365,7 @@ router.post('/submit', upload.single('resume'), async (req, res) => {
 
     // Applicant confirmation email options
     const applicantMailOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
       to: req.body.email,
       subject: applicantEmailTemplate.subject,
       html: applicantEmailTemplate.html
@@ -431,8 +395,12 @@ router.post('/submit', upload.single('resume'), async (req, res) => {
     console.error('Stack trace:', error.stack)
     
     // Clean up uploaded file if there was an error
-    if (req.file && fs.existsSync(req.file.path)) {
-      fs.unlinkSync(req.file.path)
+    if (req.file && req.file.path) {
+      try {
+        await deleteFile(req.file.path)
+      } catch (unlinkError) {
+        console.error('Error cleaning up file:', unlinkError)
+      }
     }
 
     if (error.message === 'Only PDF and Word documents are allowed') {
@@ -448,8 +416,10 @@ router.post('/submit', upload.single('resume'), async (req, res) => {
     }
 
     res.status(500).json({ 
-      message: 'Failed to submit application. Please try again later.',
-      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+      success: false, 
+      message: 'Failed to submit application. Please try again.',
+      error: error.message,
+      stack: error.stack
     })
   }
 })

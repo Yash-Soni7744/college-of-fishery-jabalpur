@@ -7,45 +7,7 @@ const FarmerResource = require('../models/FarmerResource')
 const { protect, adminOnly } = require('../middleware/auth')
 const { queueEmail } = require('../services/emailQueue')
 
-// Configure multer for PDF uploads
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const uploadPath = path.join(__dirname, '../uploads/farmers')
-    // Create directory if it doesn't exist
-    if (!fs.existsSync(uploadPath)) {
-      fs.mkdirSync(uploadPath, { recursive: true })
-    }
-    cb(null, uploadPath)
-  },
-  filename: function (req, file, cb) {
-    // Generate unique filename
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname))
-  }
-})
-
-const fileFilter = (req, file, cb) => {
-  // Accept PDF and Word document files
-  const allowedTypes = [
-    'application/pdf',
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-  ]
-  
-  if (allowedTypes.includes(file.mimetype)) {
-    cb(null, true)
-  } else {
-    cb(new Error('Only PDF and Word documents (DOC, DOCX) are allowed'), false)
-  }
-}
-
-const upload = multer({ 
-  storage: storage,
-  fileFilter: fileFilter,
-  limits: {
-    fileSize: parseInt(process.env.MAX_FILE_SIZE) || 50 * 1024 * 1024 // 50MB default
-  }
-})
+const { upload, deleteFile } = require('../middleware/upload');
 
 
 
@@ -63,8 +25,8 @@ router.post('/advisory', async (req, res) => {
 
     // Email to admin
     const adminMailOptions = {
-      from: process.env.EMAIL_USER,
-      to: 'admin@fisherycollegejabalpur.edu.in',
+      from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
+      to: process.env.ADMIN_EMAIL || 'admin@fisherycollegejabalpur.edu.in',
       subject: `New Advisory Query - ${category || 'General'}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -112,7 +74,7 @@ router.post('/advisory', async (req, res) => {
 
     // Confirmation email to farmer
     const farmerMailOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
       to: email,
       subject: 'Advisory Query Received - CoF Jabalpur',
       html: `
@@ -172,6 +134,7 @@ router.post('/advisory', async (req, res) => {
     ])
 
     res.status(200).json({ 
+      success: true,
       message: 'Advisory query submitted successfully. You will receive a response within 24-48 hours.' 
     })
 
@@ -197,8 +160,8 @@ router.post('/training', async (req, res) => {
 
     // Email to admin
     const adminMailOptions = {
-      from: process.env.EMAIL_USER,
-      to: 'training@fisherycollegejabalpur.edu.in',
+      from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
+      to: process.env.ADMIN_EMAIL || 'training@fisherycollegejabalpur.edu.in',
       subject: `New Training Registration - ${program}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -252,7 +215,7 @@ router.post('/training', async (req, res) => {
 
     // Confirmation email to participant
     const participantMailOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
       to: email,
       subject: 'Training Registration Confirmed - CoF Jabalpur',
       html: `
@@ -324,12 +287,14 @@ router.post('/training', async (req, res) => {
     ])
 
     res.status(200).json({ 
+      success: true,
       message: 'Training registration successful! You will receive joining instructions via email within 2-3 working days.' 
     })
 
   } catch (error) {
     console.error('Error submitting training registration:', error)
     res.status(500).json({ 
+      success: false,
       message: 'Failed to submit training registration. Please try again.' 
     })
   }
@@ -405,13 +370,10 @@ router.get('/resources/:id/download', async (req, res) => {
       })
     }
     
-    const filePath = path.join(__dirname, '../uploads/farmers', resource.filename)
-    
-    // Check if file exists
-    if (!fs.existsSync(filePath)) {
+    if (!resource.filename) {
       return res.status(404).json({
         success: false,
-        message: 'File not found'
+        message: 'File URL not found in database'
       })
     }
     
@@ -420,12 +382,8 @@ router.get('/resources/:id/download', async (req, res) => {
       $inc: { downloadCount: 1 }
     })
     
-    // Set headers for PDF download
-    res.setHeader('Content-Type', 'application/pdf')
-    res.setHeader('Content-Disposition', `attachment; filename="${resource.originalName}"`)
-    
-    // Send file
-    res.sendFile(filePath)
+    // Redirect to Cloudinary URL
+    res.redirect(resource.filename)
   } catch (error) {
     console.error('Download farmer resource error:', error)
     res.status(500).json({
@@ -464,7 +422,7 @@ router.post('/resources', protect, adminOnly, upload.single('pdf'), async (req, 
     console.log('Creating resource with data:', {
       title: title.trim(),
       description: description.trim(),
-      filename: req.file.filename,
+      filename: req.file.path,
       originalName: req.file.originalname,
       fileSize: req.file.size,
       mimeType: req.file.mimetype,
@@ -475,7 +433,7 @@ router.post('/resources', protect, adminOnly, upload.single('pdf'), async (req, 
     const resource = new FarmerResource({
       title: title.trim(),
       description: description.trim(),
-      filename: req.file.filename,
+      filename: req.file.path,
       originalName: req.file.originalname,
       fileSize: req.file.size,
       mimeType: req.file.mimetype,
@@ -495,12 +453,13 @@ router.post('/resources', protect, adminOnly, upload.single('pdf'), async (req, 
     console.error('Create farmer resource error:', error)
     console.error('Error stack:', error.stack)
     
-    // Clean up uploaded file if database save fails
-    if (req.file) {
-      const filePath = path.join(__dirname, '../uploads/farmers', req.file.filename)
-      if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath)
-        console.log('Cleaned up uploaded file:', req.file.filename)
+    // Clean up uploaded file from Cloudinary if database save fails
+    if (req.file && req.file.path) {
+      try {
+        await deleteFile(req.file.path);
+        console.log('Cleaned up uploaded file from Cloudinary:', req.file.path);
+      } catch (cleanupError) {
+        console.error('Error cleaning up file:', cleanupError);
       }
     }
     
@@ -571,17 +530,16 @@ router.put('/resources/:id/file', protect, adminOnly, upload.single('pdf'), asyn
     // Handle file operations
     if (req.file) {
       // New file uploaded - delete old file and update file information
-      const oldFilePath = path.join(__dirname, '../uploads/farmers', resource.filename)
-      if (fs.existsSync(oldFilePath)) {
-        fs.unlinkSync(oldFilePath)
-        console.log('Deleted old file:', resource.filename)
+      if (resource.filename) {
+        await deleteFile(resource.filename);
+        console.log('Deleted old file from Cloudinary:', resource.filename);
       }
       
       // Update file information
-      resource.filename = req.file.filename
-      resource.originalName = req.file.originalname
-      resource.fileSize = req.file.size
-      resource.mimeType = req.file.mimetype
+      resource.filename = req.file.path;
+      resource.originalName = req.file.originalname;
+      resource.fileSize = req.file.size;
+      resource.mimeType = req.file.mimetype;
     }
     
     await resource.save()
@@ -612,10 +570,9 @@ router.delete('/resources/:id', protect, adminOnly, async (req, res) => {
       })
     }
     
-    // Delete file from filesystem
-    const filePath = path.join(__dirname, '../uploads/farmers', resource.filename)
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath)
+    // Delete file from Cloudinary
+    if (resource.filename) {
+      await deleteFile(resource.filename);
     }
     
     // Delete from database

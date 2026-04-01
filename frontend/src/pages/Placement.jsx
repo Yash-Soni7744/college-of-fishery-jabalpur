@@ -164,7 +164,8 @@ const Placement = () => {
       }
     } catch (error) {
       console.error('Error submitting form:', error)
-      toast.error('Failed to submit application. Please try again.')
+      const errorMsg = error.response?.data?.message || 'Failed to submit application. Please try again.'
+      toast.error(errorMsg)
     } finally {
       setLoading(false)
     }

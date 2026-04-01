@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const Infrastructure = require('../models/Infrastructure');
 const { protect, adminOnly } = require('../middleware/auth');
+const { upload, deleteFile } = require('../middleware/upload');
 
 const router = express.Router();
 
@@ -78,21 +79,13 @@ router.delete('/:id', protect, adminOnly, async (req, res) => {
       return res.status(404).json({ success: false, message: 'Infrastructure not found' });
     }
 
-    // Delete all associated image files
+    // Delete all associated image files from Cloudinary
     if (infrastructure.images && infrastructure.images.length > 0) {
-      infrastructure.images.forEach(imagePath => {
+      for (const imagePath of infrastructure.images) {
         if (imagePath) {
-          const filePath = path.join('uploads/infrastructure/', path.basename(imagePath));
-          if (fs.existsSync(filePath)) {
-            try {
-              fs.unlinkSync(filePath);
-              console.log('Deleted image file:', filePath);
-            } catch (err) {
-              console.error('Error deleting image file:', err);
-            }
-          }
+          await deleteFile(imagePath);
         }
-      });
+      }
     }
 
     await Infrastructure.findByIdAndDelete(req.params.id);

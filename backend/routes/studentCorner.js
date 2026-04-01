@@ -1,40 +1,11 @@
 const express = require('express');
 const StudentCorner = require('../models/StudentCorner');
 const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
 const { protect, adminOnly } = require('../middleware/auth');
 
 const router = express.Router();
 
-// Configure multer for multiple PDF uploads
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/documents/');
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, file.fieldname + '_' + uniqueSuffix + path.extname(file.originalname));
-  }
-});
-
-const upload = multer({
-  storage: storage,
-  fileFilter: function (req, file, cb) {
-    const allowedTypes = [
-      'application/pdf',
-      'application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-    ];
-    
-    if (allowedTypes.includes(file.mimetype)) {
-      cb(null, true);
-    } else {
-      cb(new Error('Only PDF and Word documents (DOC, DOCX) are allowed!'), false);
-    }
-  },
-  limits: { fileSize: parseInt(process.env.MAX_FILE_SIZE) || 50 * 1024 * 1024 } // 50MB default
-});
+const { upload, deleteFile } = require('../middleware/upload');
 
 // @desc    Get all student corner data (public endpoint)
 // @route   GET /api/student-corner
@@ -167,9 +138,9 @@ router.post('/', protect, adminOnly, upload.array('pdfs', 10), async (req, res) 
       });
     }
 
-    // Process uploaded PDF files
+    // Process uploaded PDF files to Cloudinary URLs
     const documents = req.files ? req.files.map(file => ({
-      filename: file.filename,
+      filename: file.path, // Store Cloudinary URL
       originalName: file.originalname,
       fileSize: file.size,
       uploadDate: new Date()
@@ -277,21 +248,13 @@ router.put('/:id', protect, adminOnly, upload.array('pdfs', 10), async (req, res
       console.log('Documents to remove:', docsToRemove);
       console.log('Current documents count:', item.documents.length);
       
-      // Delete physical files before removing from database
-      docsToRemove.forEach(docId => {
+      // Delete from Cloudinary before removing from database
+      for (const docId of docsToRemove) {
         const doc = item.documents.find(d => d._id.toString() === docId);
         if (doc && doc.filename) {
-          const filePath = path.join('uploads/documents/', doc.filename);
-          if (fs.existsSync(filePath)) {
-            try {
-              fs.unlinkSync(filePath);
-              console.log('Deleted file:', filePath);
-            } catch (err) {
-              console.error('Error deleting file:', err);
-            }
-          }
+          await deleteFile(doc.filename);
         }
-      });
+      }
       
       item.documents = item.documents.filter(doc => !docsToRemove.includes(doc._id.toString()));
       console.log('Documents count after removal:', item.documents.length);
@@ -300,7 +263,7 @@ router.put('/:id', protect, adminOnly, upload.array('pdfs', 10), async (req, res
     // Add new PDF files
     if (req.files && req.files.length > 0) {
       const newDocuments = req.files.map(file => ({
-        filename: file.filename,
+        filename: file.path, // Cloudinary URL
         originalName: file.originalname,
         fileSize: file.size,
         uploadDate: new Date()
@@ -357,21 +320,13 @@ router.delete('/:id', protect, adminOnly, async (req, res) => {
       });
     }
 
-    // Delete all associated document files
+    // Delete all associated document files from Cloudinary
     if (item.documents && item.documents.length > 0) {
-      item.documents.forEach(doc => {
+      for (const doc of item.documents) {
         if (doc.filename) {
-          const filePath = path.join('uploads/documents/', doc.filename);
-          if (fs.existsSync(filePath)) {
-            try {
-              fs.unlinkSync(filePath);
-              console.log('Deleted file:', filePath);
-            } catch (err) {
-              console.error('Error deleting file:', err);
-            }
-          }
+          await deleteFile(doc.filename);
         }
-      });
+      }
     }
 
     await StudentCorner.findByIdAndDelete(req.params.id);
@@ -419,9 +374,9 @@ router.post('/:id/documents', protect, adminOnly, upload.array('pdfs', 10), asyn
       });
     }
 
-    // Add new documents
+    // Add new documents to Cloudinary
     const newDocuments = req.files.map(file => ({
-      filename: file.filename,
+      filename: file.path,
       originalName: file.originalname,
       fileSize: file.size,
       uploadDate: new Date()
@@ -479,17 +434,9 @@ router.delete('/:id/documents/:docId', protect, adminOnly, async (req, res) => {
     // Remove the document from the array
     const removedDoc = item.documents.splice(documentIndex, 1)[0];
     
-    // Delete the physical file from uploads/documents/
+    // Delete the physical file from Cloudinary
     if (removedDoc.filename) {
-      const filePath = path.join('uploads/documents/', removedDoc.filename);
-      if (fs.existsSync(filePath)) {
-        try {
-          fs.unlinkSync(filePath);
-          console.log('Deleted file:', filePath);
-        } catch (err) {
-          console.error('Error deleting file:', err);
-        }
-      }
+      await deleteFile(removedDoc.filename);
     }
     
     await item.save();

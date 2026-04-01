@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const Partner = require('../models/Partner');
 const { protect, adminOnly } = require('../middleware/auth');
-const { upload } = require('../middleware/upload');
+const { upload, deleteFile } = require('../middleware/upload');
 
 const router = express.Router();
 
@@ -119,7 +119,7 @@ router.post('/', protect, adminOnly, upload.single('logo'), async (req, res) => 
 
     // Handle logo upload
     if (req.file) {
-      partnerData.logo = req.file.filename;
+      partnerData.logo = req.file.path;
     } else if (req.body.logo) {
       partnerData.logo = req.body.logo;
     } else {
@@ -179,34 +179,18 @@ router.put('/:id', protect, adminOnly, upload.single('logo'), async (req, res) =
 
     // Handle logo upload or removal
     if (req.file) {
-      // New logo uploaded - delete old one
+      // New logo uploaded - delete old one from Cloudinary
       if (existingPartner.logo) {
-        const oldFilePath = path.join('uploads/partners/', path.basename(existingPartner.logo));
-        if (fs.existsSync(oldFilePath)) {
-          try {
-            fs.unlinkSync(oldFilePath);
-            console.log('Deleted old partner logo:', oldFilePath);
-          } catch (err) {
-            console.error('Error deleting old partner logo:', err);
-          }
-        }
+        await deleteFile(existingPartner.logo);
       }
-      updateData.logo = req.file.filename;
+      updateData.logo = req.file.path;
     } else if (req.body.logo && req.body.logo !== 'undefined' && req.body.logo !== '') {
       // Keep existing logo
       updateData.logo = req.body.logo;
     } else if (req.body.logo === '') {
       // Logo was explicitly removed
       if (existingPartner.logo) {
-        const oldFilePath = path.join('uploads/partners/', path.basename(existingPartner.logo));
-        if (fs.existsSync(oldFilePath)) {
-          try {
-            fs.unlinkSync(oldFilePath);
-            console.log('Deleted partner logo (user requested removal):', oldFilePath);
-          } catch (err) {
-            console.error('Error deleting partner logo:', err);
-          }
-        }
+        await deleteFile(existingPartner.logo);
       }
       updateData.logo = '';
     }
@@ -253,17 +237,9 @@ router.delete('/:id', protect, adminOnly, async (req, res) => {
       });
     }
 
-    // Delete the physical logo file if it exists
+    // Delete the physical logo file from Cloudinary if it exists
     if (partner.logo) {
-      const filePath = path.join('uploads/partners/', path.basename(partner.logo));
-      if (fs.existsSync(filePath)) {
-        try {
-          fs.unlinkSync(filePath);
-          console.log('Deleted file:', filePath);
-        } catch (err) {
-          console.error('Error deleting file:', err);
-        }
-      }
+      await deleteFile(partner.logo);
     }
 
     await Partner.findByIdAndDelete(req.params.id);
@@ -299,20 +275,12 @@ router.delete('/bulk/delete', protect, adminOnly, async (req, res) => {
     // Fetch all partners to delete their files
     const partners = await Partner.find({ _id: { $in: ids } });
     
-    // Delete all associated logo files
-    partners.forEach(partner => {
+    // Delete all associated logo files from Cloudinary
+    for (const partner of partners) {
       if (partner.logo) {
-        const filePath = path.join('uploads/partners/', path.basename(partner.logo));
-        if (fs.existsSync(filePath)) {
-          try {
-            fs.unlinkSync(filePath);
-            console.log('Deleted file:', filePath);
-          } catch (err) {
-            console.error('Error deleting file:', err);
-          }
-        }
+        await deleteFile(partner.logo);
       }
-    });
+    }
 
     const result = await Partner.deleteMany({
       _id: { $in: ids }

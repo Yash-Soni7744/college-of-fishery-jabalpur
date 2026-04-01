@@ -5,36 +5,7 @@ const path = require('path')
 const fs = require('fs')
 const { queueEmail } = require('../services/emailQueue')
 
-// Configure multer for file upload
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadPath = path.join(__dirname, '../uploads/resumes')
-    if (!fs.existsSync(uploadPath)) {
-      fs.mkdirSync(uploadPath, { recursive: true })
-    }
-    cb(null, uploadPath)
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname))
-  }
-})
-
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: parseInt(process.env.MAX_FILE_SIZE) || 50 * 1024 * 1024 }, // 50MB default
-  fileFilter: (req, file, cb) => {
-    const allowedTypes = /pdf|doc|docx/
-    const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase())
-    const mimetype = allowedTypes.test(file.mimetype)
-    
-    if (mimetype && extname) {
-      return cb(null, true)
-    } else {
-      cb(new Error('Only PDF and DOC/DOCX files are allowed'))
-    }
-  }
-})
+const { upload, deleteFile } = require('../middleware/upload');
 
 
 
@@ -53,7 +24,7 @@ router.post('/submit', upload.single('resume'), async (req, res) => {
     console.log('Program:', program)
     console.log('Program ID:', programId)
     console.log('Message:', message)
-    console.log('Resume:', req.file ? req.file.filename : 'No resume')
+    console.log('Resume:', req.file ? req.file.path : 'No resume')
 
     // Validation
     if (!name || !email || !phone) {
@@ -75,11 +46,11 @@ router.post('/submit', upload.single('resume'), async (req, res) => {
     // Prepare email content
     const adminEmail = process.env.ADMIN_EMAIL || 'admin@cof.edu.in'
     const resumePath = req.file ? req.file.path : null
-    const resumeFilename = req.file ? req.file.filename : null
+    const resumeFilename = req.file ? req.file.originalname : null
 
     // Email to admin
     const adminMailOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
       to: adminEmail,
       subject: `New Application - ${program || 'General Inquiry'}`,
       html: `
@@ -127,7 +98,7 @@ router.post('/submit', upload.single('resume'), async (req, res) => {
 
     // Email to applicant (confirmation)
     const applicantMailOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
       to: email,
       subject: 'Application Received - College of Fishery Science',
       html: `

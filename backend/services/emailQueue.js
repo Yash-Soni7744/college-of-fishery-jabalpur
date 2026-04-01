@@ -7,6 +7,9 @@ console.log('Connecting to Redis:', redisUrl);
 
 const emailQueue = new Queue('email', redisUrl, {
   redis: {
+    tls: {
+      rejectUnauthorized: false
+    },
     enableOfflineQueue: true, 
     maxRetriesPerRequest: 3
   }

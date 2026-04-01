@@ -6,51 +6,7 @@ const fs = require('fs');
 const Extension = require('../models/Extension');
 const { protect, adminOnly } = require('../middleware/auth');
 
-// Configure multer for file uploads (PDF + Images)
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    if (file.fieldname === 'image') {
-      cb(null, 'uploads/images/'); // Images go to images folder
-    } else {
-      cb(null, 'uploads/documents/'); // PDFs go to documents folder
-    }
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, file.fieldname + '_' + uniqueSuffix + path.extname(file.originalname));
-  }
-});
-
-const upload = multer({
-  storage: storage,
-  fileFilter: (req, file, cb) => {
-    if (file.fieldname === 'image') {
-      // Allow images
-      if (file.mimetype.startsWith('image/')) {
-        cb(null, true);
-      } else {
-        cb(new Error('Only image files are allowed for image field!'), false);
-      }
-    } else if (file.fieldname === 'pdf') {
-      // Allow PDFs and Word documents
-      const allowedTypes = [
-        'application/pdf',
-        'application/msword',
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-      ];
-      if (allowedTypes.includes(file.mimetype)) {
-        cb(null, true);
-      } else {
-        cb(new Error('Only PDF and Word documents (DOC, DOCX) are allowed for pdf field!'), false);
-      }
-    } else {
-      cb(new Error('Invalid field name!'), false);
-    }
-  },
-  limits: {
-    fileSize: parseInt(process.env.MAX_FILE_SIZE) || 50 * 1024 * 1024 // 50MB default
-  }
-});
+const { upload, deleteFile } = require('../middleware/upload');
 
 const router = express.Router();
 
@@ -269,7 +225,7 @@ router.post('/', protect, adminOnly, upload.fields([{ name: 'pdf', maxCount: 1 }
     // If PDF file is uploaded, add filename and originalName
     // Handle PDF file if present
     if (req.files && req.files.pdf && req.files.pdf[0]) {
-      extensionData.filename = req.files.pdf[0].filename;
+      extensionData.filename = req.files.pdf[0].path;
       extensionData.originalName = req.files.pdf[0].originalname;
     }
     
@@ -277,10 +233,7 @@ router.post('/', protect, adminOnly, upload.fields([{ name: 'pdf', maxCount: 1 }
     if (req.files && req.files.image && req.files.image[0]) {
       const imageFile = req.files.image[0];
       const imagePath = imageFile.path;
-      // Extract directory from path to construct URL
-      const pathParts = imagePath.split('\\').join('/').split('/');
-      const uploadType = pathParts[pathParts.length - 2]; // e.g., "images"
-      extensionData.imageUrl = `/uploads/${uploadType}/${imageFile.filename}`;
+      extensionData.imageUrl = imagePath;
       extensionData.imagePath = imagePath;
     }
 
@@ -346,15 +299,7 @@ router.put('/:id', protect, adminOnly, upload.fields([{ name: 'pdf', maxCount: 1
     if (req.body.removePdf === 'true') {
       // Delete old PDF if it exists
       if (existingExtension.filename) {
-        const oldPdfPath = path.join('uploads/documents/', existingExtension.filename);
-        if (fs.existsSync(oldPdfPath)) {
-          try {
-            fs.unlinkSync(oldPdfPath);
-            console.log('Deleted extension PDF (user requested removal):', oldPdfPath);
-          } catch (err) {
-            console.error('Error deleting extension PDF:', err);
-          }
-        }
+        await deleteFile(existingExtension.filename);
       }
       cleanData.filename = '';
       cleanData.originalName = '';
@@ -364,33 +309,18 @@ router.put('/:id', protect, adminOnly, upload.fields([{ name: 'pdf', maxCount: 1
     else if (req.files && req.files.pdf && req.files.pdf[0]) {
       // Delete old PDF if it exists
       if (existingExtension.filename) {
-        const oldPdfPath = path.join('uploads/documents/', existingExtension.filename);
-        if (fs.existsSync(oldPdfPath)) {
-          try {
-            fs.unlinkSync(oldPdfPath);
-            console.log('Deleted old extension PDF:', oldPdfPath);
-          } catch (err) {
-            console.error('Error deleting old extension PDF:', err);
-          }
-        }
+        await deleteFile(existingExtension.filename);
       }
-      cleanData.filename = req.files.pdf[0].filename;
+      cleanData.filename = req.files.pdf[0].path;
       cleanData.originalName = req.files.pdf[0].originalname;
-      console.log('PDF file uploaded:', req.files.pdf[0].filename);
+      console.log('PDF file uploaded:', req.files.pdf[0].path);
     }
     
     // Handle Image removal flag
     if (req.body.removeImage === 'true') {
       // Delete old image if it exists
       if (existingExtension.imagePath) {
-        if (fs.existsSync(existingExtension.imagePath)) {
-          try {
-            fs.unlinkSync(existingExtension.imagePath);
-            console.log('Deleted extension image (user requested removal):', existingExtension.imagePath);
-          } catch (err) {
-            console.error('Error deleting extension image:', err);
-          }
-        }
+        await deleteFile(existingExtension.imagePath);
       }
       cleanData.imageUrl = '';
       cleanData.imagePath = '';
@@ -399,24 +329,14 @@ router.put('/:id', protect, adminOnly, upload.fields([{ name: 'pdf', maxCount: 1
     else if (req.files && req.files.image && req.files.image[0]) {
       // Delete old image if it exists
       if (existingExtension.imagePath) {
-        if (fs.existsSync(existingExtension.imagePath)) {
-          try {
-            fs.unlinkSync(existingExtension.imagePath);
-            console.log('Deleted old extension image:', existingExtension.imagePath);
-          } catch (err) {
-            console.error('Error deleting old extension image:', err);
-          }
-        }
+        await deleteFile(existingExtension.imagePath);
       }
       
       const imageFile = req.files.image[0];
       const imagePath = imageFile.path;
-      // Extract directory from path to construct URL
-      const pathParts = imagePath.split('\\').join('/').split('/');
-      const uploadType = pathParts[pathParts.length - 2]; // e.g., "images"
-      cleanData.imageUrl = `/uploads/${uploadType}/${imageFile.filename}`;
+      cleanData.imageUrl = imagePath;
       cleanData.imagePath = imagePath;
-      console.log('Image file uploaded:', imageFile.filename);
+      console.log('Image file uploaded:', imagePath);
     }
 
     // Parse JSON strings for arrays
@@ -557,29 +477,14 @@ router.delete('/:id', protect, adminOnly, async (req, res) => {
       });
     }
 
-    // Delete the physical PDF file if it exists
+    // Delete the physical PDF file from Cloudinary if it exists
     if (extension.filename) {
-      const docPath = path.join('uploads/documents/', extension.filename);
-      if (fs.existsSync(docPath)) {
-        try {
-          fs.unlinkSync(docPath);
-          console.log('Deleted document file:', docPath);
-        } catch (err) {
-          console.error('Error deleting document file:', err);
-        }
-      }
+      await deleteFile(extension.filename);
     }
 
-    // Delete the physical image file if it exists
+    // Delete the physical image file from Cloudinary if it exists
     if (extension.imagePath) {
-      if (fs.existsSync(extension.imagePath)) {
-        try {
-          fs.unlinkSync(extension.imagePath);
-          console.log('Deleted image file:', extension.imagePath);
-        } catch (err) {
-          console.error('Error deleting image file:', err);
-        }
-      }
+      await deleteFile(extension.imagePath);
     }
 
     await Extension.findByIdAndDelete(req.params.id);

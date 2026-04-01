@@ -4,6 +4,7 @@ const fs = require('fs');
 const { body, validationResult, query } = require('express-validator');
 const Program = require('../models/Program');
 const { protect, adminOnly } = require('../middleware/auth');
+const { upload, deleteFile } = require('../middleware/upload');
 
 const router = express.Router();
 
@@ -292,34 +293,18 @@ router.delete('/:id', protect, adminOnly, async (req, res) => {
       });
     }
 
-    // Delete the physical image file if it exists
+    // Delete the physical image file from Cloudinary if it exists
     if (program.image) {
-      const filePath = path.join('uploads/programs/', path.basename(program.image));
-      if (fs.existsSync(filePath)) {
-        try {
-          fs.unlinkSync(filePath);
-          console.log('Deleted file:', filePath);
-        } catch (err) {
-          console.error('Error deleting file:', err);
-        }
-      }
+      await deleteFile(program.image);
     }
 
-    // Delete any document files if they exist
+    // Delete any document files from Cloudinary if they exist
     if (program.documents && program.documents.length > 0) {
-      program.documents.forEach(docPath => {
+      for (const docPath of program.documents) {
         if (docPath) {
-          const filePath = path.join('uploads/programs/', path.basename(docPath));
-          if (fs.existsSync(filePath)) {
-            try {
-              fs.unlinkSync(filePath);
-              console.log('Deleted document:', filePath);
-            } catch (err) {
-              console.error('Error deleting document:', err);
-            }
-          }
+          await deleteFile(docPath);
         }
-      });
+      }
     }
 
     await Program.findByIdAndDelete(req.params.id);

@@ -5,36 +5,7 @@ const path = require('path')
 const fs = require('fs')
 const { queueEmail } = require('../services/emailQueue')
 
-// Configure multer for file upload
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadPath = path.join(__dirname, '../uploads/resumes')
-    if (!fs.existsSync(uploadPath)) {
-      fs.mkdirSync(uploadPath, { recursive: true })
-    }
-    cb(null, uploadPath)
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname))
-  }
-})
-
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: parseInt(process.env.MAX_FILE_SIZE) || 50 * 1024 * 1024 }, // 50MB default
-  fileFilter: (req, file, cb) => {
-    const allowedTypes = /pdf|doc|docx/
-    const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase())
-    const mimetype = allowedTypes.test(file.mimetype)
-    
-    if (mimetype && extname) {
-      return cb(null, true)
-    } else {
-      cb(new Error('Only PDF and DOC/DOCX files are allowed'))
-    }
-  }
-})
+const { upload } = require('../middleware/upload');
 
 
 
@@ -77,14 +48,14 @@ router.post('/submit', upload.single('resume'), async (req, res) => {
 
     const adminEmail = process.env.ADMIN_EMAIL || 'admin@cof.edu.in'
     const hrEmail = process.env.HR_EMAIL || adminEmail
-    const resumePath = req.file.path
-    const resumeFilename = req.file.filename
+    const resumePath = req.file.path; // Cloudinary URL
+    const resumeFilename = req.file.originalname;
 
     const positionTypeLabel = positionType === 'faculty' ? 'Faculty Position' : 'Staff Position'
 
     // Email to HR/Admin
     const adminMailOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
       to: hrEmail,
       cc: adminEmail,
       subject: `New Job Application - ${positionTypeLabel} - ${position}`,
@@ -137,7 +108,7 @@ router.post('/submit', upload.single('resume'), async (req, res) => {
 
     // Email to applicant (confirmation)
     const applicantMailOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
       to: email,
       subject: 'Application Received - College of Fishery Science',
       html: `

@@ -1,9 +1,8 @@
 const express = require('express');
-const path = require('path');
-const fs = require('fs');
 const Alumni = require('../models/Alumni');
 const { protect, adminOnly } = require('../middleware/auth');
 const { queueEmail } = require('../services/emailQueue');
+const { upload, deleteFile } = require('../middleware/upload');
 
 const router = express.Router();
 
@@ -55,9 +54,13 @@ router.get('/:id', async (req, res) => {
 // @desc    Create alumni item
 // @route   POST /api/alumni
 // @access  Private (Admin)
-router.post('/', protect, adminOnly, async (req, res) => {
+router.post('/', protect, adminOnly, upload.single('image'), async (req, res) => {
   try {
-    const alumniData = { ...req.body, createdBy: req.admin._id };
+    const alumniData = { 
+      ...req.body, 
+      createdBy: req.admin._id,
+      image: req.file ? req.file.path : undefined 
+    };
     const alumniItem = await Alumni.create(alumniData);
     res.status(201).json({ success: true, data: { alumni: alumniItem } });
   } catch (error) {
@@ -69,12 +72,22 @@ router.post('/', protect, adminOnly, async (req, res) => {
 // @desc    Update alumni item
 // @route   PUT /api/alumni/:id
 // @access  Private (Admin)
-router.put('/:id', protect, adminOnly, async (req, res) => {
+router.put('/:id', protect, adminOnly, upload.single('image'), async (req, res) => {
   try {
-    const alumniItem = await Alumni.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    let alumniItem = await Alumni.findById(req.params.id);
     if (!alumniItem) {
       return res.status(404).json({ success: false, message: 'Alumni item not found' });
     }
+
+    const updateData = { ...req.body };
+    if (req.file) {
+      if (alumniItem.image) {
+        await deleteFile(alumniItem.image);
+      }
+      updateData.image = req.file.path;
+    }
+
+    alumniItem = await Alumni.findByIdAndUpdate(req.params.id, updateData, { new: true });
     res.json({ success: true, data: { alumni: alumniItem } });
   } catch (error) {
     console.error('Update alumni error:', error);
@@ -92,17 +105,8 @@ router.delete('/:id', protect, adminOnly, async (req, res) => {
       return res.status(404).json({ success: false, message: 'Alumni item not found' });
     }
 
-    // Delete the physical image file if it exists
     if (alumniItem.image) {
-      const filePath = path.join('uploads/images/', path.basename(alumniItem.image));
-      if (fs.existsSync(filePath)) {
-        try {
-          fs.unlinkSync(filePath);
-          console.log('Deleted image file:', filePath);
-        } catch (err) {
-          console.error('Error deleting image file:', err);
-        }
-      }
+      await deleteFile(alumniItem.image);
     }
 
     await Alumni.findByIdAndDelete(req.params.id);
@@ -129,7 +133,6 @@ router.post('/register-event', async (req, res) => {
       designation
     } = req.body;
 
-    // Validate required fields
     if (!eventId || !eventTitle || !name || !email || !phone || !batch || !currentOrganization || !designation) {
       return res.status(400).json({
         success: false,
@@ -137,7 +140,6 @@ router.post('/register-event', async (req, res) => {
       });
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return res.status(400).json({
@@ -146,11 +148,8 @@ router.post('/register-event', async (req, res) => {
       });
     }
 
-
-
-    // Admin notification email
     const adminMailOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
       to: process.env.ADMIN_EMAIL,
       subject: `New Alumni Event Registration - ${eventTitle}`,
       html: `
@@ -225,7 +224,7 @@ router.post('/register-event', async (req, res) => {
 
     // Applicant confirmation email
     const applicantMailOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
       to: email,
       subject: `Event Registration Confirmed - ${eventTitle}`,
       html: `

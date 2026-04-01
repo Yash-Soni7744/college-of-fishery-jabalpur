@@ -4,6 +4,7 @@ const fs = require('fs');
 const { body, validationResult, query } = require('express-validator');
 const Faculty = require('../models/Faculty');
 const { protect, adminOnly } = require('../middleware/auth');
+const { upload, deleteFile } = require('../middleware/upload');
 
 const router = express.Router();
 
@@ -214,17 +215,9 @@ router.delete('/:id', protect, adminOnly, async (req, res) => {
       });
     }
 
-    // Delete the physical image file if it exists
+    // Delete the physical image file from Cloudinary if it exists
     if (faculty.image) {
-      const filePath = path.join('uploads/faculty/', path.basename(faculty.image));
-      if (fs.existsSync(filePath)) {
-        try {
-          fs.unlinkSync(filePath);
-          console.log('Deleted file:', filePath);
-        } catch (err) {
-          console.error('Error deleting file:', err);
-        }
-      }
+      await deleteFile(faculty.image);
     }
 
     await Faculty.findByIdAndDelete(req.params.id);

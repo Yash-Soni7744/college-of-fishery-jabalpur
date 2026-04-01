@@ -6,36 +6,7 @@ const fs = require('fs');
 const Research = require('../models/Research');
 const { protect, adminOnly } = require('../middleware/auth');
 
-// Configure multer for file uploads
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/documents/');
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, file.fieldname + '_' + uniqueSuffix + path.extname(file.originalname));
-  }
-});
-
-const upload = multer({
-  storage: storage,
-  fileFilter: (req, file, cb) => {
-    const allowedTypes = [
-      'application/pdf',
-      'application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-    ];
-    
-    if (allowedTypes.includes(file.mimetype)) {
-      cb(null, true);
-    } else {
-      cb(new Error('Only PDF and Word documents (DOC, DOCX) are allowed!'), false);
-    }
-  },
-  limits: {
-    fileSize: parseInt(process.env.MAX_FILE_SIZE) || 50 * 1024 * 1024 // 50MB default
-  }
-});
+const { upload, deleteFile } = require('../middleware/upload');
 
 const router = express.Router();
 
@@ -261,9 +232,9 @@ router.post('/', protect, adminOnly, upload.single('pdf'), async (req, res) => {
       }
     });
 
-    // If PDF file is uploaded, add filename and originalName
+    // If PDF file is uploaded to Cloudinary, add URL and originalName
     if (req.file) {
-      researchData.filename = req.file.filename;
+      researchData.filename = req.file.path; // Store Cloudinary URL in filename field for compatibility or update schema
       researchData.originalName = req.file.originalname;
     }
 
@@ -464,18 +435,10 @@ router.put('/:id', protect, adminOnly, upload.single('pdf'), async (req, res) =>
       });
     }
 
-    // If removePdf flag is set, delete the PDF
+    // If removePdf flag is set, delete the PDF from Cloudinary
     if (req.body.removePdf === 'true') {
       if (existingResearch.filename) {
-        const oldPdfPath = path.join('uploads/documents/', existingResearch.filename);
-        if (fs.existsSync(oldPdfPath)) {
-          try {
-            fs.unlinkSync(oldPdfPath);
-            console.log('Deleted research PDF (user requested removal):', oldPdfPath);
-          } catch (err) {
-            console.error('Error deleting research PDF:', err);
-          }
-        }
+        await deleteFile(existingResearch.filename);
       }
       cleanData.filename = '';
       cleanData.originalName = '';
@@ -483,20 +446,12 @@ router.put('/:id', protect, adminOnly, upload.single('pdf'), async (req, res) =>
     // If PDF file is uploaded, add filename and originalName
     else if (req.file) {
       if (existingResearch.filename) {
-        const oldPdfPath = path.join('uploads/documents/', existingResearch.filename);
-        if (fs.existsSync(oldPdfPath)) {
-          try {
-            fs.unlinkSync(oldPdfPath);
-            console.log('Deleted old research PDF:', oldPdfPath);
-          } catch (err) {
-            console.error('Error deleting old research PDF:', err);
-          }
-        }
+        await deleteFile(existingResearch.filename);
       }
       
-      cleanData.filename = req.file.filename;
-      cleanData.originalName = req.file.originalname;
-      console.log('PDF file uploaded:', req.file.filename);
+      researchData.filename = req.file.path;
+      researchData.originalName = req.file.originalname;
+      console.log('PDF file uploaded to Cloudinary:', req.file.path);
     }
 
     // Convert string numbers to actual numbers where needed
@@ -598,38 +553,27 @@ router.delete('/:id', protect, adminOnly, async (req, res) => {
       return res.status(404).json({ success: false, message: 'Research not found' });
     }
 
-    // Delete all associated image files
+    // Delete all associated image files from Cloudinary
     if (research.images && research.images.length > 0) {
-      research.images.forEach(imagePath => {
+      for (const imagePath of research.images) {
         if (imagePath) {
-          const filePath = path.join('uploads/research/', path.basename(imagePath));
-          if (fs.existsSync(filePath)) {
-            try {
-              fs.unlinkSync(filePath);
-              console.log('Deleted image file:', filePath);
-            } catch (err) {
-              console.error('Error deleting image file:', err);
-            }
-          }
+          await deleteFile(imagePath);
         }
-      });
+      }
     }
 
-    // Delete all associated document files
+    // Delete all associated document files from Cloudinary
     if (research.documents && research.documents.length > 0) {
-      research.documents.forEach(docPath => {
+      for (const docPath of research.documents) {
         if (docPath) {
-          const filePath = path.join('uploads/documents/', path.basename(docPath));
-          if (fs.existsSync(filePath)) {
-            try {
-              fs.unlinkSync(filePath);
-              console.log('Deleted document file:', filePath);
-            } catch (err) {
-              console.error('Error deleting document file:', err);
-            }
-          }
+          await deleteFile(docPath);
         }
-      });
+      }
+    }
+    
+    // Delete the main PDF from Cloudinary
+    if (research.filename) {
+      await deleteFile(research.filename);
     }
 
     await Research.findByIdAndDelete(req.params.id);

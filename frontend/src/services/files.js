@@ -19,6 +19,8 @@ export const getUploadsBase = () => {
 // Document (PDFs) URL builder
 export const getDocumentUrl = (filename) => {
   if (!filename) return ''
+  // If it's already a full URL (Cloudinary), return it as is
+  if (String(filename).startsWith('http')) return filename
   const clean = String(filename).replace(/^\/+/, '')
   return `${getUploadsBase()}/documents/${clean}`
 }
@@ -26,6 +28,8 @@ export const getDocumentUrl = (filename) => {
 // Generic image/file URL builder for sub-directories inside uploads
 export const getImageUrl = (subdir, filename) => {
   if (!filename) return ''
+  // If it's already a full URL (Cloudinary), return it as is
+  if (String(filename).startsWith('http')) return filename
   const clean = String(filename).replace(/^\/+/, '')
   const dir = String(subdir || '').replace(/^\/+|\/+$/g, '')
   return `${getUploadsBase()}/${dir}/${clean}`

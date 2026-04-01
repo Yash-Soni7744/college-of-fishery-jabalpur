@@ -5,44 +5,14 @@ const { protect, adminOnly } = require('../middleware/auth');
 
 const router = express.Router();
 
-// @desc    Serve uploaded files with proper CORS headers
+// @desc    Serve uploaded files with proper CORS headers (Deprecated for Cloudinary)
 // @route   GET /api/upload/serve/:type/:filename
 // @access  Public
 router.get('/serve/:type/:filename', (req, res) => {
-  try {
-    const { type, filename } = req.params;
-    const validTypes = ['images', 'documents', 'faculty', 'news', 'research', 'dean', 'gallery', 'incubation'];
-    
-    if (!validTypes.includes(type)) {
-      return res.status(400).json({
-        success: false,
-        message: 'Invalid file type'
-      });
-    }
-
-    const filePath = path.join(__dirname, '..', 'uploads', type, filename);
-    
-    // Set CORS headers
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Cross-Origin-Resource-Policy', 'cross-origin');
-    
-    // Send file
-    res.sendFile(filePath, (err) => {
-      if (err) {
-        res.status(404).json({
-          success: false,
-          message: 'File not found'
-        });
-      }
-    });
-
-  } catch (error) {
-    console.error('File serve error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Server error while serving file'
-    });
-  }
+  res.status(410).json({
+    success: false,
+    message: 'This endpoint is deprecated. Use direct Cloudinary URLs instead.'
+  });
 });
 
 // @desc    Upload single file (fallback route)
@@ -62,9 +32,9 @@ router.post('/', protect, adminOnly, upload.single('file'), (req, res) => {
       });
     }
 
-    const fileUrl = `${req.protocol}://${req.get('host')}/uploads/${path.relative('uploads', req.file.path).replace(/\\/g, '/')}`;
+    const fileUrl = req.file.path;
 
-    console.log('File saved to:', req.file.path);
+    console.log('File uploaded to Cloudinary:', req.file.path);
     console.log('Returning URL:', fileUrl);
 
     res.json({
@@ -110,10 +80,9 @@ router.post('/single', protect, adminOnly, upload.single('file'), (req, res) => 
     const category = req.body.category || req.headers['x-upload-category'] || 'images';
     
     // Create relative path for URL
-    const relativePath = path.relative('uploads', req.file.path).replace(/\\/g, '/');
-    const fileUrl = `${req.protocol}://${req.get('host')}/uploads/${relativePath}`;
+    const fileUrl = req.file.path;
 
-    console.log('File saved to:', req.file.path);
+    console.log('File uploaded to Cloudinary:', req.file.path);
     console.log('Category:', category);
     console.log('Returning URL:', fileUrl);
 
@@ -153,7 +122,7 @@ router.post('/multiple', protect, adminOnly, upload.array('files', 10), (req, re
     }
 
     const uploadedFiles = req.files.map(file => {
-      const fileUrl = `${req.protocol}://${req.get('host')}/uploads/${path.relative('uploads', file.path).replace(/\\/g, '/')}`;
+      const fileUrl = file.path;
       
       return {
         filename: file.filename,
@@ -186,7 +155,7 @@ router.post('/multiple', protect, adminOnly, upload.array('files', 10), (req, re
 // @desc    Delete uploaded file
 // @route   DELETE /api/upload/:filename
 // @access  Private (Admin only)
-router.delete('/:filename', protect, adminOnly, (req, res) => {
+router.delete('/:filename', protect, adminOnly, async (req, res) => {
   try {
     const { filename } = req.params;
     
@@ -200,31 +169,7 @@ router.delete('/:filename', protect, adminOnly, (req, res) => {
 
     // Try to find and delete the file in all upload directories
     // Keep this list in sync with middleware/upload.js (add new upload folders here as needed)
-    const uploadDirs = [
-      'uploads/images',
-      'uploads/documents',
-      'uploads/faculty',
-      'uploads/news',
-      'uploads/research',
-      'uploads/dean',
-      'uploads/gallery',
-      'uploads/partners',
-      'uploads/incubation',
-      'uploads/resumes',
-      'uploads/programs',
-      'uploads/farmers',
-      'uploads/infrastructure',
-      'uploads/slideshow'
-    ];
-    let fileDeleted = false;
-
-    for (const dir of uploadDirs) {
-      const filePath = path.join(dir, filename);
-      if (deleteFile(filePath)) {
-        fileDeleted = true;
-        break;
-      }
-    }
+    const fileDeleted = await deleteFile(filename);
 
     if (fileDeleted) {
       res.json({
@@ -234,7 +179,7 @@ router.delete('/:filename', protect, adminOnly, (req, res) => {
     } else {
       res.status(404).json({
         success: false,
-        message: 'File not found'
+        message: 'File not found or could not be deleted from Cloudinary'
       });
     }
 

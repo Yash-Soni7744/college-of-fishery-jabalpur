@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Gallery = require('../models/Gallery');
 const { protect } = require('../middleware/auth');
-const { upload } = require('../middleware/upload');
+const { upload, deleteFile } = require('../middleware/upload');
 const path = require('path');
 const fs = require('fs').promises;
 
@@ -107,15 +107,10 @@ router.post('/', protect, upload.single('image'), async (req, res) => {
       });
     }
 
-    // Construct imageUrl based on actual file destination
+    const imageUrl = req.file.path;
     const imagePath = req.file.path;
-    // Extract the directory from the actual path to use in URL
-    const pathParts = imagePath.split('\\').join('/').split('/');
-    const uploadType = pathParts[pathParts.length - 2]; // e.g., "gallery" or "images"
-    const imageUrl = `/uploads/${uploadType}/${req.file.filename}`;
     
-    console.log('Image uploaded to path:', imagePath);
-    console.log('Constructed imageUrl:', imageUrl);
+    console.log('Image uploaded to Cloudinary:', imageUrl);
 
     const galleryImage = new Gallery({
       title,
@@ -141,10 +136,10 @@ router.post('/', protect, upload.single('image'), async (req, res) => {
   } catch (error) {
     console.error('Error creating gallery image:', error);
     
-    // Delete uploaded file if database save fails
-    if (req.file) {
+    // Delete uploaded file from Cloudinary if database save fails
+    if (req.file && req.file.path) {
       try {
-        await fs.unlink(req.file.path);
+        await deleteFile(req.file.path);
       } catch (unlinkError) {
         console.error('Error deleting file:', unlinkError);
       }
@@ -177,26 +172,14 @@ router.put('/:id', protect, upload.single('image'), async (req, res) => {
     if (req.file) {
       // Delete old image file if it exists
       const existingGallery = await Gallery.findById(req.params.id);
-      if (existingGallery && existingGallery.imagePath) {
-        if (fs.existsSync(existingGallery.imagePath)) {
-          try {
-            fs.unlinkSync(existingGallery.imagePath);
-            console.log('Deleted old gallery image:', existingGallery.imagePath);
-          } catch (err) {
-            console.error('Error deleting old gallery image:', err);
-          }
-        }
+      if (existingGallery && existingGallery.imageUrl) {
+        await deleteFile(existingGallery.imageUrl);
       }
       
-      // Construct imageUrl based on actual file destination
-      const imagePath = req.file.path;
-      const pathParts = imagePath.split('\\').join('/').split('/');
-      const uploadType = pathParts[pathParts.length - 2]; // e.g., "gallery" or "images"
-      updateData.imageUrl = `/uploads/${uploadType}/${req.file.filename}`;
+      updateData.imageUrl = req.file.path;
       updateData.imagePath = req.file.path;
       
-      console.log('Updated image path:', imagePath);
-      console.log('Updated imageUrl:', updateData.imageUrl);
+      console.log('Updated image Cloudinary URL:', updateData.imageUrl);
     }
     
     const galleryImage = await Gallery.findByIdAndUpdate(
@@ -242,15 +225,9 @@ router.delete('/:id', protect, async (req, res) => {
       });
     }
     
-    // Delete the physical file
-    if (galleryImage.imagePath) {
-      try {
-        await fs.unlink(galleryImage.imagePath);
-        console.log('Physical file deleted:', galleryImage.imagePath);
-      } catch (fileError) {
-        console.error('Error deleting physical file:', fileError);
-        // Continue with database deletion even if file deletion fails
-      }
+    // Delete the physical file from Cloudinary
+    if (galleryImage.imageUrl) {
+      await deleteFile(galleryImage.imageUrl);
     }
     
     // Delete from database

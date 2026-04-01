@@ -13,6 +13,16 @@ const FarmersCorner = () => {
     search: ''
   })
 
+  // Advisory Form State
+  const [advisoryForm, setAdvisoryForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    category: 'General',
+    query: ''
+  })
+  const [submitting, setSubmitting] = useState(false)
+
   const categories = [
     { value: '', label: 'All Categories' },
     { value: 'advisory', label: 'Advisory Services' },
@@ -67,6 +77,30 @@ const FarmersCorner = () => {
   const handleSearchSubmit = (e) => {
     e.preventDefault()
     fetchResources()
+  }
+
+  const handleAdvisorySubmit = async (e) => {
+    e.preventDefault()
+    try {
+      setSubmitting(true)
+      const response = await farmersAPI.sendAdvisoryQuery(advisoryForm)
+      if (response.data.success || response.status === 200) {
+        toast.success('Your advisory query has been sent successfully!')
+        setAdvisoryForm({
+          name: '',
+          email: '',
+          phone: '',
+          category: 'General',
+          query: ''
+        })
+      }
+    } catch (error) {
+      console.error('Error submitting advisory query:', error)
+      const errorMsg = error.response?.data?.message || 'Failed to send query. Please try again.'
+      toast.error(errorMsg)
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -286,7 +320,108 @@ const FarmersCorner = () => {
             </>
           )}
         </div>
-      </section>      {/* Call to Action */}
+      </section>      {/* Advisory Support Form */}
+      <section id="advisory-form" className="section-padding bg-white relative">
+        <div className="container-max">
+          <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-3xl p-8 md:p-12 shadow-xl border border-green-100 flex flex-col lg:flex-row gap-12">
+            <div className="lg:w-1/3">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Expert Advisory</h2>
+              <p className="text-gray-600 mb-8">
+                Have a specific question about fish farming, pond management, or aquaculture techniques? 
+                Submit your query here and our scientists from College of Fishery will get back to you with expert advice.
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-center gap-4 text-green-700">
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                    <Eye className="w-5 h-5" />
+                  </div>
+                  <span>Verified Scientific Advice</span>
+                </div>
+                <div className="flex items-center gap-4 text-blue-700">
+                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                    <Calendar className="w-5 h-5" />
+                  </div>
+                  <span>Response within 48-72 hours</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:w-2/3 bg-white rounded-2xl p-6 md:p-8 shadow-inner border border-gray-100">
+              <form onSubmit={handleAdvisorySubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                  <input
+                    type="text"
+                    required
+                    value={advisoryForm.name}
+                    onChange={(e) => setAdvisoryForm({...advisoryForm, name: e.target.value})}
+                    placeholder="Your name"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                  <input
+                    type="email"
+                    required
+                    value={advisoryForm.email}
+                    onChange={(e) => setAdvisoryForm({...advisoryForm, email: e.target.value})}
+                    placeholder="your@email.com"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                  <input
+                    type="tel"
+                    value={advisoryForm.phone}
+                    onChange={(e) => setAdvisoryForm({...advisoryForm, phone: e.target.value})}
+                    placeholder="Mobile number"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Query Category</label>
+                  <select
+                    value={advisoryForm.category}
+                    onChange={(e) => setAdvisoryForm({...advisoryForm, category: e.target.value})}
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                  >
+                    <option value="General">General Query</option>
+                    <option value="Pond Management">Pond Management</option>
+                    <option value="Seed Selection">Seed Selection</option>
+                    <option value="Fish Diseases">Fish Health/Diseases</option>
+                    <option value="Biofloc">Biofloc Technology</option>
+                    <option value="Feed Management">Feed Management</option>
+                  </select>
+                </div>
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Your Detailed Query *</label>
+                  <textarea
+                    required
+                    rows="4"
+                    value={advisoryForm.query}
+                    onChange={(e) => setAdvisoryForm({...advisoryForm, query: e.target.value})}
+                    placeholder="Describe your question or problem in detail..."
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                  ></textarea>
+                </div>
+                <div className="md:col-span-2">
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="w-full py-4 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-xl font-bold hover:from-green-700 hover:to-blue-700 transition-all transform hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+                  >
+                    {submitting ? 'Sending Request...' : 'Submit Advisory Request'}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action */}
       <section className="section-padding bg-gradient-to-r from-green-600 via-blue-600 to-emerald-600 text-white relative overflow-hidden">
         {/* Background decorative elements */}
         <div className="absolute inset-0 opacity-10">
@@ -303,9 +438,9 @@ const FarmersCorner = () => {
         </div>
         
         <div className="container-max text-center relative z-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Need More Help?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Still Need Help?</h2>
           <p className="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
-            Our experts are here to assist you with personalized advice and guidance.
+            You can also visit our campus or reach out to our administration directly.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

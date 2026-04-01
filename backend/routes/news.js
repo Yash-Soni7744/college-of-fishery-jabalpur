@@ -5,6 +5,7 @@ const fs = require('fs');
 const { body, validationResult, query } = require('express-validator');
 const NewsEvent = require('../models/NewsEvent');
 const { protect, adminOnly } = require('../middleware/auth');
+const { upload, deleteFile } = require('../middleware/upload');
 
 const router = express.Router();
 
@@ -351,9 +352,9 @@ router.post('/upload', protect, adminOnly, (req, res) => {
       console.log('File path:', req.file.path);
       console.log('File destination:', req.file.destination);
       
-      const imageUrl = `/api/upload/serve/news/${req.file.filename}`;
+      const imageUrl = req.file.path;
 
-      console.log('Returning success response with filename:', req.file.filename);
+      console.log('Returning success response with Cloudinary URL:', imageUrl);
       
       res.json({
         success: true,
@@ -414,9 +415,9 @@ router.post('/upload-attachment', protect, adminOnly, (req, res) => {
         });
       }
 
-      const attachmentUrl = `/api/upload/serve/documents/${req.file.filename}`;
+      const attachmentUrl = req.file.path;
 
-      console.log('Attachment uploaded successfully:', req.file.filename);
+      console.log('Attachment uploaded successfully to Cloudinary:', req.file.filename);
       
       res.json({
         success: true,
@@ -454,25 +455,22 @@ router.delete('/:id', protect, adminOnly, async (req, res) => {
       });
     }
 
-    // Delete all associated image files
+    // Delete all associated image files from Cloudinary
     if (newsEvent.images && newsEvent.images.length > 0) {
-      newsEvent.images.forEach(imagePath => {
-        if (imagePath) {
-          // Handle both full paths and relative paths
-          const filePathToDelete = imagePath.startsWith('uploads/') 
-            ? imagePath 
-            : path.join('uploads/news/', path.basename(imagePath));
-          
-          if (fs.existsSync(filePathToDelete)) {
-            try {
-              fs.unlinkSync(filePathToDelete);
-              console.log('Deleted file:', filePathToDelete);
-            } catch (err) {
-              console.error('Error deleting file:', err);
-            }
-          }
+      for (const image of newsEvent.images) {
+        if (image.url) {
+          await deleteFile(image.url);
         }
-      });
+      }
+    }
+
+    // Delete all associated attachments from Cloudinary
+    if (newsEvent.attachments && newsEvent.attachments.length > 0) {
+      for (const attachment of newsEvent.attachments) {
+        if (attachment.url) {
+          await deleteFile(attachment.url);
+        }
+      }
     }
 
     await NewsEvent.findByIdAndDelete(req.params.id);
