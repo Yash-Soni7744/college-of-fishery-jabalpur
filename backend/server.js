@@ -35,17 +35,33 @@ const limiter = rateLimit({
 });
 app.use('/api/', limiter);
 
+const allowedOrigins = [
+  'https://cofsjabalpur.com',
+  'https://www.cofsjabalpur.com',
+  'https://cofsjabalpur.in',
+  'https://www.cofsjabalpur.in',
+  'https://cofsjabalpur.org',
+  'https://www.cofsjabalpur.org',
+  'https://college-of-fishery-jabalpur.vercel.app',
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'http://localhost:5174',
+];
+
 app.use(cors({
-  origin: [
-    process.env.FRONTEND_URL,
-    process.env.FRONTEND_URL_IN,
-    process.env.FRONTEND_URL_ORG
-  ].filter(Boolean),
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production') {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS: Origin ${origin} not allowed`));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: [
-    'Content-Type', 
-    'Authorization', 
+    'Content-Type',
+    'Authorization',
     'X-Upload-Category',
     'Accept',
     'Origin',
