@@ -181,17 +181,13 @@ const FacultyManagement = () => {
       console.log('Upload response:', response.data)
       
       if (response.data.success) {
-        // Extract just the filename from the response
-        const filename = response.data.data.filename
-        console.log('Faculty image uploaded filename:', filename)
-        
-        // Test the URL construction
-        const imageUrl = uploadAPI.getImageUrl(filename, 'faculty')
-        console.log('Constructed image URL:', imageUrl)
+        // Use the full URL from the response
+        const imageUrl = response.data.data.url || response.data.data.filename
+        console.log('Faculty image uploaded URL:', imageUrl)
         
         setFormData(prev => ({
           ...prev,
-          image: filename
+          image: imageUrl
         }))
         toast.success('Image uploaded successfully')
       } else {

@@ -217,15 +217,27 @@ export const uploadAPI = {
   },
   delete: (filename) => api.delete(`/upload/${filename}`),
   getImageUrl: (filename, type = 'images') => {
-    // Handle external URLs (proxy through backend)
+    if (!filename) return ''
+
+    // Handle external URLs
     if (filename.startsWith('http')) {
-      const baseURL = import.meta.env.VITE_SERVER_HOST || '/api'
+      // If it's a Cloudinary URL, return it directly (don't proxy)
+      if (filename.includes('cloudinary.com')) {
+        return filename
+      }
+      
+      // For other remote URLs (like the old ndvsu.org), proxy through backend
+      const serverHost = import.meta.env.VITE_SERVER_HOST || '/api'
+      // Ensure we have a valid base URL for the proxy
+      const baseURL = serverHost.startsWith('http') ? serverHost : `${window.location.origin}${serverHost.startsWith('/') ? '' : '/'}${serverHost}`
       return `${baseURL}/proxy/image?url=${encodeURIComponent(filename)}`
     }
 
     // Get the base URL from environment variable
-    const serverHost = import.meta.env.VITE_SERVER_HOST || 'http://localhost:5000/api'
-    // Remove /api suffix and any trailing slashes
+    // Use empty string as default to create relative URLs (better for production)
+    const serverHost = import.meta.env.VITE_SERVER_HOST || ''
+    
+    // Remove /api suffix and any trailing slashes for the base path
     const baseURL = serverHost.replace('/api', '').replace(/\/+$/, '')
     
     // Handle files that already have the full path
