@@ -58,22 +58,14 @@ const GalleryManagement = () => {
 
   // Helper function to get proper image URL
   const getImageUrl = (image) => {
-    // If imageUrl starts with http, use it directly (external images)
-    if (image.imageUrl && image.imageUrl.startsWith('http')) {
-      return image.imageUrl;
+    // If imageUrl starts with http or includes fishery_college, use it via central resolver
+    if (image.imageUrl) {
+      if (image.imageUrl.startsWith('http')) return image.imageUrl;
+      return uploadAPI.getImageUrl(image.imageUrl, 'gallery');
     }
     
-    // Extract filename from imageUrl path
-    const filename = image.imageUrl ? image.imageUrl.split('/').pop() : null;
-    if (filename) {
-      const url = uploadAPI.getImageUrl(filename, 'gallery');
-      console.log('Generated URL for gallery image:', url, 'from filename:', filename);
-      return url;
-    }
-    
-    // Fallback to direct imageUrl
-    console.log('Using fallback imageUrl:', image.imageUrl);
-    return image.imageUrl;
+    // Fallback
+    return '';
   }
 
   useEffect(() => {

@@ -19,17 +19,9 @@ const Gallery = () => {
       return image.imageUrl;
     }
     
-    // Extract filename from imageUrl path
-    const filename = image.imageUrl ? image.imageUrl.split('/').pop() : null;
-    if (filename) {
-      const url = uploadAPI.getImageUrl(filename, 'gallery');
-      console.log('Gallery page - Generated URL:', url, 'from filename:', filename);
-      return url;
-    }
-    
-    // Fallback to direct imageUrl
-    console.log('Gallery page - Using fallback imageUrl:', image.imageUrl);
-    return image.imageUrl;
+    // Use uploadAPI to get the full URL
+    const url = uploadAPI.getImageUrl(image.imageUrl, 'gallery');
+    return url;
   }
 
   const categories = [

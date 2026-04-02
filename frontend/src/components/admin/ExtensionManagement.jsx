@@ -940,7 +940,7 @@ const ExtensionManagement = () => {
                         </button>
                       </div>
                       <img
-                        src={uploadAPI.getImageUrl(editingItem.imageUrl.split('/').pop(), 'images')}
+                        src={uploadAPI.getImageUrl(editingItem.imageUrl, 'images')}
                         alt="Current image"
                         className="w-32 h-32 object-cover rounded-lg border"
                       />

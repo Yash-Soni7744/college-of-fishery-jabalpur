@@ -125,7 +125,7 @@ const Extension = () => {
                 {program.imageUrl && (
                   <div className="mb-4 -mx-6 -mt-6">
                     <img
-                      src={uploadAPI.getImageUrl(program.imageUrl.split('/').pop(), 'images')}
+                      src={uploadAPI.getImageUrl(program.imageUrl, 'images')}
                       alt={program.title}
                       className="w-full h-48 object-cover rounded-t-lg"
                       onError={(e) => {
@@ -245,7 +245,7 @@ const Extension = () => {
                 {activity.imageUrl && (
                   <div className="mb-6 -mx-8 -mt-8">
                     <img
-                      src={uploadAPI.getImageUrl(activity.imageUrl.split('/').pop(), 'images')}
+                      src={uploadAPI.getImageUrl(activity.imageUrl, 'images')}
                       alt={activity.title}
                       className="w-full h-48 object-cover rounded-t-lg"
                       onError={(e) => {
@@ -368,7 +368,7 @@ const Extension = () => {
                 {demo.imageUrl && (
                   <div className="mb-4 -mx-6 -mt-6">
                     <img
-                      src={uploadAPI.getImageUrl(demo.imageUrl.split('/').pop(), 'images')}
+                      src={uploadAPI.getImageUrl(demo.imageUrl, 'images')}
                       alt={demo.title}
                       className="w-full h-48 object-cover rounded-t-lg"
                       onError={(e) => {
@@ -486,7 +486,7 @@ const Extension = () => {
                 {story.imageUrl && (
                   <div className="mb-4 -mx-6 -mt-6">
                     <img
-                      src={uploadAPI.getImageUrl(story.imageUrl.split('/').pop(), 'images')}
+                      src={uploadAPI.getImageUrl(story.imageUrl, 'images')}
                       alt={story.title}
                       className="w-full h-48 object-cover rounded-t-lg"
                       onError={(e) => {

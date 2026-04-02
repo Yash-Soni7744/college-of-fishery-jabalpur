@@ -221,24 +221,41 @@ export const uploadAPI = {
 
     // Handle external URLs
     if (filename.startsWith('http')) {
-      // If it's a Cloudinary URL, return it directly (don't proxy)
+      // If it's a Cloudinary URL, return it directly
       if (filename.includes('cloudinary.com')) {
-        return filename
+        // Ensure https
+        return filename.replace('http://res.cloudinary.com', 'https://res.cloudinary.com')
       }
       
       // For other remote URLs (like the old ndvsu.org), proxy through backend
       const serverHost = import.meta.env.VITE_SERVER_HOST || '/api'
-      // Ensure we have a valid base URL for the proxy
       const baseURL = serverHost.startsWith('http') ? serverHost : `${window.location.origin}${serverHost.startsWith('/') ? '' : '/'}${serverHost}`
       return `${baseURL}/proxy/image?url=${encodeURIComponent(filename)}`
     }
 
+    // Detect Cloudinary-style paths that might have arrived without the protocol
+    if (filename.includes('fishery_college/')) {
+      const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dffu99v88'
+      return `https://res.cloudinary.com/${cloudName}/image/upload/${filename}`
+    }
+
     // Get the base URL from environment variable
-    // Use empty string as default to create relative URLs (better for production)
-    const serverHost = import.meta.env.VITE_SERVER_HOST || ''
+    // Default to /api for relative URLs in production to avoid mixed content errors
+    const serverHost = import.meta.env.VITE_SERVER_HOST || '/api'
     
-    // Remove /api suffix and any trailing slashes for the base path
-    const baseURL = serverHost.replace('/api', '').replace(/\/+$/, '')
+    // If we're on a production domain but the bundle has 'localhost:5000' hardcoded (build-time artifact),
+    // use a relative path instead to prevent "Connection Refused".
+    const isProdDomain = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
+    const isHardcodedLocalhost = serverHost.includes('localhost') || serverHost.includes('127.0.0.1')
+    
+    let baseURL = ''
+    if (isProdDomain && isHardcodedLocalhost) {
+      baseURL = '' // Use current domain's relative path
+    } else {
+      baseURL = serverHost.replace('/api', '').replace(/\/+$/, '')
+      // Make sure it doesn't accidentally become just 'http:' or 'https:'
+      if (baseURL === 'http:' || baseURL === 'https:') baseURL = ''
+    }
     
     // Handle files that already have the full path
     if (filename.startsWith('/uploads/')) {
