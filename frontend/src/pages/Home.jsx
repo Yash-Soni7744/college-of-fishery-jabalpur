@@ -309,14 +309,16 @@ const Home = () => {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="social-media-masonry">
                     {socialMediaLinks.map((link, index) => (
-                      <div key={link.id || index} className="social-media-embed-container">
-                        <SocialEmbed
-                          platform={link.platform}
-                          url={link.url}
-                          width="100%"
-                        />
+                      <div key={link.id || index} className="social-media-item">
+                        <div className="social-media-embed-container">
+                          <SocialEmbed
+                            platform={link.platform}
+                            url={link.url}
+                            width="100%"
+                          />
+                        </div>
                       </div>
                     ))}
                   </div>

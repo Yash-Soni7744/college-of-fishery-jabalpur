@@ -287,7 +287,11 @@ const SocialMediaManagement = () => {
                 <p className="text-xs text-gray-500 mt-1">
                   Enter the full URL of the {platforms.find(p => p.value === formData.platform)?.label || 'Social Media'} post
                 </p>
-                          <p className="text-gray-600 text-sm mt-2">Manage social media posts to display on homepage</p>
+                <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                  <p className="text-xs text-blue-700 leading-relaxed font-semibold">
+                    Note: For Facebook and Instagram, make sure the post is set to "Public". If the post is private or from a personal profile with restricted settings, it will not display on the website and show an "Unavailable" error.
+                  </p>
+                </div>
               </div>
 
               <div className="flex items-center">

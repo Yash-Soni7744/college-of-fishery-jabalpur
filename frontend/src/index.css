@@ -364,21 +364,49 @@ body {
   -webkit-line-clamp: 3;
 }
 
-/* Social Media Embed Styles */
+/* Social Media Masonry Pattern */
+.social-media-masonry {
+  column-count: 1;
+  column-gap: 1.5rem;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .social-media-masonry {
+    column-count: 2;
+  }
+}
+
+.social-media-item {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
 .social-media-embed-container {
   width: 100%;
   max-width: 100%;
+  border-radius: 12px;
+  background-color: #ffffff;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
   overflow: hidden;
+  height: auto; /* Dynamic height */
 }
 
+/* Force Facebook and other iframes to fit properly */
 .social-media-embed-container iframe {
-  max-width: 100%;
-  border-radius: 8px;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-/* Responsive adjustments for social embeds */
-@media (max-width: 768px) {
-  .social-media-embed-container {
-    margin: 0 auto;
-  }
+/* Custom shadow on hover for a Pinterest feel */
+.social-media-item:hover .social-media-embed-container {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
 }
