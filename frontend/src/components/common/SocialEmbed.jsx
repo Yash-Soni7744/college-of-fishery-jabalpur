@@ -13,6 +13,14 @@ const FacebookEmbed = lazy(() =>
   import('react-social-media-embed').then(module => ({ default: module.FacebookEmbed }))
 )
 
+const InstagramEmbed = lazy(() =>
+  import('react-social-media-embed').then(module => ({ default: module.InstagramEmbed }))
+)
+
+const YouTubeEmbed = lazy(() =>
+  import('react-social-media-embed').then(module => ({ default: module.YouTubeEmbed }))
+)
+
 // Loading fallback
 const EmbedLoader = () => (
   <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
@@ -88,6 +96,17 @@ const SocialEmbed = ({ platform, url, width = '100%', height }) => {
             url={url}
             width={width}
             height={height || 400}
+          />
+        ) : platform === 'instagram' ? (
+          <InstagramEmbed
+            url={url}
+            width={width}
+          />
+        ) : platform === 'youtube' ? (
+          <YouTubeEmbed
+            url={url}
+            width={width}
+            height={height || 315}
           />
         ) : (
           <EmbedError url={url} platform={platform} />
