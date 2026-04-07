@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Users, Award, Target, Lightbulb, ChevronRight, MapPin, Calendar, TrendingUp, BookOpen, UserCheck, Download, FileText } from 'lucide-react'
 import Card from '../components/common/Card'
-import { getDocumentUrl, getImageUrl } from '../services/files'
+import { getDocumentUrl, getImageUrl, downloadFile } from '../services/files'
 import { extensionAPI, uploadAPI } from '../services/api'
 
 const Extension = () => {
@@ -183,16 +183,15 @@ const Extension = () => {
                 {/* Document Download */}
                 {program.filename && (
                   <div className="mt-4 pt-4 border-t border-gray-200">
-                    <a
-                      href={getDocumentUrl(program.filename)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center px-3 py-2 bg-blue-100 text-blue-700 text-sm rounded-md hover:bg-blue-200 transition-colors"
+                    <button
+                      onClick={() => downloadFile(getDocumentUrl(program.filename), program.title || 'Document')}
+                      type="button"
+                      className="inline-flex items-center px-3 py-2 bg-blue-100 text-blue-700 text-sm rounded-md hover:bg-blue-200 transition-colors border-none cursor-pointer"
                     >
                       <FileText className="w-4 h-4 mr-2" />
                       <Download className="w-4 h-4 mr-2" />
                       Download Document
-                    </a>
+                    </button>
                   </div>
                 )}
               </Card>
@@ -283,16 +282,15 @@ const Extension = () => {
                     {/* Document Download */}
                     {activity.filename && (
                       <div className="mt-4 pt-4 border-t border-gray-200">
-                        <a
-                          href={getDocumentUrl(activity.filename)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center px-3 py-2 bg-blue-100 text-blue-700 text-sm rounded-md hover:bg-blue-200 transition-colors"
+                        <button
+                          onClick={() => downloadFile(getDocumentUrl(activity.filename), activity.title || 'Document')}
+                          type="button"
+                          className="inline-flex items-center px-3 py-2 bg-blue-100 text-blue-700 text-sm rounded-md hover:bg-blue-200 transition-colors border-none cursor-pointer"
                         >
                           <FileText className="w-4 h-4 mr-2" />
                           <Download className="w-4 h-4 mr-2" />
                           Download Document
-                        </a>
+                        </button>
                       </div>
                     )}
                   </div>
@@ -424,16 +422,15 @@ const Extension = () => {
                 {/* Document Download */}
                 {demo.filename && (
                   <div className="mt-4 pt-4 border-t border-gray-200">
-                    <a
-                      href={getDocumentUrl(demo.filename)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center px-3 py-2 bg-blue-100 text-blue-700 text-sm rounded-md hover:bg-blue-200 transition-colors"
+                    <button
+                      onClick={() => downloadFile(getDocumentUrl(demo.filename), demo.title || 'Document')}
+                      type="button"
+                      className="inline-flex items-center px-3 py-2 bg-blue-100 text-blue-700 text-sm rounded-md hover:bg-blue-200 transition-colors border-none cursor-pointer"
                     >
                       <FileText className="w-4 h-4 mr-2" />
                       <Download className="w-4 h-4 mr-2" />
                       Download Document
-                    </a>
+                    </button>
                   </div>
                 )}
               </Card>
@@ -544,16 +541,15 @@ const Extension = () => {
                 {/* Document Download */}
                 {story.filename && (
                   <div className="mt-4 pt-4 border-t border-gray-200">
-                    <a
-                      href={getDocumentUrl(story.filename)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center px-3 py-2 bg-blue-100 text-blue-700 text-sm rounded-md hover:bg-blue-200 transition-colors"
+                    <button
+                      onClick={() => downloadFile(getDocumentUrl(story.filename), story.name || 'Document')}
+                      type="button"
+                      className="inline-flex items-center px-3 py-2 bg-blue-100 text-blue-700 text-sm rounded-md hover:bg-blue-200 transition-colors border-none cursor-pointer"
                     >
                       <FileText className="w-4 h-4 mr-2" />
                       <Download className="w-4 h-4 mr-2" />
                       Download Document
-                    </a>
+                    </button>
                   </div>
                 )}
               </Card>

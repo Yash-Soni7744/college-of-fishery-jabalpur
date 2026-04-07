@@ -883,9 +883,13 @@ const ResearchManagement = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm text-gray-600">Current file: {editingItem.originalName || editingItem.filename}</p>
-                    <a href={getDocumentUrl(editingItem.filename)} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 text-sm">
+                    <button 
+                      type="button"
+                      onClick={() => downloadFile(getDocumentUrl(editingItem.filename), editingItem.originalName || editingItem.filename || 'Document')} 
+                      className="text-blue-600 hover:text-blue-800 text-sm border-none bg-transparent cursor-pointer p-0"
+                    >
                       View Current PDF
-                    </a>
+                    </button>
                   </div>
                   <button
                     type="button"

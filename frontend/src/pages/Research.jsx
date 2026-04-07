@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { FlaskConical, Users, Award, BookOpen, Globe, Building, Fish, Microscope, Calendar, User, ExternalLink, DollarSign, FileText, Target, GraduationCap, Beaker, MapPin } from 'lucide-react'
 import Card from '../components/common/Card'
-import { getDocumentUrl } from '../services/files'
+import { getDocumentUrl, downloadFile } from '../services/files'
 import { researchAPI } from '../services/api'
 
 const Research = () => {
@@ -280,16 +280,15 @@ const Research = () => {
                         {project.filename && (
                           <div className="pt-3 border-t border-gray-100 mt-3">
                             <div className="flex flex-wrap gap-2">
-                              <a
-                                href={getDocumentUrl(project.filename)}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center px-3 py-1 bg-indigo-100 text-indigo-700 text-xs rounded-full hover:bg-indigo-200 transition-colors"
-                            >
-                              <FileText className="w-3 h-3 mr-1" />
-                              View Document
-                              <ExternalLink className="w-3 h-3 ml-1" />
-                            </a>
+                              <button
+                                onClick={() => downloadFile(getDocumentUrl(project.filename), project.title || 'Document')}
+                                type="button"
+                                className="flex items-center px-3 py-1 bg-indigo-100 text-indigo-700 text-xs rounded-full hover:bg-indigo-200 transition-colors border-none cursor-pointer"
+                              >
+                                <FileText className="w-3 h-3 mr-1" />
+                                View Document
+                                <ExternalLink className="w-3 h-3 ml-1" />
+                              </button>
                             </div>
                           </div>
                         )}
@@ -298,17 +297,16 @@ const Research = () => {
                           <div className="pt-3 border-t border-gray-100">
                             <div className="flex flex-wrap gap-2">
                               {project.documents.map((doc, index) => (
-                                <a
+                                <button
                                   key={index}
-                                  href={doc.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="flex items-center px-3 py-1 bg-blue-100 text-blue-700 text-xs rounded-full hover:bg-blue-200 transition-colors"
+                                  onClick={() => downloadFile(doc.url, doc.name || 'Details')}
+                                  type="button"
+                                  className="flex items-center px-3 py-1 bg-blue-100 text-blue-700 text-xs rounded-full hover:bg-blue-200 transition-colors border-none cursor-pointer"
                                 >
                                   <FileText className="w-3 h-3 mr-1" />
                                   View Details
                                   <ExternalLink className="w-3 h-3 ml-1" />
-                                </a>
+                                </button>
                               ))}
                             </div>
                           </div>
@@ -410,17 +408,16 @@ const Research = () => {
                           <div className="pt-3 border-t border-gray-100">
                             <div className="flex flex-wrap gap-2">
                               {publication.documents.map((doc, index) => (
-                                <a
+                                <button
                                   key={index}
-                                  href={doc.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="flex items-center px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full hover:bg-green-200 transition-colors"
+                                  onClick={() => downloadFile(doc.url, doc.name || 'Publication')}
+                                  type="button"
+                                  className="flex items-center px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full hover:bg-green-200 transition-colors border-none cursor-pointer"
                                 >
                                   <FileText className="w-3 h-3 mr-1" />
                                   View Publication
                                   <ExternalLink className="w-3 h-3 ml-1" />
-                                </a>
+                                </button>
                               ))}
                             </div>
                           </div>
@@ -512,16 +509,15 @@ const Research = () => {
                         {research.filename && (
                           <div className="pt-3 border-t border-gray-100 mt-3">
                             <div className="flex flex-wrap gap-2">
-                            <a
-                              href={getDocumentUrl(research.filename)}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center px-3 py-1 bg-orange-100 text-orange-700 text-xs rounded-full hover:bg-orange-200 transition-colors"
+                            <button
+                              onClick={() => downloadFile(getDocumentUrl(research.filename), research.title || 'Document')}
+                              type="button"
+                              className="flex items-center px-3 py-1 bg-orange-100 text-orange-700 text-xs rounded-full hover:bg-orange-200 transition-colors border-none cursor-pointer"
                             >
                               <FileText className="w-3 h-3 mr-1" />
                               View Document
                               <ExternalLink className="w-3 h-3 ml-1" />
-                            </a>
+                            </button>
                             </div>
                           </div>
                         )}
@@ -530,17 +526,16 @@ const Research = () => {
                           <div className="pt-3 border-t border-gray-100 mt-3">
                             <div className="flex flex-wrap gap-2">
                               {research.documents.map((doc, index) => (
-                                <a
+                                <button
                                   key={index}
-                                  href={doc.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="flex items-center px-3 py-1 bg-orange-100 text-orange-700 text-xs rounded-full hover:bg-orange-200 transition-colors"
+                                  onClick={() => downloadFile(doc.url, doc.name || 'Thesis')}
+                                  type="button"
+                                  className="flex items-center px-3 py-1 bg-orange-100 text-orange-700 text-xs rounded-full hover:bg-orange-200 transition-colors border-none cursor-pointer"
                                 >
                                   <FileText className="w-3 h-3 mr-1" />
                                   View Thesis
                                   <ExternalLink className="w-3 h-3 ml-1" />
-                                </a>
+                                </button>
                               ))}
                             </div>
                           </div>
@@ -652,16 +647,15 @@ const Research = () => {
                         {collaboration.filename && (
                           <div className="pt-3 border-t border-gray-100 mt-3">
                             <div className="flex flex-wrap gap-2">
-                              <a
-                                href={getDocumentUrl(collaboration.filename)}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center px-3 py-1 bg-purple-100 text-purple-700 text-xs rounded-full hover:bg-purple-200 transition-colors"
+                              <button
+                                onClick={() => downloadFile(getDocumentUrl(collaboration.filename), collaboration.title || 'Document')}
+                                type="button"
+                                className="flex items-center px-3 py-1 bg-purple-100 text-purple-700 text-xs rounded-full hover:bg-purple-200 transition-colors border-none cursor-pointer"
                               >
                                 <FileText className="w-3 h-3 mr-1" />
                                 View Document
                                 <ExternalLink className="w-3 h-3 ml-1" />
-                              </a>
+                              </button>
                             </div>
                           </div>
                         )}
@@ -670,17 +664,16 @@ const Research = () => {
                           <div className="pt-3 border-t border-gray-100">
                             <div className="flex flex-wrap gap-2">
                               {collaboration.documents.map((doc, index) => (
-                                <a
+                                <button
                                   key={index}
-                                  href={doc.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="flex items-center px-3 py-1 bg-purple-100 text-purple-700 text-xs rounded-full hover:bg-purple-200 transition-colors"
+                                  onClick={() => downloadFile(doc.url, doc.name || 'Agreement')}
+                                  type="button"
+                                  className="flex items-center px-3 py-1 bg-purple-100 text-purple-700 text-xs rounded-full hover:bg-purple-200 transition-colors border-none cursor-pointer"
                                 >
                                   <FileText className="w-3 h-3 mr-1" />
                                   View Agreement
                                   <ExternalLink className="w-3 h-3 ml-1" />
-                                </a>
+                                </button>
                               ))}
                             </div>
                           </div>
@@ -785,16 +778,15 @@ const Research = () => {
                         {facility.filename && (
                           <div className="pt-3 border-t border-gray-100 mt-3">
                             <div className="flex flex-wrap gap-2">
-                              <a
-                                href={getDocumentUrl(facility.filename)}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center px-3 py-1 bg-indigo-100 text-indigo-700 text-xs rounded-full hover:bg-indigo-200 transition-colors"
+                              <button
+                                onClick={() => downloadFile(getDocumentUrl(facility.filename), facility.title || 'Document')}
+                                type="button"
+                                className="flex items-center px-3 py-1 bg-indigo-100 text-indigo-700 text-xs rounded-full hover:bg-indigo-200 transition-colors border-none cursor-pointer"
                               >
                                 <FileText className="w-3 h-3 mr-1" />
                                 View Document
                                 <ExternalLink className="w-3 h-3 ml-1" />
-                              </a>
+                              </button>
                             </div>
                           </div>
                         )}
@@ -803,17 +795,16 @@ const Research = () => {
                           <div className="pt-3 border-t border-gray-100">
                             <div className="flex flex-wrap gap-2">
                               {facility.documents.map((doc, index) => (
-                                <a
+                                <button
                                   key={index}
-                                  href={doc.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="flex items-center px-3 py-1 bg-indigo-100 text-indigo-700 text-xs rounded-full hover:bg-indigo-200 transition-colors"
+                                  onClick={() => downloadFile(doc.url, doc.name || 'Agreement')}
+                                  type="button"
+                                  className="flex items-center px-3 py-1 bg-indigo-100 text-indigo-700 text-xs rounded-full hover:bg-indigo-200 transition-colors border-none cursor-pointer"
                                 >
                                   <FileText className="w-3 h-3 mr-1" />
                                   View Specifications
                                   <ExternalLink className="w-3 h-3 ml-1" />
-                                </a>
+                                </button>
                               ))}
                             </div>
                           </div>
