@@ -133,10 +133,21 @@ router.post('/', protect, adminOnly, [
     });
 
   } catch (error) {
-    console.error('Create faculty error:', error);
+    console.error('Create faculty error detailed:', error);
+    
+    // Handle Mongoose validation errors
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({
+        success: false,
+        message: 'Validation failed',
+        errors: Object.values(error.errors).map(err => err.message)
+      });
+    }
+
     res.status(500).json({
       success: false,
-      message: 'Server error creating faculty member'
+      message: 'Server error creating faculty member',
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 });
@@ -193,10 +204,21 @@ router.put('/:id', protect, adminOnly, [
     });
 
   } catch (error) {
-    console.error('Update faculty error:', error);
+    console.error('Update faculty error detailed:', error);
+
+    // Handle Mongoose validation errors
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({
+        success: false,
+        message: 'Validation failed',
+        errors: Object.values(error.errors).map(err => err.message)
+      });
+    }
+
     res.status(500).json({
       success: false,
-      message: 'Server error updating faculty member'
+      message: 'Server error updating faculty member',
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 });

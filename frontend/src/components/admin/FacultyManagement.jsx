@@ -86,10 +86,10 @@ const FacultyManagement = () => {
     try {
       const data = {
         ...formData,
-        experience: formData.experience ? parseInt(formData.experience) : 0,
+        experience: !isNaN(parseInt(formData.experience)) ? parseInt(formData.experience) : 0,
         researchInterests: Array.isArray(formData.researchInterests) 
           ? formData.researchInterests 
-          : formData.researchInterests.split(',').map(s => s.trim()).filter(Boolean)
+          : (formData.researchInterests || '').split(',').map(s => s.trim()).filter(Boolean)
       }
 
       // Only include department for teaching staff
@@ -135,7 +135,7 @@ const FacultyManagement = () => {
       qualification: facultyMember.qualification,
       specialization: facultyMember.specialization,
       experience: facultyMember.experience?.toString() || '',
-      bio: facultyMember.bio,
+      bio: facultyMember.bio || '',
       researchInterests: Array.isArray(facultyMember.researchInterests) 
         ? facultyMember.researchInterests.join(', ') 
         : facultyMember.researchInterests || '',
@@ -475,6 +475,7 @@ const FacultyManagement = () => {
                   onChange={handleChange}
                   placeholder="Years of experience"
                   required
+                  min="0"
                 />
               </FormGroup>
             </div>

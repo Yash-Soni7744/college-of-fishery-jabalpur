@@ -41,9 +41,46 @@ export const getImageUrl = (subdir, filename) => {
   return `${getUploadsBase()}/${dir}/${clean}`
 }
 
+/**
+ * Downloads a file with the specified filename, ensuring correct PDF extension if needed
+ * @param {string} url - The URL of the file to download
+ * @param {string} originalName - The desired filename
+ */
+export const downloadFile = async (url, originalName) => {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Network fetch failed');
+    const blob = await response.blob();
+    const blobUrl = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = blobUrl;
+    
+    let filename = originalName || 'document.pdf';
+    // Ensure PDF extension if the original name doesn't have it
+    if (!filename.toLowerCase().endsWith('.pdf') && url.toLowerCase().includes('.pdf')) {
+      filename += '.pdf';
+    } else if (!filename.toLowerCase().endsWith('.pdf') && !filename.includes('.')) {
+      // If no extension at all, default to .pdf if it's likely a PDF
+      filename += '.pdf';
+    }
+    
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(blobUrl);
+    document.body.removeChild(a);
+  } catch (error) {
+    console.error('Download error:', error);
+    // Fallback: just open in new tab
+    window.open(url, '_blank');
+  }
+};
+
 export default {
   getBaseHost,
   getUploadsBase,
   getDocumentUrl,
   getImageUrl,
+  downloadFile
 }

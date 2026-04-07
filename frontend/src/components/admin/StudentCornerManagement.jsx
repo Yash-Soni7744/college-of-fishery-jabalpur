@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Plus, Edit, Trash2, Search, Users, Award, GraduationCap, Calendar, FileText, Upload, Save, X, Download } from 'lucide-react'
 import { studentCornerAPI, uploadAPI } from '../../services/api'
-import { getDocumentUrl } from '../../services/files'
+import { getDocumentUrl, downloadFile } from '../../services/files'
 import LoadingSpinner, { LoadingCard } from '../common/LoadingSpinner'
 import Modal, { ConfirmModal } from '../common/Modal'
 import { Form, FormGroup, Input, Textarea, Select, SubmitButton } from '../common/Form'
@@ -539,14 +539,13 @@ const StudentCornerManagement = () => {
                           {doc.originalName}
                         </span>
                         <span className="text-xs text-gray-500 flex-shrink-0">({(doc.fileSize / 1024 / 1024).toFixed(1)} MB)</span>
-                        <a 
-                          href={getDocumentUrl(doc.filename)} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          className="text-blue-600 hover:text-blue-800 text-xs flex-shrink-0"
+                        <button 
+                          type="button"
+                          onClick={() => downloadFile(getDocumentUrl(doc.filename), doc.originalName)} 
+                          className="text-blue-600 hover:text-blue-800 text-xs flex-shrink-0 border-none bg-transparent cursor-pointer"
                         >
                           <Download className="w-3 h-3" />
-                        </a>
+                        </button>
                       </div>
                       <button
                         type="button"
@@ -575,9 +574,13 @@ const StudentCornerManagement = () => {
                     <div className="flex items-center space-x-2">
                       <FileText className="w-4 h-4 text-gray-600" />
                       <span className="text-sm text-gray-600">{editingItem.originalName || editingItem.filename}</span>
-                      <a href={getDocumentUrl(editingItem.filename)} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 text-sm">
+                      <button 
+                        type="button"
+                        onClick={() => downloadFile(getDocumentUrl(editingItem.filename), editingItem.originalName || editingItem.filename)} 
+                        className="text-blue-600 hover:text-blue-800 text-sm border-none bg-transparent cursor-pointer"
+                      >
                         <Download className="w-3 h-3" />
-                      </a>
+                      </button>
                     </div>
                     <button
                       type="button"
@@ -834,14 +837,13 @@ const StudentCornerManagement = () => {
                         {doc.originalName}
                       </span>
                       <span className="text-xs text-gray-400">({(doc.fileSize / 1024 / 1024).toFixed(1)}MB)</span>
-                      <a
-                        href={getDocumentUrl(doc.filename)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center px-1 py-1 bg-blue-100 text-blue-700 text-xs rounded hover:bg-blue-200 flex-shrink-0"
+                      <button
+                        onClick={() => downloadFile(getDocumentUrl(doc.filename || doc.url), doc.originalName || doc.name)}
+                        className="flex items-center px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded hover:bg-blue-100 border-none cursor-pointer"
                       >
-                        <Download className="w-3 h-3" />
-                      </a>
+                        <Download className="w-3 h-3 mr-1" />
+                        {doc.originalName || doc.name || 'Document'}
+                      </button>
                     </div>
                   ))}
                 </div>

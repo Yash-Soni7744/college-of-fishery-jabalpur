@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { GraduationCap, Award, Users, Star, Briefcase, FileText, Calendar, Mail, Phone, MapPin, ChevronRight, Download, AlertCircle } from 'lucide-react'
 import Card from '../components/common/Card'
-import { getDocumentUrl } from '../services/files'
+import { getDocumentUrl, downloadFile } from '../services/files'
 import LoadingSpinner from '../components/common/LoadingSpinner'
 import { studentCornerAPI } from '../services/api'
 
@@ -176,12 +176,11 @@ const StudentCorner = () => {
                       <p className="text-sm font-medium text-gray-700 mb-3">Available Documents:</p>
                       <div className="space-y-2">
                         {guideline.documents.map((doc, docIndex) => (
-                          <a
+                          <button
                             key={docIndex}
-                            href={getDocumentUrl(doc.filename)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center w-full px-3 py-2 bg-blue-50 text-blue-700 text-sm rounded-md hover:bg-blue-100 transition-colors group"
+                            onClick={() => downloadFile(getDocumentUrl(doc.filename), doc.originalName)}
+                            type="button"
+                            className="inline-flex items-center w-full px-3 py-2 bg-blue-50 text-blue-700 text-sm rounded-md hover:bg-blue-100 transition-colors group border-none cursor-pointer"
                           >
                             <FileText className="w-4 h-4 mr-2 flex-shrink-0" />
                             <span className="flex-1 text-left truncate">{doc.originalName}</span>
@@ -189,23 +188,22 @@ const StudentCorner = () => {
                               ({(doc.fileSize / 1024 / 1024).toFixed(1)} MB)
                             </span>
                             <Download className="w-4 h-4 flex-shrink-0 group-hover:animate-bounce" />
-                          </a>
+                          </button>
                         ))}
                       </div>
                     </div>
                   ) : guideline.filename ? (
                     // Legacy single PDF support
                     <div className="mt-4 pt-4 border-t border-gray-200">
-                      <a
-                        href={getDocumentUrl(guideline.filename)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center px-3 py-2 bg-blue-100 text-blue-700 text-sm rounded-md hover:bg-blue-200 transition-colors"
+                      <button
+                        onClick={() => downloadFile(getDocumentUrl(guideline.filename), guideline.category || 'Document')}
+                        type="button"
+                        className="inline-flex items-center px-3 py-2 bg-blue-100 text-blue-700 text-sm rounded-md hover:bg-blue-200 transition-colors border-none cursor-pointer"
                       >
                         <FileText className="w-4 h-4 mr-2" />
                         <Download className="w-4 h-4 mr-2" />
                         Download Document
-                      </a>
+                      </button>
                     </div>
                   ) : null}
                 </Card>
@@ -311,12 +309,11 @@ const StudentCorner = () => {
                       <p className="text-sm font-medium text-gray-700 mb-3">Available Documents:</p>
                       <div className="space-y-2">
                         {scholarship.documents.map((doc, docIndex) => (
-                          <a
+                          <button
                             key={docIndex}
-                            href={getDocumentUrl(doc.filename)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center w-full px-3 py-2 bg-yellow-50 text-yellow-700 text-sm rounded-md hover:bg-yellow-100 transition-colors group"
+                            onClick={() => downloadFile(getDocumentUrl(doc.filename), doc.originalName)}
+                            type="button"
+                            className="inline-flex items-center w-full px-3 py-2 bg-yellow-50 text-yellow-700 text-sm rounded-md hover:bg-yellow-100 transition-colors group border-none cursor-pointer"
                           >
                             <FileText className="w-4 h-4 mr-2 flex-shrink-0" />
                             <span className="flex-1 text-left truncate">{doc.originalName}</span>
@@ -324,23 +321,22 @@ const StudentCorner = () => {
                               ({(doc.fileSize / 1024 / 1024).toFixed(1)} MB)
                             </span>
                             <Download className="w-4 h-4 flex-shrink-0 group-hover:animate-bounce" />
-                          </a>
+                          </button>
                         ))}
                       </div>
                     </div>
                   ) : scholarship.filename ? (
                     // Legacy single PDF support
                     <div className="mt-4 pt-4 border-t border-gray-200">
-                      <a
-                        href={getDocumentUrl(scholarship.filename)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center px-3 py-2 bg-yellow-100 text-yellow-700 text-sm rounded-md hover:bg-yellow-200 transition-colors"
+                      <button
+                        onClick={() => downloadFile(getDocumentUrl(scholarship.filename), scholarship.name || 'Document')}
+                        type="button"
+                        className="inline-flex items-center px-3 py-2 bg-yellow-100 text-yellow-700 text-sm rounded-md hover:bg-yellow-200 transition-colors border-none cursor-pointer"
                       >
                         <FileText className="w-4 h-4 mr-2" />
                         <Download className="w-4 h-4 mr-2" />
                         Download Document
-                      </a>
+                      </button>
                     </div>
                   ) : null}
                 </Card>
@@ -434,16 +430,15 @@ const StudentCorner = () => {
                   )}
                   {club.filename && (
                     <div className="mt-4 pt-4 border-t border-gray-200">
-                      <a
-                        href={getDocumentUrl(club.filename)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center px-3 py-2 bg-secondary-100 text-secondary-700 text-sm rounded-md hover:bg-secondary-200 transition-colors"
+                      <button
+                        onClick={() => downloadFile(getDocumentUrl(club.filename), club.name || 'Document')}
+                        type="button"
+                        className="inline-flex items-center px-3 py-2 bg-secondary-100 text-secondary-700 text-sm rounded-md hover:bg-secondary-200 transition-colors border-none cursor-pointer"
                       >
                         <FileText className="w-4 h-4 mr-2" />
                         <Download className="w-4 h-4 mr-2" />
                         Download Document
-                      </a>
+                      </button>
                     </div>
                   )}
                 </Card>

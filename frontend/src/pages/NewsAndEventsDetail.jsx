@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { Calendar, MapPin, Clock, Tag, ArrowLeft, Download, FileText, Share2 } from 'lucide-react'
 import { newsAPI, uploadAPI } from '../services/api'
 import { LoadingCard } from '../components/common/LoadingSpinner'
+import { downloadFile } from '../services/files'
 import toast from 'react-hot-toast'
 
 const NewsAndEventsDetail = () => {
@@ -293,13 +294,11 @@ const NewsAndEventsDetail = () => {
                       </div>
                       <div className="grid gap-4">
                         {item.attachments.map((attachment, index) => (
-                          <a
+                          <button
                             key={index}
-                            href={uploadAPI.getImageUrl(attachment.url, 'documents')}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            download
-                            className="flex items-center justify-between p-4 bg-white/80 backdrop-blur-sm rounded-xl hover:shadow-lg transition-all border border-blue-200/50 hover:border-blue-400/50 group"
+                            onClick={() => downloadFile(uploadAPI.getImageUrl(attachment.url, 'documents'), attachment.name)}
+                            type="button"
+                            className="flex items-center justify-between p-4 bg-white/80 backdrop-blur-sm rounded-xl hover:shadow-lg transition-all border border-blue-200/50 hover:border-blue-400/50 group cursor-pointer w-full text-left"
                           >
                             <div className="flex items-center flex-1 min-w-0">
                               <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-100 to-indigo-200 rounded-xl flex items-center justify-center text-2xl group-hover:from-blue-200 group-hover:to-indigo-300 transition-all shadow-md">
@@ -319,7 +318,7 @@ const NewsAndEventsDetail = () => {
                                 <Download className="w-5 h-5" />
                               </div>
                             </div>
-                          </a>
+                          </button>
                         ))}
                       </div>
                     </div>

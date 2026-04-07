@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Plus, Edit, Trash2, Search, FileText, Download, Eye, EyeOff } from 'lucide-react'
 import { farmersAPI } from '../../services/api'
-import { getImageUrl } from '../../services/files'
+import { getImageUrl, downloadFile } from '../../services/files'
 import LoadingSpinner, { LoadingCard } from '../common/LoadingSpinner'
 import Modal, { ConfirmModal } from '../common/Modal'
 import { Form, FormGroup, Input, Textarea, Select, SubmitButton, FileUpload } from '../common/Form'
@@ -313,15 +313,13 @@ const FarmersResourceManagement = () => {
                           <div className="flex items-center gap-2 text-xs text-gray-500">
                             <span className="font-medium">{resource.originalName}</span>
                             <span>({formatFileSize(resource.fileSize)})</span>
-                            <a
-                              href={getImageUrl('farmers', resource.filename)}
-                              target="_blank"
-                              rel="noopener noreferrer"
+                            <button
+                              onClick={() => downloadFile(getImageUrl('farmers', resource.filename), resource.originalName)}
                               className="flex items-center px-2 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
                             >
                               <Download className="w-3 h-3 mr-1" />
                               View PDF
-                            </a>
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -437,15 +435,14 @@ const FarmersResourceManagement = () => {
                       <FileText className="w-4 h-4 text-blue-500" />
                       <span className="text-sm text-gray-700">{editingResource.originalName}</span>
                       <span className="text-xs text-gray-500">({formatFileSize(editingResource.fileSize)})</span>
-                      <a
-                        href={getImageUrl('farmers', editingResource.filename)}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <button
+                        type="button"
+                        onClick={() => downloadFile(getImageUrl('farmers', editingResource.filename), editingResource.originalName)}
                         className="flex items-center px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded hover:bg-blue-200"
                       >
                         <Download className="w-3 h-3 mr-1" />
                         View Document
-                      </a>
+                      </button>
                     </div>
                     <p className="text-xs text-gray-500 mt-1">
                       Upload a new file to replace the current one

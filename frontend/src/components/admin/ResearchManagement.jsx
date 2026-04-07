@@ -3,7 +3,7 @@ import { Save, Eye, RefreshCw, FlaskConical, BookOpen, Users, Building, Graduati
 import Card from '../common/Card'
 import toast from 'react-hot-toast'
 import { researchAPI, uploadAPI } from '../../services/api'
-import { getDocumentUrl } from '../../services/files'
+import { getDocumentUrl, downloadFile } from '../../services/files'
 
 const ResearchManagement = () => {
   const [activeTab, setActiveTab] = useState('ongoing-projects')
@@ -236,29 +236,6 @@ const ResearchManagement = () => {
     }
   }
 
-  const handleDownloadClick = async (url, originalName) => {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error('Network fetch failed');
-      const blob = await response.blob();
-      const blobUrl = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.style.display = 'none';
-      a.href = blobUrl;
-      
-      let filename = originalName || 'document.pdf';
-      if (!filename.toLowerCase().endsWith('.pdf')) filename += '.pdf';
-      
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(blobUrl);
-      document.body.removeChild(a);
-    } catch (error) {
-      console.error('Download error:', error);
-      window.open(url, '_blank');
-    }
-  };
 
   const handleInputChange = (field, value) => {
     setFormData(prev => ({
@@ -1065,7 +1042,7 @@ const ResearchManagement = () => {
                           <FileText className="w-4 h-4 text-blue-500" />
                           <span className="text-sm text-gray-700">{item.originalName || item.filename}</span>
                           <button
-                            onClick={() => handleDownloadClick(getDocumentUrl(item.filename), item.originalName)}
+                            onClick={() => downloadFile(getDocumentUrl(item.filename), item.originalName)}
                             className="flex items-center px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded hover:bg-blue-200 cursor-pointer border-none"
                           >
                             <Download className="w-3 h-3 mr-1" />
@@ -1082,7 +1059,7 @@ const ResearchManagement = () => {
                           {item.documents.map((doc, idx) => (
                             <button
                               key={idx}
-                              onClick={() => handleDownloadClick(getDocumentUrl(doc.url), doc.name)}
+                              onClick={() => downloadFile(doc.url, doc.name)}
                               className="flex items-center px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded hover:bg-gray-200 cursor-pointer border-none"
                             >
                               <FileText className="w-3 h-3 mr-1" />

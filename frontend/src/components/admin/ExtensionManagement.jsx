@@ -3,7 +3,7 @@ import { Save, Eye, RefreshCw, BookOpen, Users, Target, Award, Plus, Edit, Trash
 import Card from '../common/Card'
 import toast from 'react-hot-toast'
 import { extensionAPI, uploadAPI } from '../../services/api'
-import { getDocumentUrl } from '../../services/files'
+import { getDocumentUrl, downloadFile } from '../../services/files'
 
 const ExtensionManagement = () => {
   const [loading, setLoading] = useState(true)
@@ -468,15 +468,13 @@ const ExtensionManagement = () => {
                         <div className="flex items-center gap-2">
                           <FileText className="w-4 h-4 text-blue-500" />
                           <span className="text-sm text-gray-700">{item.originalName || item.filename}</span>
-                          <a
-                            href={getDocumentUrl(item.filename)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded hover:bg-blue-200"
+                          <button
+                            onClick={() => downloadFile(getDocumentUrl(item.filename), item.originalName || item.filename)}
+                            className="flex items-center px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded hover:bg-blue-200 border-none cursor-pointer"
                           >
                             <Download className="w-3 h-3 mr-1" />
                             View Document
-                          </a>
+                          </button>
                         </div>
                       </div>
                     )}

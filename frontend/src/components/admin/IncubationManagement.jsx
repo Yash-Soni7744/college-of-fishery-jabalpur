@@ -23,6 +23,7 @@ import Card from '../common/Card';
 import Modal from '../common/Modal';
 import { Form, FormGroup, Input, Textarea, SubmitButton } from '../common/Form';
 import { incubationAPI, uploadAPI } from '../../services/api';
+import { downloadFile } from '../../services/files';
 import toast from 'react-hot-toast';
 
 const IncubationManagement = () => {
