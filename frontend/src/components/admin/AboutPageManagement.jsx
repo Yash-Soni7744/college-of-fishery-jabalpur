@@ -7,8 +7,6 @@ const AboutPageManagement = () => {
   const [loading, setLoading] = useState(false)
   const [saving, setSaving] = useState(false)
   const [aboutData, setAboutData] = useState({
-    vision: '',
-    mission: '',
     history: '',
     mandateCore: [''],
     mandateObjectives: [''],
@@ -24,9 +22,7 @@ const AboutPageManagement = () => {
       setLoading(true)
       
       // Fetch all about sections
-      const [visionRes, missionRes, historyRes, mandateCoreRes, mandateObjectivesRes, mandateThrustRes] = await Promise.allSettled([
-        contentAPI.getByKey('about-vision'),
-        contentAPI.getByKey('about-mission'),
+      const [historyRes, mandateCoreRes, mandateObjectivesRes, mandateThrustRes] = await Promise.allSettled([
         contentAPI.getByKey('about-history'),
         contentAPI.getByKey('about-mandate-core'),
         contentAPI.getByKey('about-mandate-objectives'),
@@ -35,15 +31,6 @@ const AboutPageManagement = () => {
 
       const newData = { ...aboutData }
 
-      // Process vision
-      if (visionRes.status === 'fulfilled' && visionRes.value.data.success) {
-        newData.vision = visionRes.value.data.data.content.content || ''
-      }
-
-      // Process mission
-      if (missionRes.status === 'fulfilled' && missionRes.value.data.success) {
-        newData.mission = missionRes.value.data.data.content.content || ''
-      }
 
       // Process history
       if (historyRes.status === 'fulfilled' && historyRes.value.data.success) {
@@ -144,7 +131,7 @@ const AboutPageManagement = () => {
         contentData.order = section === 'mandate-core' ? 4 : section === 'mandate-objectives' ? 5 : 6
       } else {
         contentData.content = typeof content === 'string' ? content : String(content || '')
-        contentData.order = section === 'vision' ? 1 : section === 'mission' ? 2 : 3
+        contentData.order = section === 'history' ? 3 : 7 // Adjust order logic or leave as is
       }
 
       await contentAPI.createOrUpdate(contentData)
@@ -162,8 +149,6 @@ const AboutPageManagement = () => {
       setSaving(true)
       
       const sections = [
-        { key: 'vision', title: 'Vision Statement', content: aboutData.vision || '', type: 'text' },
-        { key: 'mission', title: 'Mission Statement', content: aboutData.mission || '', type: 'text' },
         { key: 'history', title: 'College History', content: aboutData.history || '', type: 'text' },
         { key: 'mandate-core', title: 'Core Mandate', content: JSON.stringify((aboutData.mandateCore || []).filter(item => item && item.trim())), type: 'json' },
         { key: 'mandate-objectives', title: 'Mandate Objectives', content: JSON.stringify((aboutData.mandateObjectives || []).filter(item => item && item.trim())), type: 'json' },
@@ -285,52 +270,6 @@ const AboutPageManagement = () => {
         </div>
       </div>
 
-      {/* Vision & Mission */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Vision */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-gray-900">Vision Statement <span className="text-red-500">*</span></h2>
-            <button
-              onClick={() => saveSection('vision', aboutData.vision, 'Vision Statement')}
-              disabled={saving}
-              className="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 text-sm flex items-center gap-1"
-            >
-              <Save className="w-4 h-4" />
-              Save
-            </button>
-          </div>
-          <textarea
-            value={aboutData.vision}
-            onChange={(e) => handleInputChange('vision', e.target.value)}
-            placeholder="Enter vision statement..."
-            className="w-full h-32 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-            required
-          />
-        </div>
-
-        {/* Mission */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-gray-900">Mission Statement <span className="text-red-500">*</span></h2>
-            <button
-              onClick={() => saveSection('mission', aboutData.mission, 'Mission Statement')}
-              disabled={saving}
-              className="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 text-sm flex items-center gap-1"
-            >
-              <Save className="w-4 h-4" />
-              Save
-            </button>
-          </div>
-          <textarea
-            value={aboutData.mission}
-            onChange={(e) => handleInputChange('mission', e.target.value)}
-            placeholder="Enter mission statement..."
-            className="w-full h-32 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-            required
-          />
-        </div>
-      </div>
 
       {/* History */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">

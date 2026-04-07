@@ -15,8 +15,6 @@ const About = () => {
   })
   
   const [aboutContent, setAboutContent] = useState({
-    vision: '',
-    mission: '',
     history: ''
   })
 
@@ -92,9 +90,7 @@ const About = () => {
   const fetchAboutContent = async () => {
     try {
       // Fetch all about sections including mandate
-      const [visionRes, missionRes, historyRes, mandateCoreRes, mandateObjectivesRes, mandateThrustRes] = await Promise.allSettled([
-        contentAPI.getByKey('about-vision'),
-        contentAPI.getByKey('about-mission'),
+      const [historyRes, mandateCoreRes, mandateObjectivesRes, mandateThrustRes] = await Promise.allSettled([
         contentAPI.getByKey('about-history'),
         contentAPI.getByKey('about-mandate-core'),
         contentAPI.getByKey('about-mandate-objectives'),
@@ -104,15 +100,6 @@ const About = () => {
       const newContent = { ...aboutContent }
       const newMandateContent = { ...mandateContent }
 
-      // Process vision
-      if (visionRes.status === 'fulfilled' && visionRes.value.data.success) {
-        newContent.vision = visionRes.value.data.data.content.content || newContent.vision
-      }
-
-      // Process mission
-      if (missionRes.status === 'fulfilled' && missionRes.value.data.success) {
-        newContent.mission = missionRes.value.data.data.content.content || newContent.mission
-      }
 
       // Process history
       if (historyRes.status === 'fulfilled' && historyRes.value.data.success) {
@@ -248,71 +235,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Vision & Mission */}
-      <section id="vision" className="section-padding bg-gradient-to-br from-white via-blue-50 to-green-50 relative overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-16 left-16 w-28 h-28 bg-blue-400 rounded-full blur-2xl"></div>
-          <div className="absolute bottom-16 right-16 w-32 h-32 bg-green-400 rounded-full blur-3xl"></div>
-        </div>
-        
-        {/* Floating geometric shapes */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 right-1/4 w-5 h-5 bg-blue-200 rotate-45 opacity-20 animate-float"></div>
-          <div className="absolute bottom-20 left-1/4 w-3 h-3 bg-green-200 rounded-full opacity-30 animate-bounce" style={{animationDelay: '1.5s'}}></div>
-        </div>
-        
-        <div className="container-max relative z-10">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Vision & Mission</h2>
-            <div className="w-16 h-1 bg-blue-400 rounded mx-auto"></div>
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="p-6 bg-gradient-to-br from-white to-blue-50 border-l-4 border-blue-500 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden group hover:scale-105">
-              {/* Enhanced decorative elements */}
-              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-blue-200 to-transparent opacity-30 group-hover:opacity-40 transition-opacity duration-300"></div>
-              <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-teal-200 to-transparent opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
-              
-              {/* Floating vision elements */}
-              <div className="absolute top-4 left-4 w-3 h-3 bg-blue-300/30 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
-              <div className="absolute bottom-4 right-4 w-6 h-3 bg-blue-400/20 rounded-full animate-float transform rotate-12" style={{animationDelay: '2s'}}></div>
-              <div className="absolute top-1/2 right-3 w-2 h-4 bg-teal-300/25 rounded animate-bounce" style={{animationDelay: '1.5s'}}></div>
-              
-              <div className="text-center mb-4 relative z-10">
-                <div className="w-14 h-14 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center mx-auto mb-4 transform hover:scale-110 transition-transform duration-300 shadow-md group-hover:shadow-lg">
-                  <Eye className="w-7 h-7 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">Our Vision</h3>
-              </div>
-              <div className="bg-gradient-to-r from-blue-50 to-teal-50 p-4 rounded-lg border border-blue-200/50 relative z-10">
-                <div className="text-gray-700 text-left leading-relaxed" dangerouslySetInnerHTML={{ __html: aboutContent.vision }} />
-              </div>
-            </Card>
-            
-            <Card className="p-6 bg-gradient-to-br from-white to-cyan-50 border-l-4 border-secondary-500 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden group hover:scale-105">
-              {/* Enhanced decorative elements */}
-              <div className="absolute top-0 right-0 w-18 h-18 bg-gradient-to-bl from-cyan-200 to-transparent opacity-30 group-hover:opacity-40 transition-opacity duration-300"></div>
-              <div className="absolute bottom-0 left-0 w-14 h-14 bg-gradient-to-tr from-secondary-200 to-transparent opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
-              
-              {/* Floating mission elements */}
-              <div className="absolute top-3 right-4 w-4 h-4 bg-secondary-300/25 rounded animate-bounce" style={{animationDelay: '2s'}}></div>
-              <div className="absolute bottom-3 left-4 w-5 h-3 bg-cyan-300/30 rounded-full animate-float transform -rotate-12" style={{animationDelay: '1s'}}></div>
-              <div className="absolute top-1/2 left-2 w-2 h-2 bg-secondary-400/30 rounded-full animate-pulse" style={{animationDelay: '2.5s'}}></div>
-              
-              <div className="text-center mb-4 relative z-10">
-                <div className="w-14 h-14 bg-gradient-to-br from-secondary-100 to-secondary-200 rounded-xl flex items-center justify-center mx-auto mb-4 transform hover:scale-110 transition-transform duration-300 shadow-md group-hover:shadow-lg">
-                  <Target className="w-7 h-7 text-secondary-600" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-secondary-600 transition-colors duration-300">Our Mission</h3>
-              </div>
-              <div className="bg-gradient-to-r from-cyan-50 to-secondary-50 p-4 rounded-lg border border-cyan-200/50 relative z-10">
-                <div className="text-gray-700 text-left leading-relaxed" dangerouslySetInnerHTML={{ __html: aboutContent.mission }} />
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
 
       {/* History */}
       <section id="history" className="section-padding bg-gradient-to-br from-gray-50 via-white to-yellow-50 relative overflow-hidden">

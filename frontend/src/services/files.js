@@ -52,19 +52,55 @@ export const downloadFile = async (url, originalName) => {
     if (!response.ok) throw new Error('Network fetch failed');
     const blob = await response.blob();
     const blobUrl = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.style.display = 'none';
-    a.href = blobUrl;
     
-    let filename = originalName || 'document.pdf';
-    // Ensure PDF extension if the original name doesn't have it
-    if (!filename.toLowerCase().endsWith('.pdf') && url.toLowerCase().includes('.pdf')) {
-      filename += '.pdf';
-    } else if (!filename.toLowerCase().endsWith('.pdf') && !filename.includes('.')) {
-      // If no extension at all, default to .pdf if it's likely a PDF
+    let filename = originalName || 'document';
+    
+    // Sanitize filename: remove characters that might be problematic
+    filename = filename.replace(/[\\/:*?"<>|]/g, '_');
+    
+    const extensionMap = {
+      'application/pdf': '.pdf',
+      'application/msword': '.doc',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': '.docx',
+      'image/jpeg': '.jpg',
+      'image/png': '.png',
+      'application/vnd.ms-excel': '.xls',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': '.xlsx'
+    };
+    
+    // Determine extension
+    let extension = '';
+    
+    // 1. Check extensionMap based on blob.type
+    if (extensionMap[blob.type]) {
+      extension = extensionMap[blob.type];
+    } 
+    // 2. Fallback: if it's application/octet-stream or unknown, check URL and context
+    else if (blob.type === 'application/octet-stream' || !blob.type) {
+      if (url.toLowerCase().includes('.pdf') || url.toLowerCase().includes('/documents/')) {
+        extension = '.pdf';
+      } else if (url.toLowerCase().includes('.doc')) {
+        extension = '.doc';
+      } else if (url.toLowerCase().includes('.docx')) {
+        extension = '.docx';
+      }
+    }
+
+    // Apply extension if missing
+    if (extension && !filename.toLowerCase().endsWith(extension)) {
+      // Remove any trailing dots before appending
+      const cleanName = filename.replace(/\.+$/, '');
+      filename = cleanName + extension;
+    }
+    
+    // If still no extension and it's likely a PDF (fallback based on common sense in this project)
+    if (!filename.includes('.') && (url.toLowerCase().includes('/documents/') || url.toLowerCase().includes('/research/'))) {
       filename += '.pdf';
     }
     
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = blobUrl;
     a.download = filename;
     document.body.appendChild(a);
     a.click();

@@ -358,14 +358,13 @@ const StudentCornerManagement = () => {
                           {doc.originalName}
                         </span>
                         <span className="text-xs text-gray-500 flex-shrink-0">({(doc.fileSize / 1024 / 1024).toFixed(1)} MB)</span>
-                        <a 
-                          href={getDocumentUrl(doc.filename)} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          className="text-blue-600 hover:text-blue-800 text-xs flex-shrink-0"
+                        <button 
+                          type="button"
+                          onClick={() => downloadFile(getDocumentUrl(doc.filename), doc.originalName)} 
+                          className="text-blue-600 hover:text-blue-800 text-xs flex-shrink-0 border-none bg-transparent cursor-pointer p-0"
                         >
                           <Download className="w-3 h-3" />
-                        </a>
+                        </button>
                       </div>
                       <button
                         type="button"
@@ -743,14 +742,13 @@ const StudentCornerManagement = () => {
                           {doc.originalName}
                         </span>
                         <span className="text-xs text-gray-500 flex-shrink-0">({(doc.fileSize / 1024 / 1024).toFixed(1)} MB)</span>
-                        <a 
-                          href={getDocumentUrl(doc.filename)} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          className="text-blue-600 hover:text-blue-800 text-xs flex-shrink-0"
+                        <button 
+                          type="button"
+                          onClick={() => downloadFile(getDocumentUrl(doc.filename), doc.originalName)} 
+                          className="text-blue-600 hover:text-blue-800 text-xs flex-shrink-0 border-none bg-transparent cursor-pointer p-0"
                         >
                           <Download className="w-3 h-3" />
-                        </a>
+                        </button>
                       </div>
                       <button
                         type="button"

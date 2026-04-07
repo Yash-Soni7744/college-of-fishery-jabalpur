@@ -23,7 +23,6 @@ const Navbar = () => {
       href: '/about',
       dropdown: [
            { name: 'Message from the Dean', href: '/about', section: 'dean-message' },
-        { name: 'Mission & Vision', href: '/about', section: 'vision' },
           { name: 'History', href: '/about', section: 'history' },
         { name: 'Mandate', href: '/about', section: 'mandate' }
          ]

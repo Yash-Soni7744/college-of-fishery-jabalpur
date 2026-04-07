@@ -83,18 +83,18 @@ const Research = () => {
           <div className="absolute top-10 right-1/3 w-36 h-36 bg-cyan-300 rounded-full blur-3xl"></div>
           <div className="absolute bottom-10 left-1/4 w-44 h-44 bg-blue-300 rounded-full blur-4xl"></div>
         </div>
-        
+
         {/* Subtle floating elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {/* Simple fish-like shapes */}
-          <div className="absolute top-20 right-20 w-16 h-8 bg-white/10 rounded-full animate-float transform rotate-12" style={{animationDelay: '0s'}}></div>
-          <div className="absolute bottom-24 left-24 w-14 h-7 bg-cyan-300/15 rounded-full animate-float transform -rotate-12" style={{animationDelay: '2s'}}></div>
-          
+          <div className="absolute top-20 right-20 w-16 h-8 bg-white/10 rounded-full animate-float transform rotate-12" style={{ animationDelay: '0s' }}></div>
+          <div className="absolute bottom-24 left-24 w-14 h-7 bg-cyan-300/15 rounded-full animate-float transform -rotate-12" style={{ animationDelay: '2s' }}></div>
+
           {/* Simple bubbles */}
-          <div className="absolute top-1/3 left-1/4 w-8 h-8 bg-white/15 rounded-full animate-bounce" style={{animationDelay: '1s'}}></div>
-          <div className="absolute bottom-1/3 right-1/4 w-6 h-6 bg-blue-300/20 rounded-full animate-bounce" style={{animationDelay: '3s'}}></div>
+          <div className="absolute top-1/3 left-1/4 w-8 h-8 bg-white/15 rounded-full animate-bounce" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute bottom-1/3 right-1/4 w-6 h-6 bg-blue-300/20 rounded-full animate-bounce" style={{ animationDelay: '3s' }}></div>
         </div>
-        
+
         <div className="container-max relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
@@ -103,7 +103,7 @@ const Research = () => {
             <p className="text-xl text-blue-100 mb-8">
               Advancing Fishery Science Through Cutting-Edge Research & Technology
             </p>
-            
+
             {/* Statistics */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8">
               <div className="text-center group">
@@ -137,27 +137,27 @@ const Research = () => {
           <div className="absolute top-10 left-10 w-24 h-24 bg-yellow-400 rounded-full blur-2xl"></div>
           <div className="absolute bottom-10 right-10 w-40 h-40 bg-purple-400 rounded-full blur-3xl"></div>
         </div>
-        
+
         {/* Large fishery-themed floating elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {/* Large swimming fish shapes */}
-          <div className="absolute top-32 left-20 w-28 h-14 bg-blue-200/20 rounded-full animate-float transform rotate-12 blur-sm" style={{animationDelay: '0s'}}></div>
-          <div className="absolute top-96 right-24 w-32 h-16 bg-green-200/25 rounded-full animate-float transform -rotate-6 blur-sm" style={{animationDelay: '2s'}}></div>
-          <div className="absolute top-[600px] left-16 w-24 h-12 bg-cyan-200/20 rounded-full animate-float transform rotate-45 blur-sm" style={{animationDelay: '1.5s'}}></div>
-          <div className="absolute top-[800px] right-32 w-36 h-18 bg-purple-200/15 rounded-full animate-float transform -rotate-12 blur-sm" style={{animationDelay: '3s'}}></div>
-          
+          <div className="absolute top-32 left-20 w-28 h-14 bg-blue-200/20 rounded-full animate-float transform rotate-12 blur-sm" style={{ animationDelay: '0s' }}></div>
+          <div className="absolute top-96 right-24 w-32 h-16 bg-green-200/25 rounded-full animate-float transform -rotate-6 blur-sm" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-[600px] left-16 w-24 h-12 bg-cyan-200/20 rounded-full animate-float transform rotate-45 blur-sm" style={{ animationDelay: '1.5s' }}></div>
+          <div className="absolute top-[800px] right-32 w-36 h-18 bg-purple-200/15 rounded-full animate-float transform -rotate-12 blur-sm" style={{ animationDelay: '3s' }}></div>
+
           {/* Large bubble circles */}
-          <div className="absolute top-48 right-48 w-20 h-20 bg-blue-300/15 rounded-full animate-bounce blur-md" style={{animationDelay: '0.5s'}}></div>
-          <div className="absolute top-[400px] left-32 w-24 h-24 bg-green-300/12 rounded-full animate-bounce blur-md" style={{animationDelay: '1.8s'}}></div>
-          <div className="absolute top-[700px] right-20 w-28 h-28 bg-cyan-300/18 rounded-full animate-bounce blur-lg" style={{animationDelay: '2.5s'}}></div>
-          <div className="absolute top-[900px] left-48 w-16 h-16 bg-purple-300/15 rounded-full animate-bounce blur-md" style={{animationDelay: '3.2s'}}></div>
-          
+          <div className="absolute top-48 right-48 w-20 h-20 bg-blue-300/15 rounded-full animate-bounce blur-md" style={{ animationDelay: '0.5s' }}></div>
+          <div className="absolute top-[400px] left-32 w-24 h-24 bg-green-300/12 rounded-full animate-bounce blur-md" style={{ animationDelay: '1.8s' }}></div>
+          <div className="absolute top-[700px] right-20 w-28 h-28 bg-cyan-300/18 rounded-full animate-bounce blur-lg" style={{ animationDelay: '2.5s' }}></div>
+          <div className="absolute top-[900px] left-48 w-16 h-16 bg-purple-300/15 rounded-full animate-bounce blur-md" style={{ animationDelay: '3.2s' }}></div>
+
           {/* Water ripple effects */}
-          <div className="absolute top-64 left-1/3 w-40 h-8 bg-blue-200/10 rounded-full animate-pulse blur-xl transform rotate-3" style={{animationDelay: '1s'}}></div>
-          <div className="absolute top-[500px] right-1/3 w-48 h-10 bg-green-200/8 rounded-full animate-pulse blur-2xl transform -rotate-2" style={{animationDelay: '2.8s'}}></div>
-          <div className="absolute top-[750px] left-1/4 w-36 h-6 bg-cyan-200/12 rounded-full animate-pulse blur-xl transform rotate-6" style={{animationDelay: '4s'}}></div>
+          <div className="absolute top-64 left-1/3 w-40 h-8 bg-blue-200/10 rounded-full animate-pulse blur-xl transform rotate-3" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-[500px] right-1/3 w-48 h-10 bg-green-200/8 rounded-full animate-pulse blur-2xl transform -rotate-2" style={{ animationDelay: '2.8s' }}></div>
+          <div className="absolute top-[750px] left-1/4 w-36 h-6 bg-cyan-200/12 rounded-full animate-pulse blur-xl transform rotate-6" style={{ animationDelay: '4s' }}></div>
         </div>
-        
+
         <div className="container-max relative z-10">
           {loading && (
             <div className="text-center py-12">
@@ -180,24 +180,21 @@ const Research = () => {
               <div id="ongoing-projects">
                 <div className="text-center mb-8">
                   <h2 className="text-3xl font-bold text-gray-900 mb-2">Ongoing/Completed Projects</h2>
-                  <p className="text-gray-600 mb-4">ICAR, NFDB, PMMSY, DBT and other funding agencies</p>
                   <div className="w-16 h-1 bg-blue-400 rounded mx-auto"></div>
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {getDataBySection('ongoing-projects').map((project, index) => (
                     <Card key={project._id} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50 relative overflow-hidden group">
                       {/* Floating decorative elements */}
                       <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-blue-200 to-transparent opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
-                      <div className={`absolute top-2 left-2 w-2 h-2 rounded-full opacity-40 animate-pulse ${
-                        index % 3 === 0 ? 'bg-blue-400' : index % 3 === 1 ? 'bg-green-400' : 'bg-cyan-400'
-                      }`} style={{animationDelay: `${index * 0.5}s`}}></div>
-                      
+                      <div className={`absolute top-2 left-2 w-2 h-2 rounded-full opacity-40 animate-pulse ${index % 3 === 0 ? 'bg-blue-400' : index % 3 === 1 ? 'bg-green-400' : 'bg-cyan-400'
+                        }`} style={{ animationDelay: `${index * 0.5}s` }}></div>
+
                       {/* Fish-like floating element */}
-                      <div className={`absolute bottom-3 right-3 w-6 h-3 rounded-full opacity-20 animate-float ${
-                        index % 3 === 0 ? 'bg-blue-300' : index % 3 === 1 ? 'bg-green-300' : 'bg-cyan-300'
-                      } transform rotate-12`} style={{animationDelay: `${index * 0.3}s`}}></div>
-                      
+                      <div className={`absolute bottom-3 right-3 w-6 h-3 rounded-full opacity-20 animate-float ${index % 3 === 0 ? 'bg-blue-300' : index % 3 === 1 ? 'bg-green-300' : 'bg-cyan-300'
+                        } transform rotate-12`} style={{ animationDelay: `${index * 0.3}s` }}></div>
+
                       <div className="p-6 relative z-10">
                         <div className="flex items-start justify-between mb-4">
                           <div className="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center">
@@ -207,10 +204,10 @@ const Research = () => {
                             {project.status || 'ongoing'}
                           </div>
                         </div>
-                        
+
                         <h3 className="text-lg font-bold text-gray-900 mb-3">{project.title}</h3>
                         <p className="text-gray-700 text-sm mb-4 line-clamp-3">{project.description}</p>
-                        
+
                         <div className="space-y-3 mb-4">
                           <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-3 rounded-lg border border-blue-200/50">
                             <div className="flex items-center text-sm text-gray-700">
@@ -219,7 +216,7 @@ const Research = () => {
                               <span className="ml-1 font-medium">{project.principalInvestigator}</span>
                             </div>
                           </div>
-                          
+
                           {project.fundingAgency && (
                             <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-3 rounded-lg border border-green-200/50">
                               <div className="flex items-center text-sm">
@@ -230,7 +227,7 @@ const Research = () => {
                               </div>
                             </div>
                           )}
-                          
+
                           {project.budget && (
                             <div className="bg-gradient-to-r from-orange-50 to-yellow-50 p-3 rounded-lg border border-orange-200/50">
                               <div className="flex items-center text-sm">
@@ -241,29 +238,29 @@ const Research = () => {
                               </div>
                             </div>
                           )}
-                          
+
                           {project.duration && (project.duration.startDate || project.duration.endDate) && (
                             <div className="bg-gradient-to-r from-purple-50 to-indigo-50 p-3 rounded-lg border border-purple-200/50">
                               <div className="flex items-center text-sm">
                                 <Calendar className="w-4 h-4 mr-2 text-purple-600" />
                                 <span className="text-purple-700 font-medium">
-                                  {project.duration.startDate && new Date(project.duration.startDate).toLocaleDateString('en-GB', { 
-                                    day: '2-digit', 
-                                    month: 'short', 
-                                    year: 'numeric' 
-                                  })} - 
-                                  {project.duration.endDate ? 
-                                    new Date(project.duration.endDate).toLocaleDateString('en-GB', { 
-                                      day: '2-digit', 
-                                      month: 'short', 
-                                      year: 'numeric' 
+                                  {project.duration.startDate && new Date(project.duration.startDate).toLocaleDateString('en-GB', {
+                                    day: '2-digit',
+                                    month: 'short',
+                                    year: 'numeric'
+                                  })} -
+                                  {project.duration.endDate ?
+                                    new Date(project.duration.endDate).toLocaleDateString('en-GB', {
+                                      day: '2-digit',
+                                      month: 'short',
+                                      year: 'numeric'
                                     }) : 'Ongoing'}
                                 </span>
                               </div>
                             </div>
                           )}
                         </div>
-                        
+
                         {project.objectives && project.objectives.length > 0 && (
                           <div className="text-xs text-gray-600 bg-gray-50 p-2 rounded mb-3">
                             <div className="flex items-center text-sm font-medium text-gray-900 mb-1">
@@ -275,7 +272,7 @@ const Research = () => {
                             ))}
                           </div>
                         )}
-                        
+
                         {/* PDF Display */}
                         {project.filename && (
                           <div className="pt-3 border-t border-gray-100 mt-3">
@@ -292,7 +289,7 @@ const Research = () => {
                             </div>
                           </div>
                         )}
-                        
+
                         {project.documents && project.documents.length > 0 && (
                           <div className="pt-3 border-t border-gray-100">
                             <div className="flex flex-wrap gap-2">
@@ -314,7 +311,7 @@ const Research = () => {
                       </div>
                     </Card>
                   ))}
-                  
+
                   {getDataBySection('ongoing-projects').length === 0 && (
                     <div className="col-span-full text-center py-8">
                       <FlaskConical className="h-12 w-12 text-gray-400 mx-auto mb-4" />
@@ -331,7 +328,7 @@ const Research = () => {
                   <p className="text-gray-600 mb-4">Research publications and academic contributions</p>
                   <div className="w-16 h-1 bg-green-400 rounded mx-auto"></div>
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {getDataBySection('publications').map((publication) => (
                     <Card key={publication._id} className="hover:shadow-xl transition-all duration-300">
@@ -344,10 +341,10 @@ const Research = () => {
                             Publication
                           </div>
                         </div>
-                        
+
                         <h3 className="text-lg font-bold text-gray-900 mb-3">{publication.title}</h3>
                         <p className="text-gray-700 text-sm mb-4 line-clamp-3">{publication.description}</p>
-                        
+
                         <div className="space-y-3 mb-4">
                           <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-3 rounded-lg border border-blue-200/50">
                             <div className="flex items-center text-sm text-gray-700">
@@ -356,7 +353,7 @@ const Research = () => {
                               <span className="ml-1 font-medium">{publication.principalInvestigator}</span>
                             </div>
                           </div>
-                          
+
                           {publication.journal && (
                             <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-3 rounded-lg border border-green-200/50">
                               <div className="flex items-center text-sm">
@@ -367,7 +364,7 @@ const Research = () => {
                               </div>
                             </div>
                           )}
-                          
+
                           {publication.publicationDetails?.year && (
                             <div className="bg-gradient-to-r from-purple-50 to-indigo-50 p-3 rounded-lg border border-purple-200/50">
                               <div className="flex items-center text-sm">
@@ -379,31 +376,30 @@ const Research = () => {
                             </div>
                           )}
                         </div>
-                        
+
                         {publication.doi && (
                           <div className="text-xs text-gray-600 bg-gray-50 p-2 rounded mb-3">
                             <span className="font-medium">DOI:</span> {publication.doi}
                           </div>
                         )}
-                        
+
                         {/* PDF Display */}
                         {publication.filename && (
                           <div className="pt-3 border-t border-gray-100 mt-3">
                             <div className="flex flex-wrap gap-2">
-                              <a
-                                href={getDocumentUrl(publication.filename)}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full hover:bg-green-200 transition-colors"
+                              <button
+                                onClick={() => downloadFile(getDocumentUrl(publication.filename), publication.title || 'Publication')}
+                                type="button"
+                                className="flex items-center px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full hover:bg-green-200 transition-colors border-none cursor-pointer"
                               >
                                 <FileText className="w-3 h-3 mr-1" />
                                 View PDF
                                 <ExternalLink className="w-3 h-3 ml-1" />
-                              </a>
+                              </button>
                             </div>
                           </div>
                         )}
-                        
+
                         {publication.documents && publication.documents.length > 0 && (
                           <div className="pt-3 border-t border-gray-100">
                             <div className="flex flex-wrap gap-2">
@@ -425,7 +421,7 @@ const Research = () => {
                       </div>
                     </Card>
                   ))}
-                  
+
                   {getDataBySection('publications').length === 0 && (
                     <div className="col-span-full text-center py-8">
                       <BookOpen className="h-12 w-12 text-gray-400 mx-auto mb-4" />
@@ -442,24 +438,22 @@ const Research = () => {
                   <p className="text-gray-600 mb-4">M.F.Sc. and B.F.Sc. student research projects</p>
                   <div className="w-16 h-1 bg-orange-400 rounded mx-auto"></div>
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {getDataBySection('student-research').map((research, index) => (
                     <Card key={research._id} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 bg-gradient-to-br from-white to-orange-50 relative overflow-hidden group">
                       {/* Floating decorative elements */}
                       <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-orange-200 to-transparent opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
                       <div className="absolute bottom-0 left-0 w-14 h-14 bg-gradient-to-tr from-yellow-200 to-transparent opacity-15 group-hover:opacity-25 transition-opacity duration-300"></div>
-                      
+
                       {/* Swimming fish elements */}
-                      <div className={`absolute top-4 left-4 w-4 h-2 rounded-full opacity-30 animate-float ${
-                        index % 3 === 0 ? 'bg-orange-400' : index % 3 === 1 ? 'bg-yellow-400' : 'bg-red-400'
-                      } transform rotate-45`} style={{animationDelay: `${index * 0.7}s`}}></div>
-                      
+                      <div className={`absolute top-4 left-4 w-4 h-2 rounded-full opacity-30 animate-float ${index % 3 === 0 ? 'bg-orange-400' : index % 3 === 1 ? 'bg-yellow-400' : 'bg-red-400'
+                        } transform rotate-45`} style={{ animationDelay: `${index * 0.7}s` }}></div>
+
                       {/* Water bubbles */}
-                      <div className={`absolute bottom-4 right-6 w-3 h-3 rounded-full opacity-25 animate-bounce ${
-                        index % 2 === 0 ? 'bg-orange-300' : 'bg-yellow-300'
-                      }`} style={{animationDelay: `${index * 0.5}s`}}></div>
-                      
+                      <div className={`absolute bottom-4 right-6 w-3 h-3 rounded-full opacity-25 animate-bounce ${index % 2 === 0 ? 'bg-orange-300' : 'bg-yellow-300'
+                        }`} style={{ animationDelay: `${index * 0.5}s` }}></div>
+
                       <div className="p-6 relative z-10">
                         <div className="flex items-start justify-between mb-4">
                           <div className="w-12 h-12 rounded-lg bg-orange-100 flex items-center justify-center">
@@ -469,23 +463,23 @@ const Research = () => {
                             Student Research
                           </div>
                         </div>
-                        
+
                         <h3 className="text-lg font-bold text-gray-900 mb-3">{research.title}</h3>
                         <p className="text-gray-700 text-sm mb-4 line-clamp-3">{research.description}</p>
-                        
+
                         <div className="space-y-2 mb-4">
                           <div className="flex items-center text-sm text-gray-600">
                             <User className="w-4 h-4 mr-2" />
                             <span className="font-medium">Student:</span>
                             <span className="ml-1">{research.studentName || research.principalInvestigator}</span>
                           </div>
-                          
+
                           <div className="flex items-center text-sm text-gray-600">
                             <Award className="w-4 h-4 mr-2" />
                             <span className="font-medium">Supervisor:</span>
                             <span className="ml-1">{research.supervisor || research.principalInvestigator}</span>
                           </div>
-                          
+
                           {research.degree && (
                             <div className="flex items-center text-xs">
                               <BookOpen className="w-3 h-3 mr-2 text-orange-500" />
@@ -494,7 +488,7 @@ const Research = () => {
                               </span>
                             </div>
                           )}
-                          
+
                           {research.completionYear && (
                             <div className="flex items-center text-xs">
                               <Calendar className="w-3 h-3 mr-2 text-purple-500" />
@@ -504,24 +498,24 @@ const Research = () => {
                             </div>
                           )}
                         </div>
-                        
+
                         {/* PDF Display */}
                         {research.filename && (
                           <div className="pt-3 border-t border-gray-100 mt-3">
                             <div className="flex flex-wrap gap-2">
-                            <button
-                              onClick={() => downloadFile(getDocumentUrl(research.filename), research.title || 'Document')}
-                              type="button"
-                              className="flex items-center px-3 py-1 bg-orange-100 text-orange-700 text-xs rounded-full hover:bg-orange-200 transition-colors border-none cursor-pointer"
-                            >
-                              <FileText className="w-3 h-3 mr-1" />
-                              View Document
-                              <ExternalLink className="w-3 h-3 ml-1" />
-                            </button>
+                              <button
+                                onClick={() => downloadFile(getDocumentUrl(research.filename), research.title || 'Document')}
+                                type="button"
+                                className="flex items-center px-3 py-1 bg-orange-100 text-orange-700 text-xs rounded-full hover:bg-orange-200 transition-colors border-none cursor-pointer"
+                              >
+                                <FileText className="w-3 h-3 mr-1" />
+                                View Document
+                                <ExternalLink className="w-3 h-3 ml-1" />
+                              </button>
                             </div>
                           </div>
                         )}
-                        
+
                         {research.documents && research.documents.length > 0 && (
                           <div className="pt-3 border-t border-gray-100 mt-3">
                             <div className="flex flex-wrap gap-2">
@@ -543,7 +537,7 @@ const Research = () => {
                       </div>
                     </Card>
                   ))}
-                  
+
                   {getDataBySection('student-research').length === 0 && (
                     <div className="col-span-full text-center py-8">
                       <Users className="h-12 w-12 text-gray-400 mx-auto mb-4" />
@@ -560,28 +554,25 @@ const Research = () => {
                   <p className="text-gray-600 mb-4">Strategic partnerships and collaborative initiatives</p>
                   <div className="w-16 h-1 bg-purple-400 rounded mx-auto"></div>
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {getDataBySection('collaborations').map((collaboration, index) => (
                     <Card key={collaboration._id} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 bg-gradient-to-br from-white to-purple-50 relative overflow-hidden group">
                       {/* Floating decorative elements */}
                       <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-purple-200 to-transparent opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
                       <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-pink-200 to-transparent opacity-15 group-hover:opacity-25 transition-opacity duration-300"></div>
-                      
+
                       {/* Swimming collaboration fish */}
-                      <div className={`absolute top-5 left-5 w-7 h-4 rounded-full opacity-25 animate-float ${
-                        index % 2 === 0 ? 'bg-purple-400' : 'bg-pink-400'
-                      } transform -rotate-12`} style={{animationDelay: `${index * 0.4}s`}}></div>
-                      
+                      <div className={`absolute top-5 left-5 w-7 h-4 rounded-full opacity-25 animate-float ${index % 2 === 0 ? 'bg-purple-400' : 'bg-pink-400'
+                        } transform -rotate-12`} style={{ animationDelay: `${index * 0.4}s` }}></div>
+
                       {/* Partnership bubbles */}
-                      <div className={`absolute bottom-6 right-4 w-4 h-4 rounded-full opacity-30 animate-bounce ${
-                        index % 3 === 0 ? 'bg-purple-300' : index % 3 === 1 ? 'bg-pink-300' : 'bg-indigo-300'
-                      }`} style={{animationDelay: `${index * 0.6}s`}}></div>
-                      
-                      <div className={`absolute bottom-3 right-7 w-2 h-2 rounded-full opacity-25 animate-pulse ${
-                        index % 2 === 0 ? 'bg-purple-200' : 'bg-pink-200'
-                      }`} style={{animationDelay: `${index * 0.9}s`}}></div>
-                      
+                      <div className={`absolute bottom-6 right-4 w-4 h-4 rounded-full opacity-30 animate-bounce ${index % 3 === 0 ? 'bg-purple-300' : index % 3 === 1 ? 'bg-pink-300' : 'bg-indigo-300'
+                        }`} style={{ animationDelay: `${index * 0.6}s` }}></div>
+
+                      <div className={`absolute bottom-3 right-7 w-2 h-2 rounded-full opacity-25 animate-pulse ${index % 2 === 0 ? 'bg-purple-200' : 'bg-pink-200'
+                        }`} style={{ animationDelay: `${index * 0.9}s` }}></div>
+
                       <div className="p-6 relative z-10">
                         <div className="flex items-start justify-between mb-4">
                           <div className="w-12 h-12 rounded-lg bg-purple-100 flex items-center justify-center">
@@ -591,17 +582,17 @@ const Research = () => {
                             Collaboration
                           </div>
                         </div>
-                        
+
                         <h3 className="text-lg font-bold text-gray-900 mb-3">{collaboration.title}</h3>
                         <p className="text-gray-700 text-sm mb-4 line-clamp-3">{collaboration.description}</p>
-                        
+
                         <div className="space-y-2 mb-4">
                           <div className="flex items-center text-sm text-gray-600">
                             <Building className="w-4 h-4 mr-2" />
                             <span className="font-medium">Partner:</span>
                             <span className="ml-1">{collaboration.partnerInstitution || collaboration.principalInvestigator}</span>
                           </div>
-                          
+
                           {collaboration.collaborationType && (
                             <div className="flex items-center text-xs">
                               <Globe className="w-3 h-3 mr-2 text-purple-500" />
@@ -610,27 +601,27 @@ const Research = () => {
                               </span>
                             </div>
                           )}
-                          
+
                           {collaboration.duration && (collaboration.duration.startDate || collaboration.duration.endDate) && (
                             <div className="flex items-center text-xs">
                               <Calendar className="w-3 h-3 mr-2 text-blue-500" />
                               <span className="text-blue-600 bg-blue-50 px-2 py-1 rounded">
-                                {collaboration.duration.startDate && new Date(collaboration.duration.startDate).toLocaleDateString('en-GB', { 
-                                  day: '2-digit', 
-                                  month: 'short', 
-                                  year: 'numeric' 
-                                })} - 
-                                {collaboration.duration.endDate ? 
-                                  new Date(collaboration.duration.endDate).toLocaleDateString('en-GB', { 
-                                    day: '2-digit', 
-                                    month: 'short', 
-                                    year: 'numeric' 
+                                {collaboration.duration.startDate && new Date(collaboration.duration.startDate).toLocaleDateString('en-GB', {
+                                  day: '2-digit',
+                                  month: 'short',
+                                  year: 'numeric'
+                                })} -
+                                {collaboration.duration.endDate ?
+                                  new Date(collaboration.duration.endDate).toLocaleDateString('en-GB', {
+                                    day: '2-digit',
+                                    month: 'short',
+                                    year: 'numeric'
                                   }) : 'Ongoing'}
                               </span>
                             </div>
                           )}
                         </div>
-                        
+
                         {collaboration.objectives && collaboration.objectives.length > 0 && (
                           <div className="text-xs text-gray-600 bg-gray-50 p-2 rounded mb-3">
                             <div className="flex items-center text-sm font-medium text-gray-900 mb-1">
@@ -642,7 +633,7 @@ const Research = () => {
                             ))}
                           </div>
                         )}
-                        
+
                         {/* PDF Display */}
                         {collaboration.filename && (
                           <div className="pt-3 border-t border-gray-100 mt-3">
@@ -659,7 +650,7 @@ const Research = () => {
                             </div>
                           </div>
                         )}
-                        
+
                         {collaboration.documents && collaboration.documents.length > 0 && (
                           <div className="pt-3 border-t border-gray-100">
                             <div className="flex flex-wrap gap-2">
@@ -681,7 +672,7 @@ const Research = () => {
                       </div>
                     </Card>
                   ))}
-                  
+
                   {getDataBySection('collaborations').length === 0 && (
                     <div className="col-span-full text-center py-8">
                       <Users className="h-12 w-12 text-gray-400 mx-auto mb-4" />
@@ -698,28 +689,25 @@ const Research = () => {
                   <p className="text-gray-600 mb-4">State-of-the-art research infrastructure and equipment</p>
                   <div className="w-16 h-1 bg-indigo-400 rounded mx-auto"></div>
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {getDataBySection('facilities').map((facility, index) => (
                     <Card key={facility._id} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 bg-gradient-to-br from-white to-indigo-50 relative overflow-hidden group">
                       {/* Floating decorative elements */}
                       <div className="absolute top-0 left-0 w-16 h-16 bg-gradient-to-br from-indigo-200 to-transparent opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
                       <div className="absolute bottom-0 right-0 w-12 h-12 bg-gradient-to-tl from-purple-200 to-transparent opacity-15 group-hover:opacity-25 transition-opacity duration-300"></div>
-                      
+
                       {/* Fish tank bubbles */}
-                      <div className={`absolute top-3 right-5 w-2 h-2 rounded-full opacity-40 animate-bounce ${
-                        index % 3 === 0 ? 'bg-indigo-400' : index % 3 === 1 ? 'bg-purple-400' : 'bg-blue-400'
-                      }`} style={{animationDelay: `${index * 0.3}s`}}></div>
-                      
-                      <div className={`absolute top-6 right-3 w-1 h-1 rounded-full opacity-30 animate-pulse ${
-                        index % 2 === 0 ? 'bg-indigo-300' : 'bg-purple-300'
-                      }`} style={{animationDelay: `${index * 0.8}s`}}></div>
-                      
+                      <div className={`absolute top-3 right-5 w-2 h-2 rounded-full opacity-40 animate-bounce ${index % 3 === 0 ? 'bg-indigo-400' : index % 3 === 1 ? 'bg-purple-400' : 'bg-blue-400'
+                        }`} style={{ animationDelay: `${index * 0.3}s` }}></div>
+
+                      <div className={`absolute top-6 right-3 w-1 h-1 rounded-full opacity-30 animate-pulse ${index % 2 === 0 ? 'bg-indigo-300' : 'bg-purple-300'
+                        }`} style={{ animationDelay: `${index * 0.8}s` }}></div>
+
                       {/* Laboratory equipment styled element */}
-                      <div className={`absolute bottom-4 left-4 w-6 h-3 rounded opacity-25 animate-float ${
-                        index % 2 === 0 ? 'bg-indigo-300' : 'bg-purple-300'
-                      } transform rotate-6`} style={{animationDelay: `${index * 0.6}s`}}></div>
-                      
+                      <div className={`absolute bottom-4 left-4 w-6 h-3 rounded opacity-25 animate-float ${index % 2 === 0 ? 'bg-indigo-300' : 'bg-purple-300'
+                        } transform rotate-6`} style={{ animationDelay: `${index * 0.6}s` }}></div>
+
                       <div className="p-6 relative z-10">
                         <div className="flex items-start justify-between mb-4">
                           <div className="w-12 h-12 rounded-lg bg-indigo-100 flex items-center justify-center">
@@ -729,17 +717,17 @@ const Research = () => {
                             Facility
                           </div>
                         </div>
-                        
+
                         <h3 className="text-lg font-bold text-gray-900 mb-3">{facility.title}</h3>
                         <p className="text-gray-700 text-sm mb-4 line-clamp-3">{facility.description}</p>
-                        
+
                         <div className="space-y-2 mb-4">
                           <div className="flex items-center text-sm text-gray-600">
                             <User className="w-4 h-4 mr-2" />
                             <span className="font-medium">In-charge:</span>
                             <span className="ml-1">{facility.facilityIncharge || facility.principalInvestigator}</span>
                           </div>
-                          
+
                           {facility.location && (
                             <div className="flex items-center text-xs">
                               <MapPin className="w-3 h-3 mr-2 text-indigo-500" />
@@ -748,7 +736,7 @@ const Research = () => {
                               </span>
                             </div>
                           )}
-                          
+
                           {facility.capacity && (
                             <div className="flex items-center text-xs">
                               <Users className="w-3 h-3 mr-2 text-green-500" />
@@ -758,7 +746,7 @@ const Research = () => {
                             </div>
                           )}
                         </div>
-                        
+
                         {facility.equipment && facility.equipment.length > 0 && (
                           <div className="text-xs text-gray-600 bg-gray-50 p-2 rounded mb-3">
                             <div className="flex items-center text-sm font-medium text-gray-900 mb-1">
@@ -773,7 +761,7 @@ const Research = () => {
                             )}
                           </div>
                         )}
-                        
+
                         {/* PDF Display */}
                         {facility.filename && (
                           <div className="pt-3 border-t border-gray-100 mt-3">
@@ -790,7 +778,7 @@ const Research = () => {
                             </div>
                           </div>
                         )}
-                        
+
                         {facility.documents && facility.documents.length > 0 && (
                           <div className="pt-3 border-t border-gray-100">
                             <div className="flex flex-wrap gap-2">
@@ -812,7 +800,7 @@ const Research = () => {
                       </div>
                     </Card>
                   ))}
-                  
+
                   {getDataBySection('facilities').length === 0 && (
                     <div className="col-span-full text-center py-8">
                       <Building className="h-12 w-12 text-gray-400 mx-auto mb-4" />
