@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Save, Eye, RefreshCw, FlaskConical, BookOpen, Users, Building, GraduationCap, Plus, Edit, Trash2, Upload, FileText, Download, X, Target } from 'lucide-react'
+import { Save, Eye, RefreshCw, FlaskConical, BookOpen, Users, Building, GraduationCap, Plus, Edit, Trash2, Upload, FileText, Download, X, Target, ExternalLink } from 'lucide-react'
 import Card from '../common/Card'
 import toast from 'react-hot-toast'
 import { researchAPI, uploadAPI } from '../../services/api'
@@ -12,6 +12,7 @@ const ResearchManagement = () => {
   const [retryCount, setRetryCount] = useState(0)
   const [saving, setSaving] = useState(false)
   const [uploading, setUploading] = useState(false)
+  const [deletingId, setDeletingId] = useState(null)
   const [researchData, setResearchData] = useState({
     'ongoing-projects': [],
     'publications': [],
@@ -42,26 +43,17 @@ const ResearchManagement = () => {
     fetchResearchData()
   }, [])
 
-  const fetchResearchData = async (attempt = 1) => {
+  const fetchResearchData = async () => {
     try {
-      setLoading(true)
-      setError(null)
+      setLoading(true);
+      setError(null);
       
-      console.log(`🔄 Fetching research data (attempt ${attempt}/3)...`)
+      console.log('🔄 Fetching research data...');
       
-      // Add a timeout promise to handle slow requests
-      const timeoutPromise = new Promise((_, reject) => 
-        setTimeout(() => reject(new Error('Request timeout')), 15000)
-      )
-      
-      // Race between the API call and timeout
-      const response = await Promise.race([
-        researchAPI.getAll({ all: 'true' }),
-        timeoutPromise
-      ])
+      const response = await researchAPI.getAll({ all: 'true' });
       
       if (response.data.success) {
-        const allResearch = response.data.data.research || []
+        const allResearch = response.data.data.research || [];
         
         // Group research by section
         const grouped = {
@@ -70,44 +62,27 @@ const ResearchManagement = () => {
           'student-research': [],
           'collaborations': [],
           'facilities': []
-        }
+        };
         
         allResearch.forEach(item => {
           if (grouped[item.section]) {
-            grouped[item.section].push(item)
+            grouped[item.section].push(item);
           }
-        })
+        });
         
-        setResearchData(grouped)
-        setRetryCount(0)
-        console.log(`✅ Loaded ${allResearch.length} research items across ${Object.keys(grouped).length} sections`)
+        setResearchData(grouped);
+        console.log(`✅ Loaded ${allResearch.length} research items across ${Object.keys(grouped).length} sections`);
         
         if (allResearch.length === 0) {
-          toast.info('No research data found. You can start by adding new research items.')
+          console.log('No research data found');
         }
       }
     } catch (error) {
-      console.error('Error fetching research data:', error)
-      setError(error)
-      
-      if (attempt < 3) {
-        console.log(`⚠️ Retrying in 2 seconds... (${attempt}/3)`)
-        setTimeout(() => {
-          setRetryCount(attempt)
-          fetchResearchData(attempt + 1)
-        }, 2000)
-        return
-      }
-      
-      if (error.message === 'Request timeout') {
-        toast.error('Research data is taking too long to load. Please check your connection and try again.')
-      } else {
-        toast.error('Failed to load research data after 3 attempts. Please check your connection and try refreshing the page.')
-      }
+      console.error('Error fetching research data:', error);
+      setError(error);
+      toast.error(error.response?.data?.message || 'Failed to load research data. Please refresh.');
     } finally {
-      if (attempt >= 3 || !error) {
-        setLoading(false)
-      }
+      setLoading(false);
     }
   }
 
@@ -249,14 +224,41 @@ const ResearchManagement = () => {
     if (!window.confirm('Are you sure you want to delete this research item?')) return
 
     try {
+      setDeletingId(id)
       await researchAPI.delete(id)
       toast.success('Research item deleted successfully')
       fetchResearchData()
     } catch (error) {
       console.error('Error deleting research item:', error)
       toast.error('Failed to delete research item')
+    } finally {
+      setDeletingId(null)
     }
   }
+
+  const handleDownloadClick = async (url, originalName) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error('Network fetch failed');
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = blobUrl;
+      
+      let filename = originalName || 'document.pdf';
+      if (!filename.toLowerCase().endsWith('.pdf')) filename += '.pdf';
+      
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(blobUrl);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error('Download error:', error);
+      window.open(url, '_blank');
+    }
+  };
 
   const handleInputChange = (field, value) => {
     setFormData(prev => ({
@@ -1062,15 +1064,13 @@ const ResearchManagement = () => {
                         <div className="flex items-center gap-2">
                           <FileText className="w-4 h-4 text-blue-500" />
                           <span className="text-sm text-gray-700">{item.originalName || item.filename}</span>
-                          <a
-                            href={getDocumentUrl(item.filename)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded hover:bg-blue-200"
+                          <button
+                            onClick={() => handleDownloadClick(getDocumentUrl(item.filename), item.originalName)}
+                            className="flex items-center px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded hover:bg-blue-200 cursor-pointer border-none"
                           >
                             <Download className="w-3 h-3 mr-1" />
-                            View Document
-                          </a>
+                            Download Document
+                          </button>
                         </div>
                       </div>
                     )}
@@ -1080,17 +1080,15 @@ const ResearchManagement = () => {
                         <p className="text-xs text-gray-500 mb-2">Additional Documents:</p>
                         <div className="flex flex-wrap gap-2">
                           {item.documents.map((doc, idx) => (
-                            <a
+                            <button
                               key={idx}
-                              href={doc.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded hover:bg-gray-200"
+                              onClick={() => handleDownloadClick(getDocumentUrl(doc.url), doc.name)}
+                              className="flex items-center px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded hover:bg-gray-200 cursor-pointer border-none"
                             >
                               <FileText className="w-3 h-3 mr-1" />
                               {doc.name}
                               <Download className="w-3 h-3 ml-1" />
-                            </a>
+                            </button>
                           ))}
                         </div>
                       </div>
@@ -1107,10 +1105,15 @@ const ResearchManagement = () => {
                     </button>
                     <button
                       onClick={() => handleDelete(item._id)}
-                      className="p-2 text-gray-400 hover:text-red-600"
-                      title="Delete"
+                      className={`p-2 hover:text-red-600 ${deletingId === item._id ? 'text-red-400 cursor-not-allowed' : 'text-gray-400'}`}
+                      title={deletingId === item._id ? 'Deleting...' : 'Delete'}
+                      disabled={deletingId === item._id}
                     >
-                      <Trash2 className="w-4 h-4" />
+                      {deletingId === item._id ? (
+                        <div className="w-4 h-4 border-2 border-red-500 border-t-transparent rounded-full animate-spin"></div>
+                      ) : (
+                        <Trash2 className="w-4 h-4" />
+                      )}
                     </button>
                   </div>
                 </div>
@@ -1134,10 +1137,7 @@ const ResearchManagement = () => {
           </div>
           <h3 className="text-lg font-semibold text-gray-900 mb-2">Failed to Load Research Data</h3>
           <p className="text-gray-600 mb-4">
-            {error.message === 'Request timeout' 
-              ? 'The request is taking too long. This might be due to a slow connection or large dataset.'
-              : 'There was an error connecting to the server. Please check your internet connection.'
-            }
+            There was an error connecting to the server or processing the data. Please check your internet connection.
           </p>
           <div className="space-y-3">
             <button

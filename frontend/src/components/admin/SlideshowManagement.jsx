@@ -84,7 +84,7 @@ const SlideshowManagement = () => {
     } catch (error) {
       console.error('Error saving slide:', error)
       console.error('Error response:', error.response?.data)
-      toast.error(error.response?.data?.message || 'Failed to save slide')
+      toast.error(error.response?.data?.message || error.response?.data?.error || 'Failed to save slide')
     }
   }
 

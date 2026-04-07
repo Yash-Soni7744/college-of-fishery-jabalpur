@@ -564,9 +564,11 @@ router.delete('/:id', protect, adminOnly, async (req, res) => {
 
     // Delete all associated document files from Cloudinary
     if (research.documents && research.documents.length > 0) {
-      for (const docPath of research.documents) {
-        if (docPath) {
-          await deleteFile(docPath);
+      for (const doc of research.documents) {
+        if (doc) {
+          // doc could be an object { url: ... } or a string directly
+          const docUrl = doc.url || doc;
+          await deleteFile(docUrl);
         }
       }
     }

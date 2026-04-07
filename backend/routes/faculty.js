@@ -91,9 +91,9 @@ router.post('/', protect, adminOnly, [
     return true;
   }),
   body('qualification').notEmpty().trim(),
-  body('specialization').notEmpty().trim(),
+  body('specialization').optional({ checkFalsy: true }).trim(),
   body('experience').isInt({ min: 0 }),
-  body('email').optional().isEmail().normalizeEmail()
+  body('email').optional({ checkFalsy: true }).isEmail().normalizeEmail()
 ], async (req, res) => {
   try {
     console.log('Faculty POST request received');
@@ -157,10 +157,10 @@ router.put('/:id', protect, adminOnly, [
     }
     return true;
   }),
-    body('qualification').notEmpty().trim(),
-  body('specialization').notEmpty().trim(),
+  body('qualification').optional().notEmpty().trim(),
+  body('specialization').optional({ checkFalsy: true }).trim(),
   body('experience').optional().isInt({ min: 0 }),
-  body('email').optional().isEmail().normalizeEmail()
+  body('email').optional({ checkFalsy: true }).isEmail().normalizeEmail()
 ], async (req, res) => {
   try {
     const errors = validationResult(req);

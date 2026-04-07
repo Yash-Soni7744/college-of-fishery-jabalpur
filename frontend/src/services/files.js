@@ -19,9 +19,15 @@ export const getUploadsBase = () => {
 // Document (PDFs) URL builder
 export const getDocumentUrl = (filename) => {
   if (!filename) return ''
-  // If it's already a full URL (Cloudinary), return it as is
-  if (String(filename).startsWith('http')) return filename
-  const clean = String(filename).replace(/^\/+/, '')
+  
+  const urlStr = String(filename);
+  
+  // If it's already a full URL (Cloudinary)
+  if (urlStr.startsWith('http')) {
+    return urlStr;
+  }
+  
+  const clean = urlStr.replace(/^\/+/, '')
   return `${getUploadsBase()}/documents/${clean}`
 }
 

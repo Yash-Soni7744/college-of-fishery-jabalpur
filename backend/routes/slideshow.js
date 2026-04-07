@@ -7,9 +7,8 @@ const Slideshow = require('../models/Slideshow');
 const { protect } = require('../middleware/auth');
 
 // Configure multer for file uploads
-const { upload, deleteFile } = require('../middleware/upload');
-
-// upload is now imported from middleware/upload.js
+// Configure multer for file uploads
+const { upload, handleMulterError, deleteFile } = require('../middleware/upload');
 
 // GET /api/slideshow - Get all active slides ordered by order field
 router.get('/', async (req, res) => {
@@ -85,7 +84,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST /api/slideshow - Create new slide
-router.post('/', protect, upload.single('image'), async (req, res) => {
+router.post('/', protect, upload.single('image'), handleMulterError, async (req, res) => {
   try {
     const { order, isActive } = req.body;
 
@@ -137,7 +136,7 @@ router.post('/', protect, upload.single('image'), async (req, res) => {
 });
 
 // PUT /api/slideshow/:id - Update slide
-router.put('/:id', protect, upload.single('image'), async (req, res) => {
+router.put('/:id', protect, upload.single('image'), handleMulterError, async (req, res) => {
   try {
     const { order, isActive } = req.body;
 

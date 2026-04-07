@@ -41,20 +41,20 @@ const FacultyManagement = () => {
     }
   })
 
-  const [departments, setDepartments] = useState([])
-  // Fetch departments from academics API
+  const predefinedDepartments = [
+    { value: 'Aquaculture', label: 'Aquaculture' },
+    { value: 'Fishery Resource Management', label: 'Fishery Resource Management' },
+    { value: 'Aquatic Animal Health Management', label: 'Aquatic Animal Health Management' },
+    { value: 'Fish Processing Technology', label: 'Fish Processing Technology' },
+    { value: 'Fisheries Extension, Economics and Statistics', label: 'Fisheries Extension, Economics and Statistics' },
+    { value: 'Aquatic Environment Management', label: 'Aquatic Environment Management' },
+    { value: 'Fisheries Engineering', label: 'Fisheries Engineering' }
+  ]
+  
+  const [departments, setDepartments] = useState(predefinedDepartments)
+  // Fetch departments from academics API is disabled to enforce the specific 7 departments requested
   useEffect(() => {
-    const fetchDepartments = async () => {
-      try {
-        const response = await academicsAPI.getPage()
-        if (response.data.success && response.data.data.departments) {
-          setDepartments(response.data.data.departments.map(d => ({ value: d.name, label: d.name })))
-        }
-      } catch (err) {
-        console.error('Failed to fetch departments', err)
-      }
-    }
-    fetchDepartments()
+    // Kept empty to maintain React hook order if any other effect logic gets added here
   }, [])
 
   useEffect(() => {
@@ -113,7 +113,11 @@ const FacultyManagement = () => {
       fetchFaculty()
     } catch (error) {
       console.error('Error saving faculty:', error)
-      toast.error(error.response?.data?.message || 'Failed to save faculty')
+      if (error.response?.data?.errors && error.response.data.errors.length > 0) {
+        toast.error(`Validation Failed: ${error.response.data.errors.join(', ')}`)
+      } else {
+        toast.error(error.response?.data?.message || 'Failed to save faculty')
+      }
     } finally {
       setSubmitting(false)
     }

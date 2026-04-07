@@ -51,16 +51,20 @@ const storage = new CloudinaryStorage({
       folder = 'fishery_college/documents';
     }
 
+    const isImage = file.mimetype.startsWith('image/');
+    const ext = path.extname(file.originalname).toLowerCase();
+    
     // Return the configuration for this file
     const config = {
       folder: folder,
-      resource_type: file.mimetype.startsWith('image/') ? 'image' : 'raw',
+      resource_type: isImage ? 'image' : 'raw',
       public_id: path.basename(file.originalname, path.extname(file.originalname)).replace(/[^a-zA-Z0-9]/g, '_') + '_' + Date.now()
     };
     
     if (config.resource_type === 'image') {
-      config.allowed_formats = ['jpeg', 'jpg', 'png', 'gif', 'webp'];
+      config.allowedFormats = ['jpeg', 'jpg', 'png', 'gif', 'webp'];
     }
+
     
     return config;
   }

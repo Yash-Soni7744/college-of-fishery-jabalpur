@@ -169,7 +169,7 @@ const AcademicsPageManagement = () => {
         // Update existing department
         const updatedData = {
           ...academicsData,
-          departments: academicsData.departments.map((dept, index) => 
+          departments: academicsData.departments.map((dept, index) =>
             index === editingDepartment ? departmentFormData : dept
           )
         }
@@ -206,7 +206,7 @@ const AcademicsPageManagement = () => {
   const handleDeleteConfirm = async () => {
     try {
       let updatedData = { ...academicsData }
-      
+
       if (deleteTarget.type === 'department') {
         updatedData.departments = academicsData.departments.filter((_, i) => i !== deleteTarget.index)
         toast.success('Department deleted successfully')
@@ -220,13 +220,13 @@ const AcademicsPageManagement = () => {
         updatedData.regulations = academicsData.regulations.filter((_, i) => i !== deleteTarget.index)
         toast.success('Regulation deleted successfully')
       }
-      
+
       setAcademicsData(updatedData)
       await academicsAPI.updatePage(updatedData)
     } catch (error) {
       toast.error('Failed to delete item')
     }
-    
+
     setShowDeleteModal(false)
     setDeleteTarget({ type: '', index: null, item: null })
   }
@@ -269,13 +269,13 @@ const AcademicsPageManagement = () => {
         // Update existing regulation
         setAcademicsData(prev => ({
           ...prev,
-          regulations: prev.regulations.map((reg, index) => 
+          regulations: prev.regulations.map((reg, index) =>
             index === editingRegulation ? regulationFormData : reg
           )
         }))
         await academicsAPI.updatePage({
           ...academicsData,
-          regulations: academicsData.regulations.map((reg, index) => 
+          regulations: academicsData.regulations.map((reg, index) =>
             index === editingRegulation ? regulationFormData : reg
           )
         })
@@ -333,7 +333,7 @@ const AcademicsPageManagement = () => {
     try {
       if (editingCalendarEvent !== null) {
         // Update existing event
-        const updatedEvents = academicsData.calendar.events.map((evt, index) => 
+        const updatedEvents = academicsData.calendar.events.map((evt, index) =>
           index === editingCalendarEvent ? calendarFormData : evt
         )
         const updatedData = {
@@ -436,7 +436,7 @@ const AcademicsPageManagement = () => {
                 Add Department
               </button>
             </div>
-            
+
             {academicsData.departments.length === 0 ? (
               <div className="text-center py-12 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
                 <Building className="w-12 h-12 text-gray-400 mx-auto mb-4" />
@@ -509,7 +509,7 @@ const AcademicsPageManagement = () => {
                 Add Event
               </button>
             </div>
-            
+
             {academicsData.calendar.events.length === 0 ? (
               <div className="text-center py-12 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
                 <Calendar className="w-12 h-12 text-gray-400 mx-auto mb-4" />
@@ -576,7 +576,7 @@ const AcademicsPageManagement = () => {
                 Add Regulation
               </button>
             </div>
-            
+
             {academicsData.regulations.length === 0 ? (
               <div className="text-center py-12 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
                 <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
@@ -651,7 +651,7 @@ const AcademicsPageManagement = () => {
                   <Edit className="w-4 h-4" />
                 </button>
               </div>
-              
+
               <div className="space-y-4">
                 <div>
                   <h4 className="font-medium text-gray-700 mb-2">Title</h4>
@@ -659,7 +659,7 @@ const AcademicsPageManagement = () => {
                     {academicsData.faculty.title || 'No title set'}
                   </p>
                 </div>
-                
+
                 <div>
                   <h4 className="font-medium text-gray-700 mb-2">Description</h4>
                   <p className="text-gray-900 bg-gray-50 px-3 py-2 rounded-md">
@@ -718,11 +718,10 @@ const AcademicsPageManagement = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center py-4 px-1 border-b-2 font-medium text-sm ${
-                    activeTab === tab.id
-                      ? 'border-blue-500 text-blue-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  }`}
+                  className={`flex items-center py-4 px-1 border-b-2 font-medium text-sm ${activeTab === tab.id
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    }`}
                 >
                   <Icon className="w-4 h-4 mr-2" />
                   {tab.name}
@@ -731,7 +730,7 @@ const AcademicsPageManagement = () => {
             })}
           </nav>
         </div>
-        
+
         <div className="p-6">
           {renderTabContent()}
         </div>
@@ -972,13 +971,13 @@ const AcademicsPageManagement = () => {
         onConfirm={handleDeleteConfirm}
         title={`Delete ${deleteTarget.type === 'department' ? 'Department' : deleteTarget.type === 'calendar' ? 'Calendar Event' : deleteTarget.type === 'regulation' ? 'Regulation' : 'Item'}`}
         message={
-          deleteTarget.type === 'department' 
+          deleteTarget.type === 'department'
             ? `Are you sure you want to delete "${deleteTarget.item?.name}"? This action cannot be undone.`
             : deleteTarget.type === 'calendar'
-            ? `Are you sure you want to delete the event "${deleteTarget.item?.event}"? This action cannot be undone.`
-            : deleteTarget.type === 'regulation'
-            ? `Are you sure you want to delete the regulation "${deleteTarget.item?.title}"? This action cannot be undone.`
-            : 'Are you sure you want to delete this item? This action cannot be undone.'
+              ? `Are you sure you want to delete the event "${deleteTarget.item?.event}"? This action cannot be undone.`
+              : deleteTarget.type === 'regulation'
+                ? `Are you sure you want to delete the regulation "${deleteTarget.item?.title}"? This action cannot be undone.`
+                : 'Are you sure you want to delete this item? This action cannot be undone.'
         }
         type="danger"
       />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Plus, Edit, Trash2, Save, X, Link as LinkIcon, Twitter, Linkedin, Facebook } from 'lucide-react'
+import { Plus, Edit, Trash2, Save, X, Link as LinkIcon, Twitter, Linkedin, Facebook, Instagram, Youtube } from 'lucide-react'
 import Card from '../common/Card'
 import { contentAPI } from '../../services/api'
 import toast from 'react-hot-toast'
@@ -19,7 +19,9 @@ const SocialMediaManagement = () => {
   const platforms = [
     { value: 'linkedin', label: 'LinkedIn', icon: Linkedin, color: 'blue' },
     { value: 'twitter', label: 'Twitter/X', icon: Twitter, color: 'sky' },
-  { value: 'facebook', label: 'Facebook', icon: Facebook, color: 'indigo' }
+    { value: 'facebook', label: 'Facebook', icon: Facebook, color: 'indigo' },
+    { value: 'instagram', label: 'Instagram', icon: Instagram, color: 'pink' },
+    { value: 'youtube', label: 'YouTube', icon: Youtube, color: 'red' }
   ]
 
   useEffect(() => {
@@ -205,7 +207,7 @@ const SocialMediaManagement = () => {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">Social Media Links</h2>
-            <p className="text-gray-600">Manage LinkedIn and Twitter/X posts to display on homepage</p>
+            <p className="text-gray-600">Manage social media posts to display on homepage</p>
           </div>
           <button
             onClick={() => setShowForm(true)}
@@ -275,13 +277,17 @@ const SocialMediaManagement = () => {
                       ? 'https://www.linkedin.com/embed/feed/... ( get it from the embed src )'
                       : formData.platform === 'twitter'
                         ? 'https://twitter.com/.../status/...'
-                        : 'https://www.facebook.com/.../posts/...'}
+                        : formData.platform === 'instagram'
+                          ? 'https://www.instagram.com/p/...'
+                          : formData.platform === 'youtube'
+                            ? 'https://www.youtube.com/watch?v=...'
+                            : 'https://www.facebook.com/.../posts/...'}
                   required
                 />
                 <p className="text-xs text-gray-500 mt-1">
-                  Enter the full URL of the {formData.platform === 'linkedin' ? 'LinkedIn' : formData.platform === 'twitter' ? 'Twitter/X' : 'Facebook'} post
+                  Enter the full URL of the {platforms.find(p => p.value === formData.platform)?.label || 'Social Media'} post
                 </p>
-                          <p className="text-gray-600">Manage LinkedIn, Twitter/X, and Facebook posts to display on homepage</p>
+                          <p className="text-gray-600 text-sm mt-2">Manage social media posts to display on homepage</p>
               </div>
 
               <div className="flex items-center">
