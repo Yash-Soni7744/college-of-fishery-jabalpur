@@ -6,6 +6,7 @@ import HeroSlideshow from '../components/common/HeroSlideshow'
 import LogoSlider from '../components/common/LogoSlider'
 import SocialEmbed from '../components/common/SocialEmbed'
 import { newsAPI, contentAPI, uploadAPI } from '../services/api'
+import filesService from '../services/files'
 
 const Home = () => {
   const [latestNews, setLatestNews] = useState([])
@@ -327,17 +328,12 @@ const Home = () => {
             </div>
 
             {/* Sidebar */}
-            <div className="space-y-6">
+            <div className="lg:h-full flex flex-col space-y-6">
               {/* Quick Links */}
-              <Card className="bg-gradient-to-br from-white to-blue-50 border-t-4 border-blue-500 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden group hover:scale-105">
-                {/* Enhanced floating decorative elements */}
+              <Card className="bg-gradient-to-br from-white to-blue-50 border-t-4 border-blue-500 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden group hover:scale-[1.02]">
+                {/* ... existing Quick Links content ... */}
                 <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-blue-200 to-transparent opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
                 <div className="absolute bottom-0 left-0 w-12 h-12 bg-gradient-to-tr from-green-200 to-transparent opacity-15 group-hover:opacity-25 transition-opacity duration-300"></div>
-                
-                {/* Enhanced floating elements */}
-                <div className="absolute top-3 right-3 w-4 h-4 bg-blue-300/30 rounded-full animate-pulse"></div>
-                <div className="absolute bottom-4 left-4 w-3 h-3 bg-yellow-300/40 rounded-full animate-bounce" style={{animationDelay: '1s'}}></div>
-                <div className="absolute top-1/2 right-2 w-2 h-4 bg-green-300/25 rounded animate-float" style={{animationDelay: '2s'}}></div>
                 
                 <div className="flex items-center mb-4 relative z-10">
                   <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center mr-3 shadow-md">
@@ -352,15 +348,8 @@ const Home = () => {
                       <Link
                         key={index}
                         to={link.href}
-                        className="flex items-start p-4 rounded-xl bg-gradient-to-r from-white to-gray-50 hover:from-blue-50 hover:to-blue-100 transition-all duration-300 group border border-gray-100 hover:border-blue-200 shadow-sm hover:shadow-md transform hover:-translate-y-0.5 relative overflow-hidden hover:scale-105"
+                        className="flex items-start p-4 rounded-xl bg-gradient-to-r from-white to-gray-50 hover:from-blue-50 hover:to-blue-100 transition-all duration-300 group border border-gray-100 hover:border-blue-200 shadow-sm hover:shadow-md transform hover:-translate-y-0.5 relative overflow-hidden"
                       >
-                        {/* Enhanced hover effect overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-green-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <div className="absolute top-0 right-0 w-8 h-8 bg-gradient-to-bl from-blue-200/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        
-                        {/* Enhanced floating elements */}
-                        <div className="absolute top-2 right-2 w-2 h-2 bg-blue-300/30 rounded-full opacity-0 group-hover:opacity-100 animate-pulse transition-opacity duration-300"></div>
-                        
                         <div className="w-10 h-10 bg-gradient-to-br from-green-100 to-green-200 rounded-xl flex items-center justify-center mr-4 shadow-sm group-hover:shadow-md transition-shadow duration-300 relative z-10">
                           <IconComponent className="w-5 h-5 text-green-600 group-hover:scale-110 group-hover:text-green-700 transition-all duration-300" />
                         </div>
@@ -378,44 +367,101 @@ const Home = () => {
                   })}
                 </div>
               </Card>
-
-              {/* Important Notices */}
+              
+              {/* Important Notices and Alerts - Stretches to fill height */}
               {importantNotices.length > 0 && (
-                <div className="space-y-4 text-left">
-                  {importantNotices.map((notice) => (
-                    <Card key={notice.id} className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden group hover:scale-105">
-                      {/* Enhanced decorative corner elements */}
-                      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-blue-200 to-transparent opacity-50 group-hover:opacity-60 transition-opacity duration-300"></div>
-                      <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-indigo-200 to-transparent opacity-40 group-hover:opacity-50 transition-opacity duration-300"></div>
+                <Card className="flex-1 bg-white border-t-4 border-orange-500 shadow-lg relative overflow-hidden flex flex-col min-h-[500px]">
+                  {/* Decorative corner elements */}
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-orange-100 to-transparent opacity-60 pointer-events-none"></div>
+                  <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-blue-50 to-transparent opacity-40 pointer-events-none"></div>
+                  
+                  <div className="flex items-center justify-between mb-4 px-2 relative z-10 p-4 pb-2 border-b border-gray-100">
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl flex items-center justify-center mr-3 shadow-lg">
+                        <Bell className="w-5 h-5 text-white animate-pulse" />
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900">Important Notices & Alerts</h3>
+                    </div>
+                  </div>
+
+                  <div className="flex-1 overflow-y-auto px-4 pb-4 pt-4 space-y-4 custom-scrollbar notice-slider-container">
+                    {importantNotices.map((notice) => {
+                      const isNew = notice.createdAt && (new Date() - new Date(notice.createdAt)) < (30 * 24 * 60 * 60 * 1000);
                       
-                      {/* Enhanced floating decorative elements */}
-                      <div className="absolute top-3 left-3 w-2 h-2 bg-blue-400/40 rounded-full animate-pulse"></div>
-                      <div className="absolute bottom-3 right-3 w-3 h-3 bg-indigo-400/35 rounded-full animate-bounce" style={{animationDelay: '1.5s'}}></div>
-                      <div className="absolute top-1/2 right-2 w-2 h-4 bg-blue-300/25 rounded animate-float" style={{animationDelay: '2s'}}></div>
-                      
-                      <div className="relative z-10">
-                        <div className="flex items-center mb-3">
-                          <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center mr-3 shadow-md">
-                            <FileText className="w-4 h-4 text-white" />
+                      return (
+                        <div 
+                          key={notice.id} 
+                          className="bg-gradient-to-br from-white to-orange-50/30 border border-orange-100 rounded-xl p-5 hover:border-orange-200 hover:shadow-md transition-all duration-300 relative group text-left"
+                        >
+                          {isNew && (
+                            <span className="absolute -top-2 -right-1 bg-gradient-to-r from-red-500 to-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm animate-bounce z-20">
+                              NEW
+                            </span>
+                          )}
+                          
+                          <div className="flex items-start gap-3 mb-3 text-left">
+                            <div className="mt-1 flex-shrink-0">
+                              {notice.isPdf ? (
+                                <FileText className="w-5 h-5 text-orange-600" />
+                              ) : (
+                                <Bell className="w-5 h-5 text-blue-600" />
+                              )}
+                            </div>
+                            <h4 className="font-bold text-gray-900 group-hover:text-orange-700 transition-colors text-left">
+                              {notice.title}
+                            </h4>
                           </div>
-                          <h3 className="text-lg font-semibold text-gray-900">{notice.title}</h3>
-                        </div>
-                        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg border border-blue-200/50 mb-4">
-                          <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                          
+                          <p className="text-gray-700 text-sm leading-relaxed mb-4 whitespace-pre-line border-l-2 border-orange-200 pl-3 text-left">
                             {notice.message}
                           </p>
+                          
+                          <div className="flex items-center justify-between">
+                            <span className="text-[10px] text-gray-400 font-medium">
+                              {notice.createdAt && new Date(notice.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
+                            </span>
+                            
+                            {notice.isPdf ? (
+                              <button
+                                onClick={() => {
+                                  const rawUrl = notice.link?.startsWith('http') 
+                                    ? notice.link 
+                                    : notice.link?.startsWith('/') 
+                                      ? notice.link 
+                                      : uploadAPI.getImageUrl(notice.link, 'documents');
+                                  
+                                  if (rawUrl.startsWith('http')) {
+                                    const serverHost = import.meta.env.VITE_SERVER_HOST || '/api';
+                                    const downloadName = `${(notice.title || 'Notice').replace(/[^a-z0-9]/gi, '_').toLowerCase()}.pdf`;
+                                    window.location.href = `${serverHost}/proxy/image?url=${encodeURIComponent(rawUrl)}&download=1&filename=${downloadName}`;
+                                  } else {
+                                    // Internal or same-origin link
+                                    window.location.href = rawUrl;
+                                  }
+                                }}
+                                className="inline-flex items-center text-xs font-bold text-orange-600 hover:text-orange-700 bg-orange-50 px-3 py-1.5 rounded-lg border border-orange-100 transition-all shadow-sm"
+                              >
+                                {notice.linkText || 'Download PDF'}
+                                <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
+                              </button>
+                            ) : (
+                              <Link
+                                to={notice.link || '#'}
+                                className="inline-flex items-center text-xs font-bold text-blue-600 hover:text-blue-700 bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-100 transition-all shadow-sm"
+                              >
+                                {notice.linkText || 'Learn More'}
+                                <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
+                              </Link>
+                            )}
+                          </div>
                         </div>
-                        <Link
-                          to={notice.link}
-                          className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg hover:from-blue-600 hover:to-indigo-700 font-medium transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
-                        >
-                          {notice.linkText}
-                          <ExternalLink className="ml-2 h-4 w-4" />
-                        </Link>
-                      </div>
-                    </Card>
-                  ))}
-                </div>
+                      );
+                    })}
+                  </div>
+                  
+                  {/* Decorative indicator at bottom */}
+                  <div className="h-1 bg-gradient-to-r from-orange-400 via-orange-500 to-orange-400 opacity-20"></div>
+                </Card>
               )}
             </div>
           </div>
@@ -438,6 +484,7 @@ const Home = () => {
 }
 
 export default Home
+
 
 
 

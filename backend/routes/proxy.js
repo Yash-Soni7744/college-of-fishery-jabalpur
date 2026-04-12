@@ -5,10 +5,11 @@ const { URL } = require('url')
 
 const router = express.Router()
 
-// Simple allow-list for remote images
+// Simple allow-list for remote assets
 const ALLOWED_HOSTS = new Set([
   'www.ndvsu.org',
   'ndvsu.org',
+  'res.cloudinary.com',
 ])
 
 // GET /api/proxy/image?url=https%3A%2F%2Fwww.ndvsu.org%2Fimages%2Ffcj-slide-01.jpg
@@ -39,11 +40,18 @@ router.get('/image', (req, res) => {
       }
 
       const contentType = r.headers['content-type'] || 'application/octet-stream'
+      const { download, filename } = req.query
 
       // Set permissive CORS/CORP headers
       res.setHeader('Access-Control-Allow-Origin', '*')
       res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin')
       res.setHeader('Content-Type', contentType)
+      
+      if (download === '1') {
+        const downloadName = filename || remote.pathname.split('/').pop() || 'download.pdf'
+        res.setHeader('Content-Disposition', `attachment; filename="${downloadName}"`)
+      }
+
       if (r.headers['cache-control']) {
         res.setHeader('Cache-Control', r.headers['cache-control'])
       } else {

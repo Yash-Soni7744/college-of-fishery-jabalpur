@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react'
-import { Instagram, Linkedin, Facebook, Twitter, Youtube, ExternalLink } from 'lucide-react'
+import { Instagram, Linkedin, Facebook, Twitter, Youtube, ExternalLink, ArrowUpRight } from 'lucide-react'
 
 // Lazy load the embed components
 const LinkedInEmbed = lazy(() => 
@@ -27,64 +27,95 @@ const EmbedLoader = () => (
   <div className="w-full h-[400px] bg-gray-50 rounded-2xl flex items-center justify-center">
     <div className="text-center">
       <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mx-auto mb-3"></div>
-      <p className="text-gray-400 text-sm">Formatting post...</p>
+      <p className="text-gray-400 text-sm font-medium">Preparing post...</p>
     </div>
   </div>
 )
 
-// Profile Card for non-embeddable links
+// High-quality Profile Card for non-embeddable links (like profile pages)
 const ProfileCard = ({ platform, url }) => {
   const platformConfig = {
-    instagram: { icon: Instagram, color: 'bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600', label: 'Instagram' },
-    linkedin: { icon: Linkedin, color: 'bg-[#0077b5]', label: 'LinkedIn' },
-    facebook: { icon: Facebook, color: 'bg-[#1877f2]', label: 'Facebook' },
-    twitter: { icon: Twitter, color: 'bg-black', label: 'X (Twitter)' },
-    youtube: { icon: Youtube, color: 'bg-[#ff0000]', label: 'YouTube' }
+    instagram: { 
+      icon: Instagram, 
+      color: 'bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600', 
+      label: 'Instagram Feed',
+      username: '@cofsc_jabalpur',
+      description: 'Follow our official Instagram for daily updates, reels, and stories from the college.'
+    },
+    linkedin: { 
+      icon: Linkedin, 
+      color: 'bg-[#0077b5]', 
+      label: 'LinkedIn Page',
+      username: 'COFS Jabalpur',
+      description: 'Connect with us on LinkedIn for professional news, career updates, and academic highlights.'
+    },
+    facebook: { 
+      icon: Facebook, 
+      color: 'bg-[#1877f2]', 
+      label: 'Facebook Page',
+      username: 'College of Fishery Science',
+      description: 'Join our community on Facebook for event updates, photos, and live announcements.'
+    },
+    twitter: { 
+      icon: Twitter, 
+      color: 'bg-black', 
+      label: 'X (Twitter)',
+      username: '@cofs_jabalpur',
+      description: 'Get real-time updates and short news highlights directly from our Twitter feed.'
+    },
+    youtube: { 
+      icon: Youtube, 
+      color: 'bg-[#ff0000]', 
+      label: 'YouTube Channel',
+      username: 'COFS TV',
+      description: 'Watch detailed videos, event recordings, and educational content on our channel.'
+    }
   }
 
   const config = platformConfig[platform] || platformConfig.instagram
   const Icon = config.icon
 
   return (
-    <div className="w-full flex items-center justify-center p-8 bg-white border border-gray-100 rounded-2xl">
-      <div className="w-full text-center">
-        <div className={`w-20 h-20 ${config.color} rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg`}>
-          <Icon className="w-10 h-10 text-white" />
-        </div>
-        <h3 className="text-xl font-bold text-gray-900 mb-2">{config.label}</h3>
-        <p className="text-sm text-gray-500 mb-6">
-          Check out our official page for more updates and stories.
-        </p>
-        <a
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`inline-flex items-center px-6 py-3 ${config.color} text-white text-sm font-bold rounded-xl shadow hover:shadow-md transition-all active:scale-95`}
-        >
-          View Profile
-          <ExternalLink className="w-4 h-4 ml-2" />
-        </a>
+    <div className="w-full p-8 bg-white border border-gray-50 flex flex-col items-center text-center">
+      <div className={`w-20 h-20 ${config.color} rounded-[2rem] flex items-center justify-center mb-6 shadow-2xl transform rotate-3`}>
+        <Icon className="w-10 h-10 text-white" />
       </div>
+      
+      <div className="mb-8">
+        <h3 className="text-2xl font-black text-gray-900 mb-1 tracking-tight">{config.label}</h3>
+        <p className="text-blue-600 font-bold text-sm mb-4">{config.username}</p>
+        <p className="text-gray-500 text-sm leading-relaxed max-w-[280px] mx-auto">
+          {config.description}
+        </p>
+      </div>
+
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`w-full py-4 px-6 ${config.color} text-white font-black text-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center group uppercase tracking-widest`}
+      >
+        Open Profile
+        <ArrowUpRight className="w-5 h-5 ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+      </a>
     </div>
   )
 }
 
 // Error fallback
 const EmbedError = ({ url, platform }) => (
-  <div className="w-full p-8 bg-gray-50 rounded-2xl border border-gray-100 flex items-center justify-center">
-    <div className="text-center">
-      <p className="text-gray-900 font-bold mb-2">Unable to load {platform} content</p>
-      <p className="text-sm text-gray-500 mb-6 max-w-[200px] mx-auto">This post might be private or deleted.</p>
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-xl hover:bg-gray-800 transition-all"
-      >
-        Open on {platform}
-        <ExternalLink className="w-4 h-4 ml-2" />
-      </a>
-    </div>
+  <div className="w-full p-10 bg-gray-50 border border-dashed border-gray-200 rounded-2xl text-center">
+    <p className="text-gray-900 font-bold mb-1">Content Hidden</p>
+    <p className="text-xs text-gray-500 mb-6">This {platform} content is either private or could not be loaded.</p>
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-800 underline underline-offset-4"
+    >
+      View directly on {platform}
+      <ExternalLink className="w-4 h-4 ml-1" />
+    </a>
   </div>
 )
 
@@ -124,24 +155,35 @@ const normalizeFacebookUrl = (url) => {
   return normalized;
 };
 
+// Helper to detect if a URL is a profile page (improved detection)
 const isProfileUrl = (platform, url) => {
   if (!url) return false;
   const normalized = url.toLowerCase();
   
   if (platform === 'instagram') {
-    // We allow Instagram profiles/channels even if they don't have post segments
-    // temporarily to see if the library handles them as requested.
-    return false;
+    // IG profile links are just username, but embeds only work with /p/ /reels/ /tv/
+    return !normalized.includes('/p/') && !normalized.includes('/reels/') && !normalized.includes('/tv/');
   }
-  if (platform === 'linkedin') return normalized.includes('/company/') || normalized.includes('/in/');
+  if (platform === 'linkedin') {
+    return normalized.includes('/company/') || normalized.includes('/in/') || !normalized.includes('/update/');
+  }
   if (platform === 'facebook') {
-    return !normalized.includes('/posts/') && !normalized.includes('/permalink.php') && !normalized.includes('/photo.php') && !normalized.includes('/videos/') && !normalized.includes('/watch/');
+    const isPost = normalized.includes('/posts/') || 
+                   normalized.includes('/permalink.php') || 
+                   normalized.includes('/photo.php') || 
+                   normalized.includes('/videos/') || 
+                   normalized.includes('/watch/');
+    return !isPost;
   }
-  if (platform === 'twitter') return !normalized.includes('/status/');
+  if (platform === 'twitter') {
+    return !normalized.includes('/status/');
+  }
   return false;
 };
 
 const SocialEmbed = ({ platform, url, width = '100%' }) => {
+  // If it's a profile link, we use our high-quality custom card 
+  // because social platforms explicitly block embedding of entire grids/profiles.
   if (isProfileUrl(platform, url)) {
     return <ProfileCard platform={platform} url={url} />;
   }
@@ -156,15 +198,19 @@ const SocialEmbed = ({ platform, url, width = '100%' }) => {
     <EmbedErrorBoundary url={processedUrl} platform={platform}>
       <Suspense fallback={<EmbedLoader />}>
         {platform === 'linkedin' ? (
-          <LinkedInEmbed url={processedUrl} width={width} />
+          <LinkedInEmbed url={processedUrl} width="100%" />
         ) : platform === 'twitter' ? (
-          <XEmbed url={url} width={width} />
+          <XEmbed url={url} width="100%" />
         ) : platform === 'facebook' ? (
-          <FacebookEmbed url={processedUrl} width={width} style={{ width: '100%', borderRadius: '12px' }} />
+          <FacebookEmbed 
+            url={processedUrl} 
+            width="100%" 
+            containerStyle={{ width: '100%', margin: '0' }}
+          />
         ) : platform === 'instagram' ? (
-          <InstagramEmbed url={url} width={width} />
+          <InstagramEmbed url={url} width="100%" />
         ) : platform === 'youtube' ? (
-          <YouTubeEmbed url={url} width={width} height={315} />
+          <YouTubeEmbed url={url} width="100%" height={315} />
         ) : (
           <EmbedError url={url} platform={platform} />
         )}

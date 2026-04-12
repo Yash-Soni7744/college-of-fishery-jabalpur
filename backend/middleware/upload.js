@@ -52,16 +52,16 @@ const storage = new CloudinaryStorage({
     }
 
     const isImage = file.mimetype.startsWith('image/');
-    const ext = path.extname(file.originalname).toLowerCase();
+    const isPdf = file.mimetype === 'application/pdf';
     
     // Return the configuration for this file
     const config = {
       folder: folder,
-      resource_type: isImage ? 'image' : 'raw',
+      resource_type: isPdf ? 'raw' : (isImage ? 'image' : 'auto'),
       public_id: path.basename(file.originalname, path.extname(file.originalname)).replace(/[^a-zA-Z0-9]/g, '_') + '_' + Date.now()
     };
     
-    if (config.resource_type === 'image') {
+    if (isImage) {
       config.allowedFormats = ['jpeg', 'jpg', 'png', 'gif', 'webp'];
     }
 

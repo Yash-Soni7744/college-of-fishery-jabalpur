@@ -48,7 +48,15 @@ export const getImageUrl = (subdir, filename) => {
  */
 export const downloadFile = async (url, originalName) => {
   try {
-    const response = await fetch(url);
+    let fetchUrl = url;
+    
+    // If it's a remote URL, use our proxy to bypass CORS
+    if (url.startsWith('http')) {
+      const serverHost = import.meta.env.VITE_SERVER_HOST || '/api';
+      fetchUrl = `${serverHost}/proxy/image?url=${encodeURIComponent(url)}`;
+    }
+    
+    const response = await fetch(fetchUrl);
     if (!response.ok) throw new Error('Network fetch failed');
     const blob = await response.blob();
     const blobUrl = window.URL.createObjectURL(blob);
@@ -108,8 +116,7 @@ export const downloadFile = async (url, originalName) => {
     document.body.removeChild(a);
   } catch (error) {
     console.error('Download error:', error);
-    // Fallback: just open in new tab
-    window.open(url, '_blank');
+    alert('Failed to download file. Please try again later.');
   }
 };
 
