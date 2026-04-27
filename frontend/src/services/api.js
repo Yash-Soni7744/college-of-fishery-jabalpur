@@ -216,55 +216,63 @@ export const uploadAPI = {
     })
   },
   delete: (filename) => api.delete(`/upload/${filename}`),
+  /**
+   * Utility to get the full URL for an image or attachment
+   * @param {string} filename - The filename or path from the database
+   * @param {string} type - The category (images, news, documents, etc.)
+   * @returns {string} The full URL to the asset
+   */
   getImageUrl: (filename, type = 'images') => {
     if (!filename) return ''
 
     // Handle external URLs
     if (filename.startsWith('http')) {
-      // If it's a Cloudinary URL, return it directly
+      // If it's a Cloudinary URL, ensure it's https
       if (filename.includes('cloudinary.com')) {
-        // Ensure https
         return filename.replace('http://res.cloudinary.com', 'https://res.cloudinary.com')
       }
       
-      // For other remote URLs (like the old ndvsu.org), proxy through backend
+      // For other remote URLs, proxy through backend to avoid CORS/mixed content
       const serverHost = import.meta.env.VITE_SERVER_HOST || '/api'
       const baseURL = serverHost.startsWith('http') ? serverHost : `${window.location.origin}${serverHost.startsWith('/') ? '' : '/'}${serverHost}`
       return `${baseURL}/proxy/image?url=${encodeURIComponent(filename)}`
     }
 
-    // Detect Cloudinary-style paths that might have arrived without the protocol
+    // Detect Cloudinary-style paths (e.g., 'fishery_college/news/filename')
     if (filename.includes('fishery_college/')) {
       const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dzonvsfnr'
-      const isDoc = filename.includes('documents/') || type === 'documents' || type === 'document'
-      return `https://res.cloudinary.com/${cloudName}/${isDoc ? 'raw' : 'image'}/upload/${isDoc ? '' : 'f_auto,q_auto/'}${filename}`
+      
+      // Smart detection for document types
+      const isDocExtension = filename.match(/\.(pdf|doc|docx|xls|xlsx|ppt|pptx)$/i);
+      const isDoc = isDocExtension || filename.includes('documents/') || type === 'documents' || type === 'document';
+      
+      const resourceType = isDoc ? 'raw' : 'image';
+      const transformations = isDoc ? '' : 'f_auto,q_auto/';
+      
+      return `https://res.cloudinary.com/${cloudName}/${resourceType}/upload/${transformations}${filename}`
     }
 
-    // Get the base URL from environment variable
-    // Default to /api for relative URLs in production to avoid mixed content errors
+    // Handle local uploads (relative paths stored in DB)
     const serverHost = import.meta.env.VITE_SERVER_HOST || '/api'
     
-    // If we're on a production domain but the bundle has 'localhost:5000' hardcoded (build-time artifact),
-    // use a relative path instead to prevent "Connection Refused".
-    const isProdDomain = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
-    const isHardcodedLocalhost = serverHost.includes('localhost') || serverHost.includes('127.0.0.1')
-    
-    let baseURL = ''
-    if (isProdDomain && isHardcodedLocalhost) {
-      baseURL = '' // Use current domain's relative path
-    } else {
-      baseURL = serverHost.replace('/api', '').replace(/\/+$/, '')
-      // Make sure it doesn't accidentally become just 'http:' or 'https:'
-      if (baseURL === 'http:' || baseURL === 'https:') baseURL = ''
+    // For local uploads, we need the base host WITHOUT the /api suffix if present
+    let baseHost = serverHost;
+    if (baseHost.endsWith('/api')) {
+      baseHost = baseHost.slice(0, -4);
     }
     
-    // Handle files that already have the full path
-    if (filename.startsWith('/uploads/')) {
-      return `${baseURL}${filename}`
-    }
+    // Construct full base URL including origin if relative
+    const baseURL = baseHost.startsWith('http') 
+      ? baseHost 
+      : `${window.location.origin}${baseHost.startsWith('/') ? '' : '/'}${baseHost}`
     
-    // Handle relative filenames
-    return `${baseURL}/uploads/${type}/${filename}`
+    const cleanFilename = filename.replace(/^\//, '')
+    // Determine if we need to prepend 'uploads/'
+    const finalPath = cleanFilename.startsWith('uploads/') 
+      ? cleanFilename 
+      : `uploads/${type}/${cleanFilename}`
+      
+    return `${baseURL.replace(/\/$/, '')}/${finalPath}`
   },
 }
 

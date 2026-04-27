@@ -42,29 +42,37 @@ export const getImageUrl = (subdir, filename) => {
 }
 
 /**
- * Downloads a file with the specified filename, ensuring correct PDF extension if needed
+ * Downloads a file with the specified filename, ensuring correct extension
  * @param {string} url - The URL of the file to download
  * @param {string} originalName - The desired filename
  */
 export const downloadFile = async (url, originalName) => {
   try {
+    console.log('Initiating download for:', url);
     let fetchUrl = url;
+    
+    // Sanitize filename: remove characters that might be problematic
+    let filename = (originalName || 'document').replace(/[\\/:*?"<>|]/g, '_');
     
     // If it's a remote URL, use our proxy to bypass CORS
     if (url.startsWith('http')) {
       const serverHost = import.meta.env.VITE_SERVER_HOST || '/api';
-      fetchUrl = `${serverHost}/proxy/image?url=${encodeURIComponent(url)}`;
+      // Append download=1 to tell the backend proxy to set Content-Disposition
+      // and filename to suggest the name to the browser
+      const proxyUrl = new URL(`${window.location.origin}${serverHost.startsWith('/') ? '' : '/'}${serverHost}/proxy/image`);
+      proxyUrl.searchParams.append('url', url);
+      proxyUrl.searchParams.append('download', '1');
+      proxyUrl.searchParams.append('filename', filename);
+      
+      fetchUrl = proxyUrl.toString();
+      console.log('Using proxy for download:', fetchUrl);
     }
     
     const response = await fetch(fetchUrl);
-    if (!response.ok) throw new Error('Network fetch failed');
+    if (!response.ok) throw new Error(`Network fetch failed with status: ${response.status}`);
+    
     const blob = await response.blob();
     const blobUrl = window.URL.createObjectURL(blob);
-    
-    let filename = originalName || 'document';
-    
-    // Sanitize filename: remove characters that might be problematic
-    filename = filename.replace(/[\\/:*?"<>|]/g, '_');
     
     const extensionMap = {
       'application/pdf': '.pdf',
@@ -72,38 +80,24 @@ export const downloadFile = async (url, originalName) => {
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document': '.docx',
       'image/jpeg': '.jpg',
       'image/png': '.png',
+      'image/gif': '.gif',
       'application/vnd.ms-excel': '.xls',
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': '.xlsx'
     };
     
     // Determine extension
     let extension = '';
-    
-    // 1. Check extensionMap based on blob.type
     if (extensionMap[blob.type]) {
       extension = extensionMap[blob.type];
-    } 
-    // 2. Fallback: if it's application/octet-stream or unknown, check URL and context
-    else if (blob.type === 'application/octet-stream' || !blob.type) {
-      if (url.toLowerCase().includes('.pdf') || url.toLowerCase().includes('/documents/')) {
-        extension = '.pdf';
-      } else if (url.toLowerCase().includes('.doc')) {
-        extension = '.doc';
-      } else if (url.toLowerCase().includes('.docx')) {
-        extension = '.docx';
-      }
+    } else if (blob.type === 'application/octet-stream' || !blob.type) {
+      if (url.toLowerCase().includes('.pdf')) extension = '.pdf';
+      else if (url.toLowerCase().includes('.doc')) extension = '.doc';
+      else if (url.toLowerCase().includes('.docx')) extension = '.docx';
     }
 
     // Apply extension if missing
     if (extension && !filename.toLowerCase().endsWith(extension)) {
-      // Remove any trailing dots before appending
-      const cleanName = filename.replace(/\.+$/, '');
-      filename = cleanName + extension;
-    }
-    
-    // If still no extension and it's likely a PDF (fallback based on common sense in this project)
-    if (!filename.includes('.') && (url.toLowerCase().includes('/documents/') || url.toLowerCase().includes('/research/'))) {
-      filename += '.pdf';
+      filename = filename.replace(/\.+$/, '') + extension;
     }
     
     const a = document.createElement('a');
@@ -112,8 +106,14 @@ export const downloadFile = async (url, originalName) => {
     a.download = filename;
     document.body.appendChild(a);
     a.click();
-    window.URL.revokeObjectURL(blobUrl);
-    document.body.removeChild(a);
+    
+    // Small delay before cleanup to ensure browser starts download
+    setTimeout(() => {
+      window.URL.revokeObjectURL(blobUrl);
+      document.body.removeChild(a);
+    }, 100);
+    
+    console.log('Download triggered successfully:', filename);
   } catch (error) {
     console.error('Download error:', error);
     alert('Failed to download file. Please try again later.');

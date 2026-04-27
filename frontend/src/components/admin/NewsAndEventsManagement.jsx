@@ -668,12 +668,14 @@ const NewsAndEventsManagement = () => {
                     <div className="grid grid-cols-3 gap-4">
                       {formData.images.map((image, index) => {
                         const imageUrl = image.url.startsWith('http') ? image.url : uploadAPI.getImageUrl(image.url, 'news')
+                        console.log(`Image ${index} URL:`, imageUrl);
                         return (
                           <div key={index} className="relative group">
                             <img
                               src={imageUrl}
                               alt={image.caption || 'Image'}
                               className="w-full h-28 object-cover rounded-lg border-2 border-gray-200 shadow-sm"
+                              onError={(e) => console.error(`Failed to load image: ${imageUrl}`)}
                             />
                             <button
                               type="button"
