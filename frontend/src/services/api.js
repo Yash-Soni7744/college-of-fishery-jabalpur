@@ -235,9 +235,9 @@ export const uploadAPI = {
 
     // Detect Cloudinary-style paths that might have arrived without the protocol
     if (filename.includes('fishery_college/')) {
-      const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dffu99v88'
-      const isDoc = filename.includes('documents/')
-      return `https://res.cloudinary.com/${cloudName}/${isDoc ? 'raw' : 'image'}/upload/${filename}`
+      const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dzonvsfnr'
+      const isDoc = filename.includes('documents/') || type === 'documents' || type === 'document'
+      return `https://res.cloudinary.com/${cloudName}/${isDoc ? 'raw' : 'image'}/upload/${isDoc ? '' : 'f_auto,q_auto/'}${filename}`
     }
 
     // Get the base URL from environment variable

@@ -162,7 +162,7 @@ router.post('/', protect, adminOnly, [
   body('excerpt').notEmpty().trim().isLength({ max: 300 }),
   body('type').isIn(['news', 'event', 'announcement', 'seminar', 'workshop', 'visit']),
   body('category').isIn(['academic', 'research', 'extension', 'general', 'placement']),
-  body('eventDate').optional().isISO8601(),
+  body('eventDate').optional({ nullable: true, checkFalsy: true }).isISO8601(),
   body('venue').optional().trim(),
   body('organizer').optional().trim()
 ], async (req, res) => {
@@ -233,7 +233,7 @@ router.put('/:id', protect, adminOnly, [
   body('excerpt').optional().notEmpty().trim().isLength({ max: 300 }),
   body('type').optional().isIn(['news', 'event', 'announcement', 'seminar', 'workshop', 'visit']),
   body('category').optional().isIn(['academic', 'research', 'extension', 'general', 'placement']),
-  body('eventDate').optional().isISO8601(),
+  body('eventDate').optional({ nullable: true, checkFalsy: true }).isISO8601(),
   body('venue').optional().trim(),
   body('organizer').optional().trim()
 ], async (req, res) => {

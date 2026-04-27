@@ -45,9 +45,9 @@ const newsEventSchema = new mongoose.Schema({
     caption: String
   }],
   attachments: [{
-    name: String,
-    url: String,
-    type: String
+    name: { type: String },
+    url: { type: String },
+    type: { type: String }
   }],
   isPublished: {
     type: Boolean,

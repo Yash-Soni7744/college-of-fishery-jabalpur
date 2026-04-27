@@ -153,7 +153,18 @@ const NewsAndEventsManagement = () => {
     } catch (error) {
       console.error('Error saving item:', error)
       console.error('Error details:', error.response?.data) // Debug log
-      toast.error(error.response?.data?.message || 'Failed to save item')
+      
+      // Extract specific validation error message if available
+      let errorMessage = 'Failed to save item';
+      if (error.response?.data?.errors && error.response.data.errors.length > 0) {
+        // Express-validator errors are objects, mongoose errors might be strings
+        const firstError = error.response.data.errors[0];
+        errorMessage = typeof firstError === 'string' ? firstError : (firstError.msg || 'Validation error');
+      } else if (error.response?.data?.message) {
+        errorMessage = error.response.data.message;
+      }
+      
+      toast.error(errorMessage)
     } finally {
       setSubmitting(false)
     }
@@ -211,11 +222,11 @@ const NewsAndEventsManagement = () => {
       const response = await newsAPI.uploadImage(file)
       
       if (response.data.success) {
-        const filename = response.data.data.filename
+        const imageUrl = response.data.data.url
         setFormData(prev => ({
           ...prev,
           images: [...prev.images, {
-            url: filename,
+            url: imageUrl,
             caption: file.name.split('.')[0]
           }]
         }))
@@ -254,7 +265,7 @@ const NewsAndEventsManagement = () => {
           ...prev,
           attachments: [...prev.attachments, {
             name: fileData.originalName,
-            url: fileData.filename,
+            url: fileData.url,
             type: fileData.type
           }]
         }))
