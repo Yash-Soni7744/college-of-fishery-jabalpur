@@ -90,7 +90,7 @@ const HeroSlideshow = () => {
   // Show loading state
   if (loading) {
     return (
-      <div className="relative h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden bg-gray-200 flex items-center justify-center">
+      <div className="relative w-full aspect-[21/9] min-h-[300px] overflow-hidden bg-gray-200 flex items-center justify-center">
         <div className="text-gray-500">Loading slideshow...</div>
       </div>
     )
@@ -99,61 +99,33 @@ const HeroSlideshow = () => {
   // Show message if no slides available
   if (slides.length === 0) {
     return (
-            <div className="relative h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden flex items-center justify-center">
-        <div className="text-white text-center">
-          <h1 className="text-4xl font-bold mb-4">College of Fishery, Jabalpur</h1>
-          <p className="text-xl">Excellence in Fishery Education & Research</p>
+      <div className="relative w-full aspect-[21/9] min-h-[300px] overflow-hidden flex items-center justify-center bg-[#1e40af]">
+        <div className="text-white text-center z-10 px-4">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4">College of Fishery, Jabalpur</h1>
+          <p className="text-lg md:text-2xl font-medium">Excellence in Fishery Education & Research</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div 
-      className="relative h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden"
-      style={{
-        position: 'relative',
-        height: '500px',
-        overflow: 'hidden'
-      }}
-    >
-      {/* Slides */}
+    <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] min-h-[400px] max-h-[800px] overflow-hidden bg-gray-900 group">
+      {/* Container height is now strictly fixed relative to the viewport. Images adjust themselves inside. */}
       {slides.map((slide, index) => (
         <div
           key={slide.id}
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            index === currentSlide ? 'opacity-100' : 'opacity-0'
+          className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+            index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
           }`}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            opacity: index === currentSlide ? 1 : 0,
-            transition: 'opacity 1s ease-in-out'
-          }}
         >
-          {/* Background Image */}
+          {/* Image scales up or down to fully fit entirely inside the fixed container without cropping */}
           <img 
             src={slide.image} 
-            alt={slide.title}
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover'
-            }}
+            alt={slide.title || `Slide ${index + 1}`}
+            className="w-full h-full object-contain"
             sizes="100vw"
-            loading="eager"
+            loading={index === 0 ? "eager" : "lazy"}
           />
-          
-          {/* Just the image - no overlay or text content */}
         </div>
       ))}
 
