@@ -15,7 +15,7 @@ const api = axios.create({
 // Create a separate axios instance for file uploads without Content-Type header
 const uploadApi = axios.create({
   baseURL: import.meta.env.VITE_SERVER_HOST || '/api',
-  timeout: 30000, // Longer timeout for file uploads
+  timeout: 120000, // Longer timeout (2 mins) for large file uploads
 })
 
 // Request interceptor to add auth token

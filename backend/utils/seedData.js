@@ -209,7 +209,7 @@ const seedData = async () => {
 
     // Seed News & Events
     console.log('Seeding news and events...');
-    const newsEvents = await NewsEvent.insertMany([
+    const newsEventsData = [
       {
         title: 'New Aquaculture Research Facility Inaugurated',
         content: 'The college inaugurated a state-of-the-art aquaculture research facility equipped with modern technology for advanced research in fish farming and breeding techniques.',
@@ -262,7 +262,14 @@ const seedData = async () => {
         tags: ['workshop', 'processing', 'training'],
         createdBy: admin._id
       }
-    ]);
+    ];
+
+    const newsEvents = [];
+    for (const itemData of newsEventsData) {
+      const item = new NewsEvent(itemData);
+      await item.save();
+      newsEvents.push(item);
+    }
     console.log(`${newsEvents.length} news/events seeded`);
 
     // Seed Research Projects
@@ -271,6 +278,8 @@ const seedData = async () => {
       {
         title: 'Development of Sustainable Feed for Freshwater Fish',
         description: 'This project focuses on developing cost-effective and environmentally sustainable fish feed using local agricultural waste and by-products.',
+        section: 'ongoing-projects',
+        projectType: 'DST',
         type: 'project',
         status: 'ongoing',
         principalInvestigator: 'Dr. Rajesh Kumar Sharma',
@@ -300,6 +309,8 @@ const seedData = async () => {
       {
         title: 'Water Quality Management in Aquaculture Systems',
         description: 'Research on optimal water quality parameters and management strategies for different aquaculture systems in the central India region.',
+        section: 'ongoing-projects',
+        projectType: 'ICAR',
         type: 'project',
         status: 'ongoing',
         principalInvestigator: 'Dr. Anil Kumar Jain',
@@ -402,80 +413,6 @@ const seedData = async () => {
     ]);
     console.log(`${infrastructure.length} infrastructure items seeded`);
 
-    // Seed Collaborations
-    console.log('Seeding collaborations...');
-    const collaborations = await Collaboration.insertMany([
-      {
-        title: 'Research Collaboration with ICAR-CIFA',
-        partner: {
-          name: 'Central Institute of Freshwater Aquaculture (CIFA)',
-          type: 'research_institute',
-          country: 'India',
-          website: 'https://www.cifa.nic.in'
-        },
-        type: 'joint_research',
-        description: 'Collaborative research program focusing on freshwater aquaculture development and technology transfer.',
-        objectives: [
-          'Joint research projects',
-          'Faculty and student exchange',
-          'Technology transfer',
-          'Capacity building'
-        ],
-        activities: [
-          'Collaborative research projects',
-          'Training programs',
-          'Workshops and seminars',
-          'Publication of research papers'
-        ],
-        duration: {
-          startDate: new Date('2022-01-01'),
-          endDate: new Date('2027-12-31')
-        },
-        status: 'active',
-        coordinator: 'Dr. Rajesh Kumar Sharma',
-        department: 'fishery science',
-        outcomes: [
-          'Joint research publications',
-          'Technology development',
-          'Trained personnel'
-        ],
-        isPublished: true,
-        createdBy: admin._id
-      },
-      {
-        title: 'MoU with Auburn University, USA',
-        partner: {
-          name: 'Auburn University',
-          type: 'university',
-          country: 'USA',
-          website: 'https://www.auburn.edu'
-        },
-        type: 'student_exchange',
-        description: 'Memorandum of Understanding for student and faculty exchange programs in aquaculture and fishery science.',
-        objectives: [
-          'Student exchange programs',
-          'Faculty collaboration',
-          'Research partnerships',
-          'Knowledge sharing'
-        ],
-        activities: [
-          'Semester exchange programs',
-          'Joint degree programs',
-          'Research collaborations',
-          'Virtual seminars'
-        ],
-        duration: {
-          startDate: new Date('2023-08-01'),
-          endDate: new Date('2028-07-31')
-        },
-        status: 'active',
-        coordinator: 'Dr. Priya Verma',
-        department: 'International Relations',
-        isPublished: true,
-        createdBy: admin._id
-      }
-    ]);
-    console.log(`${collaborations.length} collaborations seeded`);
 
     // Seed Content
     console.log('Seeding content...');

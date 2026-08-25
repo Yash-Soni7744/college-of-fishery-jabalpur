@@ -140,11 +140,12 @@ const GalleryManagement = () => {
         })
         fetchImages()
       } else {
-        toast.error(data.error || 'Failed to upload image')
+        toast.error(data.error || data.message || 'Failed to upload image')
       }
     } catch (error) {
       console.error('Error uploading image:', error)
-      toast.error('Failed to upload image')
+      const errorMsg = error.response?.data?.error || error.response?.data?.message || error.message || 'Failed to upload image';
+      toast.error(errorMsg)
     } finally {
       setLoading(false)
     }
@@ -185,7 +186,8 @@ const GalleryManagement = () => {
       }
     } catch (error) {
       console.error('Error updating image:', error)
-      toast.error('Failed to update image')
+      const errorMsg = error.response?.data?.error || error.response?.data?.message || error.message || 'Failed to update image';
+      toast.error(errorMsg)
     } finally {
       setLoading(false)
     }

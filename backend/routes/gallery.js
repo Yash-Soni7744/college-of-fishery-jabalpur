@@ -248,8 +248,75 @@ router.delete('/:id', protect, async (req, res) => {
   }
 });
 
-module.exports = router;
+// Bulk delete gallery images (protected route)
+router.delete('/bulk/delete', protect, async (req, res) => {
+  try {
+    const { ids } = req.body;
+    
+    if (!ids || !Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'No image IDs provided'
+      });
+    }
 
+    const images = await Gallery.find({ _id: { $in: ids } });
+    
+    // Delete files from Cloudinary
+    for (const image of images) {
+      if (image.imageUrl) {
+        await deleteFile(image.imageUrl);
+      }
+    }
+    
+    await Gallery.deleteMany({ _id: { $in: ids } });
+    
+    res.json({
+      success: true,
+      message: `${images.length} images deleted successfully`
+    });
+  } catch (error) {
+    console.error('Error bulk deleting gallery images:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to delete images'
+    });
+  }
+});
+
+// Toggle gallery image status (protected route)
+router.patch('/:id/toggle-status', protect, async (req, res) => {
+  try {
+    const galleryImage = await Gallery.findById(req.params.id);
+    
+    if (!galleryImage) {
+      return res.status(404).json({
+        success: false,
+        error: 'Gallery image not found'
+      });
+    }
+    
+    galleryImage.isActive = !galleryImage.isActive;
+    await galleryImage.save();
+    
+    res.json({
+      success: true,
+      message: `Image ${galleryImage.isActive ? 'activated' : 'deactivated'} successfully`,
+      data: galleryImage
+    });
+  } catch (error) {
+    console.error('Error toggling gallery image status:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to toggle image status'
+    });
+  }
+});
+
+// Apply error handling middleware
+router.use(require('../middleware/upload').handleMulterError);
+
+module.exports = router;
 
 
 

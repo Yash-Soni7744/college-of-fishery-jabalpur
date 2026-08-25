@@ -26,7 +26,7 @@ router.put('/change-password', protect, adminOnly, async (req, res) => {
     }
     
     // Find the admin user
-    const admin = await Admin.findById(req.user.id);
+    const admin = await Admin.findById(req.admin._id).select('+password');
     if (!admin) {
       return res.status(404).json({
         success: false,
