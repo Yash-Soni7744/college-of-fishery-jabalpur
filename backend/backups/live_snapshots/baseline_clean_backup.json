@@ -1,0 +1,2916 @@
+{
+  "metadata": {
+    "timestamp": "2026-09-06T17:08:56.005Z",
+    "label": "Manual CLI Backup",
+    "isBaseline": true,
+    "sourceDatabase": "fishery_college",
+    "totalCollections": 18,
+    "totalDocuments": 108,
+    "collectionSummary": {
+      "faculties": 0,
+      "newsevents": 0,
+      "researches": 9,
+      "incubations": 8,
+      "farmerresources": 0,
+      "alumnis": 13,
+      "contents": 10,
+      "collaborations": 13,
+      "extensions": 15,
+      "galleries": 0,
+      "partners": 10,
+      "contacts": 1,
+      "studentcorners": 14,
+      "academicspages": 1,
+      "admins": 1,
+      "infrastructures": 3,
+      "slideshows": 8,
+      "programs": 2
+    }
+  },
+  "collections": {
+    "faculties": [],
+    "newsevents": [],
+    "researches": [
+      {
+        "_id": "6a8d2849279cd8a58b05fd6a",
+        "title": "Climate Change Impacts on Freshwater Fish Production",
+        "description": "Comprehensive assessment of climate variability effects on fish farming productivity and adaptation strategies.",
+        "section": "publications",
+        "status": "ongoing",
+        "principalInvestigator": "Dr. Rajesh Kumar Sharma",
+        "coInvestigators": [
+          "Dr. Vikash Kumar"
+        ],
+        "department": "Fishery Science",
+        "objectives": [],
+        "keyFindings": [
+          "Temperature rise affects fish metabolism significantly",
+          "Adaptation strategies can mitigate 60% of climate impacts",
+          "Early warning systems improve farmer preparedness"
+        ],
+        "publicationDetails": {
+          "journal": "Aquaculture Environment Interactions",
+          "volume": "15",
+          "issue": "2",
+          "pages": "123-145",
+          "year": 2023,
+          "doi": "10.3354/aei00423",
+          "impactFactor": 2.8,
+          "authors": [
+            "Dr. Rajesh Kumar Sharma",
+            "Dr. Vikash Kumar",
+            "Dr. Priya Singh"
+          ]
+        },
+        "facilityDetails": {
+          "utilizationAreas": []
+        },
+        "documents": [],
+        "tags": [
+          "climate change",
+          "publication",
+          "impact factor"
+        ],
+        "isPublished": true,
+        "order": 1,
+        "images": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:45.800Z",
+        "updatedAt": "2026-08-25T05:29:45.800Z"
+      },
+      {
+        "_id": "6a8d2849279cd8a58b05fd6b",
+        "title": "Advances in Fish Breeding Techniques",
+        "description": "Novel approaches to selective breeding and genetic improvement of aquaculture species.",
+        "section": "publications",
+        "status": "ongoing",
+        "principalInvestigator": "Prof. Shashikant Sadashiv Gaikwad",
+        "coInvestigators": [
+          "Dr. Rajesh Kumar Sharma"
+        ],
+        "department": "Fish Genetics and Biotechnology",
+        "objectives": [],
+        "keyFindings": [
+          "Modern breeding techniques increase productivity by 40%",
+          "Genetic markers improve selection accuracy",
+          "Indigenous species show better adaptation"
+        ],
+        "publicationDetails": {
+          "journal": "Aquaculture Research",
+          "volume": "54",
+          "issue": "8",
+          "pages": "2156-2175",
+          "year": 2023,
+          "doi": "10.1111/are.15890",
+          "impactFactor": 3.2,
+          "authors": [
+            "Prof. Shashikant Gaikwad",
+            "Dr. Rajesh Kumar Sharma"
+          ]
+        },
+        "facilityDetails": {
+          "utilizationAreas": []
+        },
+        "documents": [],
+        "tags": [
+          "genetics",
+          "breeding",
+          "publication"
+        ],
+        "isPublished": true,
+        "order": 2,
+        "images": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:45.800Z",
+        "updatedAt": "2026-08-25T05:29:45.800Z"
+      },
+      {
+        "_id": "6a8d2849279cd8a58b05fd6c",
+        "title": "Biofloc Technology for Sustainable Aquaculture",
+        "description": "Student research on implementing biofloc technology for zero-discharge aquaculture systems.",
+        "section": "student-research",
+        "status": "ongoing",
+        "principalInvestigator": "Dr. Priya Kumari Singh",
+        "coInvestigators": [],
+        "department": "Aquaculture",
+        "objectives": [
+          "Evaluate biofloc system efficiency",
+          "Assess fish growth performance",
+          "Analyze water quality parameters"
+        ],
+        "keyFindings": [
+          "Biofloc systems reduce water usage by 80%",
+          "Fish growth rates improved by 25%",
+          "Feed conversion ratio optimized"
+        ],
+        "publicationDetails": {
+          "authors": []
+        },
+        "studentDetails": {
+          "studentName": "Rahul Kumar Patel",
+          "degree": "M.F.Sc",
+          "supervisor": "Dr. Priya Kumari Singh",
+          "completionYear": 2024
+        },
+        "facilityDetails": {
+          "utilizationAreas": []
+        },
+        "documents": [],
+        "tags": [
+          "biofloc",
+          "student research",
+          "M.F.Sc"
+        ],
+        "isPublished": true,
+        "order": 1,
+        "images": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:45.800Z",
+        "updatedAt": "2026-08-25T05:29:45.800Z"
+      },
+      {
+        "_id": "6a8d2849279cd8a58b05fd6d",
+        "title": "Ornamental Fish Breeding and Marketing",
+        "description": "Undergraduate research project on ornamental fish culture and market analysis.",
+        "section": "student-research",
+        "status": "ongoing",
+        "principalInvestigator": "Dr. Amit Kumar Verma",
+        "coInvestigators": [],
+        "department": "Aquaculture",
+        "objectives": [
+          "Study breeding protocols for ornamental fish",
+          "Analyze market demand and pricing",
+          "Develop business model"
+        ],
+        "keyFindings": [
+          "High market demand for native ornamental species",
+          "Profitable venture for small farmers",
+          "Breeding techniques standardized"
+        ],
+        "publicationDetails": {
+          "authors": []
+        },
+        "studentDetails": {
+          "studentName": "Priya Sharma",
+          "degree": "B.F.Sc",
+          "supervisor": "Dr. Amit Kumar Verma",
+          "completionYear": 2023
+        },
+        "facilityDetails": {
+          "utilizationAreas": []
+        },
+        "documents": [],
+        "tags": [
+          "ornamental fish",
+          "student research",
+          "B.F.Sc"
+        ],
+        "isPublished": true,
+        "order": 2,
+        "images": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:45.800Z",
+        "updatedAt": "2026-08-25T05:29:45.800Z"
+      },
+      {
+        "_id": "6a8d2849279cd8a58b05fd6e",
+        "title": "International Aquatic Ecosystem Health Partnership",
+        "description": "Multi-national collaboration on aquatic ecosystem monitoring and biodiversity conservation.",
+        "section": "collaborations",
+        "status": "ongoing",
+        "principalInvestigator": "Dr. Vikash Kumar",
+        "coInvestigators": [
+          "Dr. Sunita Devi"
+        ],
+        "fundingAgency": "International Development Research Centre",
+        "budget": 2200000,
+        "duration": {
+          "startDate": "2023-06-01T00:00:00.000Z",
+          "endDate": "2026-05-31T00:00:00.000Z"
+        },
+        "department": "Aquatic Environment Management",
+        "objectives": [
+          "Monitor ecosystem health indicators",
+          "Assess biodiversity patterns",
+          "Develop conservation strategies"
+        ],
+        "keyFindings": [],
+        "publicationDetails": {
+          "authors": []
+        },
+        "collaborationDetails": {
+          "partnerInstitution": "University of Stirling, Scotland",
+          "partnerCountry": "United Kingdom",
+          "collaborationType": "Research",
+          "mou": true
+        },
+        "facilityDetails": {
+          "utilizationAreas": []
+        },
+        "documents": [],
+        "tags": [
+          "international",
+          "collaboration",
+          "ecosystem"
+        ],
+        "isPublished": true,
+        "order": 1,
+        "images": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:45.800Z",
+        "updatedAt": "2026-08-25T05:29:45.800Z"
+      },
+      {
+        "_id": "6a8d2849279cd8a58b05fd6f",
+        "title": "ICAR Institute Network Partnership",
+        "description": "Collaboration with premier ICAR institutes for joint research and technology transfer.",
+        "section": "collaborations",
+        "status": "ongoing",
+        "principalInvestigator": "Prof. Shashikant Sadashiv Gaikwad",
+        "coInvestigators": [],
+        "department": "Fishery Science",
+        "objectives": [
+          "Joint research projects",
+          "Faculty exchange programs",
+          "Technology transfer initiatives"
+        ],
+        "keyFindings": [],
+        "publicationDetails": {
+          "authors": []
+        },
+        "collaborationDetails": {
+          "partnerInstitution": "CIFA Bhubaneswar, CIFRI Barrackpore",
+          "partnerCountry": "India",
+          "collaborationType": "Technology Transfer",
+          "mou": true
+        },
+        "facilityDetails": {
+          "utilizationAreas": []
+        },
+        "documents": [],
+        "tags": [
+          "ICAR",
+          "national",
+          "collaboration"
+        ],
+        "isPublished": true,
+        "order": 2,
+        "images": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:45.800Z",
+        "updatedAt": "2026-08-25T05:29:45.800Z"
+      },
+      {
+        "_id": "6a8d2849279cd8a58b05fd70",
+        "title": "Advanced Aquaculture Research Laboratory",
+        "description": "State-of-the-art laboratory equipped with modern analytical instruments for fishery research.",
+        "section": "facilities",
+        "status": "ongoing",
+        "principalInvestigator": "Prof. Shashikant Sadashiv Gaikwad",
+        "coInvestigators": [],
+        "fundingAgency": "University Grants Commission",
+        "budget": 2500000,
+        "department": "Fishery Science",
+        "objectives": [],
+        "keyFindings": [],
+        "publicationDetails": {
+          "authors": []
+        },
+        "facilityDetails": {
+          "type": "Laboratory",
+          "capacity": "50 students",
+          "specifications": "Water quality analyzers, microscopes, spectrophotometers, incubators",
+          "utilizationAreas": [
+            "Water quality analysis",
+            "Fish health diagnosis",
+            "Feed analysis",
+            "Research training"
+          ]
+        },
+        "documents": [],
+        "tags": [
+          "laboratory",
+          "equipment",
+          "research facility"
+        ],
+        "isPublished": true,
+        "order": 1,
+        "images": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:45.800Z",
+        "updatedAt": "2026-08-25T05:29:45.800Z"
+      },
+      {
+        "_id": "6a8d2849279cd8a58b05fd71",
+        "title": "Recirculating Aquaculture System (RAS)",
+        "description": "Modern RAS facility for controlled environment fish production and research.",
+        "section": "facilities",
+        "status": "ongoing",
+        "principalInvestigator": "Dr. Priya Kumari Singh",
+        "coInvestigators": [],
+        "fundingAgency": "National Fisheries Development Board",
+        "budget": 1800000,
+        "department": "Aquaculture",
+        "objectives": [],
+        "keyFindings": [],
+        "publicationDetails": {
+          "authors": []
+        },
+        "facilityDetails": {
+          "type": "Infrastructure",
+          "capacity": "5000 L water capacity",
+          "specifications": "Biological filters, UV sterilizers, automated feeding systems",
+          "utilizationAreas": [
+            "Fish breeding",
+            "Nutrition studies",
+            "Water quality research",
+            "Student training"
+          ]
+        },
+        "documents": [],
+        "tags": [
+          "RAS",
+          "infrastructure",
+          "aquaculture"
+        ],
+        "isPublished": true,
+        "order": 2,
+        "images": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:45.800Z",
+        "updatedAt": "2026-08-25T05:29:45.800Z"
+      },
+      {
+        "_id": "6a8d2849279cd8a58b05fd72",
+        "title": "Fish Health Diagnostic Center",
+        "description": "Specialized facility for fish disease diagnosis and health monitoring services.",
+        "section": "facilities",
+        "status": "ongoing",
+        "principalInvestigator": "Dr. Sunita Devi",
+        "coInvestigators": [],
+        "fundingAgency": "Department of Biotechnology",
+        "budget": 1500000,
+        "department": "Fishery Science",
+        "objectives": [],
+        "keyFindings": [],
+        "publicationDetails": {
+          "authors": []
+        },
+        "facilityDetails": {
+          "type": "Laboratory",
+          "capacity": "100 samples per day",
+          "specifications": "PCR machines, histopathology equipment, bacterial culture systems",
+          "utilizationAreas": [
+            "Disease diagnosis",
+            "Pathogen identification",
+            "Health monitoring",
+            "Extension services"
+          ]
+        },
+        "documents": [],
+        "tags": [
+          "fish health",
+          "diagnostic",
+          "facility"
+        ],
+        "isPublished": true,
+        "order": 3,
+        "images": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:45.800Z",
+        "updatedAt": "2026-08-25T05:29:45.800Z"
+      }
+    ],
+    "incubations": [
+      {
+        "_id": "6a8d284370a7b0db92a93d7b",
+        "title": "Chairperson",
+        "description": "Strategic leadership and policy guidance for the incubation center.",
+        "category": "governing-body",
+        "order": 1,
+        "isPublished": true,
+        "name": "Dr. R.K. Sharma",
+        "position": "Vice Chancellor",
+        "designation": "Chairperson",
+        "organization": "NDVSU",
+        "location": "Jabalpur",
+        "email": "vc@ndvsu.org",
+        "expertise": [
+          "Leadership",
+          "Policy Making",
+          "Strategic Planning"
+        ],
+        "tags": [
+          "leadership",
+          "policy"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:39.436Z",
+        "updatedAt": "2026-08-25T05:29:39.436Z"
+      },
+      {
+        "_id": "6a8d284370a7b0db92a93d7c",
+        "title": "Member Secretary",
+        "description": "Academic oversight and coordination of incubation activities.",
+        "category": "governing-body",
+        "order": 2,
+        "isPublished": true,
+        "name": "Dr. Shashikant",
+        "position": "Dean",
+        "designation": "Member Secretary",
+        "organization": "College of Fishery Sciences",
+        "location": "Jabalpur",
+        "email": "dean@cofs.edu",
+        "bio": "Leading academic and research initiatives in fisheries science with over 20 years of experience.",
+        "expertise": [
+          "Fisheries Science",
+          "Research Management",
+          "Academic Leadership"
+        ],
+        "tags": [
+          "academic",
+          "research"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:39.436Z",
+        "updatedAt": "2026-08-25T05:29:39.436Z"
+      },
+      {
+        "_id": "6a8d284370a7b0db92a93d7f",
+        "title": "Chairperson",
+        "description": "Operational oversight and day-to-day management of incubation activities.",
+        "category": "management-committee",
+        "order": 1,
+        "isPublished": true,
+        "name": "Dr. Shashikant",
+        "position": "Dean",
+        "designation": "Chairperson",
+        "organization": "College of Fishery Sciences",
+        "location": "Jabalpur",
+        "email": "dean@cofs.edu",
+        "phone": "+91-761-2681693",
+        "bio": "Operational leadership of the incubation center with focus on startup development and entrepreneurship.",
+        "expertise": [
+          "Leadership",
+          "Startup Development",
+          "Entrepreneurship"
+        ],
+        "tags": [
+          "leadership",
+          "operations"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:39.437Z",
+        "updatedAt": "2026-08-25T05:29:39.437Z"
+      },
+      {
+        "_id": "6a8d284370a7b0db92a93d80",
+        "title": "Chief Operating Officer",
+        "description": "Daily operations management and startup support coordination.",
+        "category": "management-committee",
+        "order": 2,
+        "isPublished": true,
+        "name": "Dr. Rajesh Kumar",
+        "position": "COO",
+        "designation": "Chief Operating Officer",
+        "organization": "Incubation Centre",
+        "location": "Jabalpur",
+        "email": "coo@incubation.cofs.edu",
+        "bio": "Managing daily operations and startup mentorship programs.",
+        "expertise": [
+          "Operations Management",
+          "Startup Mentorship",
+          "Business Development"
+        ],
+        "tags": [
+          "operations",
+          "mentorship"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:39.437Z",
+        "updatedAt": "2026-08-25T05:29:39.437Z"
+      },
+      {
+        "_id": "6a8d284370a7b0db92a93d81",
+        "title": "Business Development Manager",
+        "description": "Business development and entrepreneurship support services.",
+        "category": "management-committee",
+        "order": 3,
+        "isPublished": true,
+        "name": "Ms. Priya Sharma",
+        "position": "BDM",
+        "designation": "Business Development Manager",
+        "organization": "Incubation Centre",
+        "location": "Jabalpur",
+        "email": "bdm@incubation.cofs.edu",
+        "bio": "Entrepreneurship support and startup acceleration programs.",
+        "expertise": [
+          "Business Development",
+          "Entrepreneurship",
+          "Market Analysis"
+        ],
+        "tags": [
+          "business",
+          "entrepreneurship"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:39.437Z",
+        "updatedAt": "2026-08-25T05:29:39.437Z"
+      },
+      {
+        "_id": "6a8d284370a7b0db92a93d82",
+        "title": "Finance & Accounts Officer",
+        "description": "Financial management and funding support for incubated startups.",
+        "category": "management-committee",
+        "order": 4,
+        "isPublished": true,
+        "name": "Mr. Suresh Gupta",
+        "position": "FAO",
+        "designation": "Finance & Accounts Officer",
+        "organization": "Incubation Centre",
+        "location": "Jabalpur",
+        "email": "finance@incubation.cofs.edu",
+        "bio": "Financial management and funding coordination for startups.",
+        "expertise": [
+          "Financial Management",
+          "Funding",
+          "Accounting"
+        ],
+        "tags": [
+          "finance",
+          "funding"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:39.437Z",
+        "updatedAt": "2026-08-25T05:29:39.437Z"
+      },
+      {
+        "_id": "6a8d284370a7b0db92a93d83",
+        "title": "Legal & IPR Expert",
+        "description": "Legal advisory and intellectual property rights management.",
+        "category": "management-committee",
+        "order": 5,
+        "isPublished": true,
+        "name": "Adv. Meera Jain",
+        "position": "Legal Advisor",
+        "designation": "Legal & IPR Expert",
+        "organization": "Incubation Centre",
+        "location": "Jabalpur",
+        "email": "legal@incubation.cofs.edu",
+        "bio": "Intellectual property rights and legal advisory services for startups.",
+        "expertise": [
+          "Legal Advisory",
+          "Intellectual Property",
+          "Startup Law"
+        ],
+        "tags": [
+          "legal",
+          "ipr"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:39.437Z",
+        "updatedAt": "2026-08-25T05:29:39.437Z"
+      },
+      {
+        "_id": "6a8d284370a7b0db92a93d84",
+        "title": "MIS & Data Manager",
+        "description": "Management information systems and data analytics support.",
+        "category": "management-committee",
+        "order": 6,
+        "isPublished": true,
+        "name": "Mr. Amit Patel",
+        "position": "Data Manager",
+        "designation": "MIS & Data Manager",
+        "organization": "Incubation Centre",
+        "location": "Jabalpur",
+        "email": "mis@incubation.cofs.edu",
+        "bio": "Information systems management and data analytics for incubation programs.",
+        "expertise": [
+          "Data Management",
+          "Information Systems",
+          "Analytics"
+        ],
+        "tags": [
+          "data",
+          "technology"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:39.437Z",
+        "updatedAt": "2026-08-25T05:29:39.437Z"
+      }
+    ],
+    "farmerresources": [],
+    "alumnis": [
+      {
+        "_id": "6a8d2823cf8547afc8cc7333",
+        "section": "event",
+        "title": "Annual Alumni Meet 2025",
+        "description": "Join us for our annual alumni reunion! Reconnect with old friends, network with fellow professionals, and share your experiences. The event includes keynote speeches, panel discussions, and cultural programs.",
+        "rating": 5,
+        "date": "December 15, 2025",
+        "time": "10:00 AM - 5:00 PM",
+        "venue": "COF Jabalpur Campus Auditorium",
+        "registrationOpen": true,
+        "eventType": "upcoming",
+        "order": 0,
+        "sortOrder": 1,
+        "isPublished": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:07.714Z",
+        "updatedAt": "2026-08-25T05:29:07.714Z"
+      },
+      {
+        "_id": "6a8d2823cf8547afc8cc7334",
+        "section": "event",
+        "title": "Alumni Career Guidance Workshop",
+        "description": "Senior alumni professionals will share insights about career paths in fisheries, aquaculture, and related fields. An excellent opportunity for recent graduates and current students.",
+        "rating": 5,
+        "date": "November 20, 2025",
+        "time": "2:00 PM - 4:00 PM",
+        "venue": "Virtual (Zoom)",
+        "registrationOpen": true,
+        "eventType": "upcoming",
+        "order": 0,
+        "sortOrder": 2,
+        "isPublished": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:07.714Z",
+        "updatedAt": "2026-08-25T05:29:07.714Z"
+      },
+      {
+        "_id": "6a8d2823cf8547afc8cc7335",
+        "section": "event",
+        "title": "Aquaculture Innovation Summit",
+        "description": "A day-long summit featuring alumni entrepreneurs, researchers, and industry leaders discussing innovations in aquaculture technology and sustainable practices.",
+        "rating": 5,
+        "date": "January 10, 2026",
+        "time": "9:00 AM - 6:00 PM",
+        "venue": "Hotel Radisson, Jabalpur",
+        "registrationOpen": true,
+        "eventType": "upcoming",
+        "order": 0,
+        "sortOrder": 3,
+        "isPublished": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:07.714Z",
+        "updatedAt": "2026-08-25T05:29:07.714Z"
+      },
+      {
+        "_id": "6a8d2823cf8547afc8cc7336",
+        "section": "event",
+        "title": "Silver Jubilee Batch Reunion - Batch of 2000",
+        "description": "The batch of 2000 celebrated their 25th reunion with great enthusiasm. Over 50 alumni attended the event, sharing memories and achievements.",
+        "rating": 5,
+        "date": "October 5, 2025",
+        "time": "11:00 AM - 3:00 PM",
+        "venue": "COF Campus",
+        "registrationOpen": false,
+        "eventType": "past",
+        "order": 0,
+        "sortOrder": 4,
+        "isPublished": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:07.714Z",
+        "updatedAt": "2026-08-25T05:29:07.714Z"
+      },
+      {
+        "_id": "6a8d2823cf8547afc8cc7337",
+        "section": "event",
+        "title": "Alumni Networking Evening",
+        "description": "An informal networking evening where alumni from various batches connected over dinner and discussed collaboration opportunities.",
+        "rating": 5,
+        "date": "September 15, 2025",
+        "time": "6:00 PM - 9:00 PM",
+        "venue": "Boat Club, Jabalpur",
+        "registrationOpen": false,
+        "eventType": "past",
+        "order": 0,
+        "sortOrder": 5,
+        "isPublished": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:07.714Z",
+        "updatedAt": "2026-08-25T05:29:07.714Z"
+      },
+      {
+        "_id": "6a8d2823cf8547afc8cc7338",
+        "section": "contact",
+        "title": "Main Email",
+        "description": "For general inquiries and alumni registration",
+        "rating": 5,
+        "registrationOpen": false,
+        "contactType": "email",
+        "email": "alumni@cofjabalpur.edu.in",
+        "order": 0,
+        "sortOrder": 1,
+        "isPublished": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:07.714Z",
+        "updatedAt": "2026-08-25T05:29:07.714Z"
+      },
+      {
+        "_id": "6a8d2823cf8547afc8cc7339",
+        "section": "contact",
+        "title": "Office Phone",
+        "description": "Alumni Office - Monday to Friday, 10 AM to 5 PM",
+        "rating": 5,
+        "registrationOpen": false,
+        "contactType": "phone",
+        "phone": "+91 761 2681239",
+        "order": 0,
+        "sortOrder": 2,
+        "isPublished": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:07.714Z",
+        "updatedAt": "2026-08-25T05:29:07.714Z"
+      },
+      {
+        "_id": "6a8d2823cf8547afc8cc733a",
+        "section": "contact",
+        "title": "Campus Address",
+        "description": "Visit us at our campus",
+        "rating": 5,
+        "registrationOpen": false,
+        "contactType": "address",
+        "address": "College of Fishery Science, Jabalpur, Madhya Pradesh, India - 482001",
+        "order": 0,
+        "sortOrder": 3,
+        "isPublished": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:07.714Z",
+        "updatedAt": "2026-08-25T05:29:07.714Z"
+      },
+      {
+        "_id": "6a8d2823cf8547afc8cc733b",
+        "section": "contact",
+        "title": "WhatsApp Group",
+        "description": "Join our official alumni WhatsApp community",
+        "rating": 5,
+        "registrationOpen": false,
+        "contactType": "phone",
+        "phone": "+91 98765 43210",
+        "order": 0,
+        "sortOrder": 4,
+        "isPublished": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:07.714Z",
+        "updatedAt": "2026-08-25T05:29:07.714Z"
+      },
+      {
+        "_id": "6a8d2823cf8547afc8cc733c",
+        "section": "stats",
+        "title": "Alumni Worldwide",
+        "description": "Our alumni are spread across the globe",
+        "rating": 5,
+        "registrationOpen": false,
+        "icon": "GraduationCap",
+        "value": "500+",
+        "label": "Alumni Worldwide",
+        "color": "blue",
+        "order": 1,
+        "sortOrder": 1,
+        "isPublished": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:07.714Z",
+        "updatedAt": "2026-08-25T05:29:07.714Z"
+      },
+      {
+        "_id": "6a8d2823cf8547afc8cc733d",
+        "section": "stats",
+        "title": "Industry Leaders",
+        "description": "Alumni holding leadership positions",
+        "rating": 5,
+        "registrationOpen": false,
+        "icon": "Award",
+        "value": "50+",
+        "label": "Industry Leaders",
+        "color": "green",
+        "order": 2,
+        "sortOrder": 2,
+        "isPublished": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:07.714Z",
+        "updatedAt": "2026-08-25T05:29:07.714Z"
+      },
+      {
+        "_id": "6a8d2823cf8547afc8cc733e",
+        "section": "stats",
+        "title": "Countries",
+        "description": "Countries where our alumni work",
+        "rating": 5,
+        "registrationOpen": false,
+        "icon": "Users",
+        "value": "25+",
+        "label": "Countries",
+        "color": "purple",
+        "order": 3,
+        "sortOrder": 3,
+        "isPublished": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:07.714Z",
+        "updatedAt": "2026-08-25T05:29:07.714Z"
+      },
+      {
+        "_id": "6a8d2823cf8547afc8cc733f",
+        "section": "stats",
+        "title": "Employment Rate",
+        "description": "Alumni employed within 6 months of graduation",
+        "rating": 5,
+        "registrationOpen": false,
+        "icon": "Star",
+        "value": "95%",
+        "label": "Employment Rate",
+        "color": "yellow",
+        "order": 4,
+        "sortOrder": 4,
+        "isPublished": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:07.714Z",
+        "updatedAt": "2026-08-25T05:29:07.714Z"
+      }
+    ],
+    "contents": [
+      {
+        "_id": "6a8d26be040f0b492576ea57",
+        "key": "dean_message",
+        "title": "Dean's Message",
+        "content": "Welcome to Fishery College Jabalpur, where excellence meets innovation in the field of fishery science and aquaculture. As the Dean of this prestigious institution, I am proud to lead a community of dedicated faculty, passionate students, and committed staff who work tirelessly to advance the frontiers of knowledge in fishery science...",
+        "type": "html",
+        "section": "about",
+        "subsection": "dean-message",
+        "isPublished": true,
+        "order": 1,
+        "lastModifiedBy": "6a8d26be040f0b492576ea27",
+        "images": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:10.882Z",
+        "updatedAt": "2026-08-25T05:23:10.882Z"
+      },
+      {
+        "_id": "6a8d26be040f0b492576ea58",
+        "key": "vision_statement",
+        "title": "Vision Statement",
+        "content": "To be a globally recognized center of Excellence in Fishery education, research, and extension, contributing to sustainable aquaculture development and food security.",
+        "type": "text",
+        "section": "about",
+        "subsection": "vision",
+        "isPublished": true,
+        "order": 1,
+        "lastModifiedBy": "6a8d26be040f0b492576ea27",
+        "images": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:10.882Z",
+        "updatedAt": "2026-08-25T05:23:10.882Z"
+      },
+      {
+        "_id": "6a8d26be040f0b492576ea59",
+        "key": "mission_statement",
+        "title": "Mission Statement",
+        "content": "To provide quality education, conduct innovative research, and extend knowledge to stakeholders for the advancement of fishery science and sustainable aquaculture practices.",
+        "type": "text",
+        "section": "about",
+        "subsection": "mission",
+        "isPublished": true,
+        "order": 2,
+        "lastModifiedBy": "6a8d26be040f0b492576ea27",
+        "images": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:10.882Z",
+        "updatedAt": "2026-08-25T05:23:10.882Z"
+      },
+      {
+        "_id": "6a8d26be040f0b492576ea5a",
+        "key": "admission_guidelines",
+        "title": "Admission Guidelines",
+        "content": "Admission to various programs at Fishery College Jabalpur is based on merit and entrance examinations. Candidates must meet the eligibility criteria specific to each program...",
+        "type": "html",
+        "section": "students",
+        "subsection": "admission",
+        "isPublished": true,
+        "order": 1,
+        "lastModifiedBy": "6a8d26be040f0b492576ea27",
+        "images": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:10.882Z",
+        "updatedAt": "2026-08-25T05:23:10.882Z"
+      },
+      {
+        "_id": "6a8d2801dbf92131436f512c",
+        "key": "about-mandate-core",
+        "title": "Core Mandate",
+        "content": "[\"Human Resource Development in Fisheries\",\"Basic, applied and adaptive research on emerging problems in fisheries\",\"Transfer of technology to fish farmers, entrepreneurs and industry\",\"To develop college as center for demonstrations and training to unemployed youth, tribal and fish farmers\",\"To impart the latest technology of composite fish culture to increase fish production from an average of 700 kg/ha to 4000 kg/ha\"]",
+        "type": "json",
+        "section": "about",
+        "subsection": "mandate-core",
+        "isPublished": true,
+        "order": 2,
+        "images": [],
+        "createdAt": "2026-08-25T05:28:33.978Z",
+        "updatedAt": "2026-09-04T12:31:04.568Z",
+        "__v": 0,
+        "lastModifiedBy": "6a8d26be040f0b492576ea27"
+      },
+      {
+        "_id": "6a8d2802dbf92131436f512f",
+        "key": "about-mandate-objectives",
+        "title": "Mandate Objectives",
+        "content": "[\"Human Resource Development\",\"Fish production and productivity enhancement\",\"Development of fishery through lab to land programme\"]",
+        "type": "json",
+        "section": "about",
+        "subsection": "mandate-objectives",
+        "isPublished": true,
+        "order": 3,
+        "images": [],
+        "createdAt": "2026-08-25T05:28:34.047Z",
+        "updatedAt": "2026-09-04T12:31:05.582Z",
+        "__v": 0,
+        "lastModifiedBy": "6a8d26be040f0b492576ea27"
+      },
+      {
+        "_id": "6a8d2802dbf92131436f5132",
+        "key": "about-mandate-thrust",
+        "title": "Mandate Thrust Areas",
+        "content": "[\"Imparting education in the field of fisheries to generate technical graduates\",\"To exploits the maximum areas of fisheries through Research and Development activity\",\"To impart latest technology (Lab to land programme) to fish farmers through extension activities\"]",
+        "type": "json",
+        "section": "about",
+        "subsection": "mandate-thrust",
+        "isPublished": true,
+        "order": 4,
+        "images": [],
+        "createdAt": "2026-08-25T05:28:34.110Z",
+        "updatedAt": "2026-09-04T12:31:04.928Z",
+        "__v": 0,
+        "lastModifiedBy": "6a8d26be040f0b492576ea27"
+      },
+      {
+        "_id": "6a8d28bced61ff61abbde831",
+        "key": "about-history",
+        "title": "College History",
+        "content": "The Fishery College, Jabalpur was started on October 2012 as per the gazette of Madhya Pradesh Government. This college is previously working as a department of Fisheries at Faculty of Veterinary Science, JNKVV, Jabalpur (Estt. 1964). The department of fisheries is look over the than five decades of its existence of Aquatic body name as Adhartal Tank which was developed by the Senapati of Gondwana State Shri Diwan Adhar Singh. The aquatic body has been able to make an overall development of fish production and management through its impressive teaching, research and extension activities in basic and applied fields. Consequent to the establishment of Madhya Pradesh Pashu Chikitsha Vigyan Viswavidyalaya (renamed as Nanaji Deshmukh Veterinary Science University) the college became a constitution institution of the new Viswa Vidyalaya with effect from 04.10.2012.",
+        "type": "text",
+        "section": "about",
+        "subsection": "history",
+        "isPublished": true,
+        "order": 1,
+        "images": [],
+        "createdAt": "2026-08-25T05:31:40.492Z",
+        "updatedAt": "2026-09-04T12:30:58.350Z",
+        "__v": 0,
+        "lastModifiedBy": "6a8d26be040f0b492576ea27"
+      },
+      {
+        "_id": "6a8d28bced61ff61abbde834",
+        "key": "dean-welcome-message",
+        "title": "Dean Welcome Message",
+        "content": "{\"deanName\":\"Dr. Shashikant Mahajan\",\"deanTitle\":\"Dean & Professor\",\"deanPhoto\":\"https://res.cloudinary.com/dzonvsfnr/image/upload/v1788526107/fishery_college/dean/MAHAJAN_SIR_2_1788526107224.jpg\",\"welcomeMessage\":\"Welcome to the College of Fishery Science, Jabalpur. Our institution is committed to excellence in fishery education, research, and outreach. We aim to prepare students to tackle modern challenges in sustainable aquaculture, aquatic health management, and value addition.\"}",
+        "type": "json",
+        "section": "welcome-message",
+        "subsection": "dean-welcome",
+        "isPublished": true,
+        "order": 1,
+        "images": [],
+        "createdAt": "2026-08-25T05:31:40.566Z",
+        "updatedAt": "2026-09-04T12:48:32.088Z",
+        "__v": 0,
+        "lastModifiedBy": "6a8d26be040f0b492576ea27",
+        "metadata": {
+          "deanName": "Dr. Shashikant Mahajan",
+          "deanTitle": "Dean & Professor",
+          "deanPhoto": "https://res.cloudinary.com/dzonvsfnr/image/upload/v1788526107/fishery_college/dean/MAHAJAN_SIR_2_1788526107224.jpg",
+          "welcomeMessage": "Welcome to the College of Fishery Science, Jabalpur. Our institution is committed to excellence in fishery education, research, and outreach. We aim to prepare students to tackle modern challenges in sustainable aquaculture, aquatic health management, and value addition."
+        }
+      },
+      {
+        "_id": "6a9ac0191e6152b366eed719",
+        "key": "important-notices",
+        "title": "Important Notices",
+        "content": "[{\"id\":1,\"title\":\"Admission Notice Session 2026-27\",\"message\":\"First round of Online counselling for admission in Bachelor of Fishery Science (BFSc) for the session 2026-27\",\"link\":\"https://ndvsu.mponline.gov.in/\",\"linkText\":\"https://ndvsu.mponline.gov.in/\",\"isActive\":true,\"isPdf\":false,\"pdfUrl\":\"\",\"createdAt\":\"2026-09-04T12:55:30.363Z\",\"updatedAt\":\"2026-09-04T12:58:50.332Z\"}]",
+        "type": "json",
+        "section": "homepage",
+        "subsection": "notices",
+        "isPublished": true,
+        "order": 0,
+        "lastModifiedBy": "6a8d26be040f0b492576ea27",
+        "images": [],
+        "createdAt": "2026-09-04T12:56:57.333Z",
+        "updatedAt": "2026-09-04T12:58:52.009Z",
+        "__v": 0
+      }
+    ],
+    "collaborations": [
+      {
+        "_id": "6a8d26bf040f0b492576ea79",
+        "section": "mou",
+        "title": "Strategic Partnership for Marketing Support",
+        "description": "Strategic partnership for marketing support, distribution networks, and procurement of fish products from college demonstration units and associated farmers.",
+        "organization": "National Agricultural Cooperative Marketing Federation of India Ltd. (NAFED)",
+        "type": "Government Agency",
+        "category": "Marketing & Distribution",
+        "signedDate": "March 2023",
+        "duration": "5 Years",
+        "objectives": [
+          "Market linkage for fish products",
+          "Price stabilization support",
+          "Technical assistance in post-harvest management",
+          "Training on cooperative marketing",
+          "Quality certification support"
+        ],
+        "activities": [
+          "Monthly fish procurement drives",
+          "Farmer training on quality standards",
+          "Market price information dissemination",
+          "Cooperative formation support",
+          "Value chain development"
+        ],
+        "outcomes": "₹15 lakh annual procurement, 200+ farmers benefited",
+        "contactPerson": "Dr. A.K. Sharma, Nodal Officer",
+        "status": "Active",
+        "sortOrder": 1,
+        "isPublished": true,
+        "partners": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:11.236Z",
+        "updatedAt": "2026-08-25T05:23:11.236Z"
+      },
+      {
+        "_id": "6a8d26bf040f0b492576ea7a",
+        "section": "mou",
+        "title": "Comprehensive Collaboration for Fisheries Development",
+        "description": "Comprehensive collaboration for fisheries development, infrastructure enhancement, capacity building, and technology demonstration projects.",
+        "organization": "National Fisheries Development Board (NFDB)",
+        "type": "Government Board",
+        "category": "Development & Funding",
+        "signedDate": "January 2022",
+        "duration": "Ongoing",
+        "objectives": [
+          "Infrastructure development support",
+          "Technology demonstration projects",
+          "Capacity building programs",
+          "Research collaboration",
+          "Extension and outreach activities"
+        ],
+        "activities": [
+          "Biofloc demonstration units",
+          "RAS technology transfer",
+          "Farmer training programs",
+          "Seed production enhancement",
+          "Aquaculture extension services"
+        ],
+        "outcomes": "₹2.5 crore funding received, 5 demonstration units established",
+        "contactPerson": "Prof. R.K. Mishra, Principal Investigator",
+        "status": "Active",
+        "sortOrder": 2,
+        "isPublished": true,
+        "partners": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:11.236Z",
+        "updatedAt": "2026-08-25T05:23:11.236Z"
+      },
+      {
+        "_id": "6a8d26bf040f0b492576ea7b",
+        "section": "mou",
+        "title": "Academic and Research Collaboration",
+        "description": "Academic and research collaboration for student exchange, joint research projects, faculty development, and knowledge sharing in fisheries science.",
+        "organization": "Indian Council of Agricultural Research (ICAR)",
+        "type": "Research Council",
+        "category": "Research & Education",
+        "signedDate": "June 2021",
+        "duration": "Permanent",
+        "objectives": [
+          "Joint research initiatives",
+          "Faculty exchange programs",
+          "Student internship opportunities",
+          "Resource sharing",
+          "Publication collaborations"
+        ],
+        "activities": [
+          "Research project collaborations",
+          "Faculty training programs",
+          "Student placement support",
+          "Library resource sharing",
+          "Conference participations"
+        ],
+        "outcomes": "15 joint research projects, 50+ student internships",
+        "contactPerson": "Dr. S.P. Singh, Research Coordinator",
+        "status": "Active",
+        "sortOrder": 3,
+        "isPublished": true,
+        "partners": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:11.236Z",
+        "updatedAt": "2026-08-25T05:23:11.236Z"
+      },
+      {
+        "_id": "6a8d26bf040f0b492576ea7c",
+        "section": "mou",
+        "title": "State-level Partnership for Fisheries Development",
+        "description": "State-level partnership for fisheries development, technology transfer, capacity building, and marketing support across Madhya Pradesh.",
+        "organization": "Madhya Pradesh State Fisheries Development Corporation",
+        "type": "State Corporation",
+        "category": "State Development",
+        "signedDate": "September 2023",
+        "duration": "3 Years",
+        "objectives": [
+          "Statewide technology dissemination",
+          "Farmer capacity building",
+          "Market development support",
+          "Policy implementation assistance",
+          "Resource mobilization"
+        ],
+        "activities": [
+          "District-wise training programs",
+          "Technology demonstration",
+          "Market facilitation",
+          "Policy advisory services",
+          "Data collection and analysis"
+        ],
+        "outcomes": "500+ farmers trained, 10 districts covered",
+        "contactPerson": "Dr. M.K. Patel, Extension Officer",
+        "status": "Active",
+        "sortOrder": 4,
+        "isPublished": true,
+        "partners": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:11.236Z",
+        "updatedAt": "2026-08-25T05:23:11.236Z"
+      },
+      {
+        "_id": "6a8d26bf040f0b492576ea7d",
+        "section": "mou",
+        "title": "Grassroots Collaboration for Women Empowerment",
+        "description": "Grassroots collaboration for women empowerment through fisheries, SHG capacity building, and livelihood enhancement programs.",
+        "organization": "Self Help Group Federation (MPSHGF)",
+        "type": "NGO Federation",
+        "category": "Rural Development",
+        "signedDate": "November 2022",
+        "duration": "4 Years",
+        "objectives": [
+          "Women empowerment through fisheries",
+          "SHG capacity building",
+          "Livelihood diversification",
+          "Financial inclusion support",
+          "Skill development programs"
+        ],
+        "activities": [
+          "Women-focused training programs",
+          "SHG formation and strengthening",
+          "Microfinance facilitation",
+          "Value addition training",
+          "Market linkage support"
+        ],
+        "outcomes": "150 SHGs formed, 2000+ women trained",
+        "contactPerson": "Ms. Priya Sharma, Program Manager",
+        "status": "Active",
+        "sortOrder": 5,
+        "isPublished": true,
+        "partners": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:11.236Z",
+        "updatedAt": "2026-08-25T05:23:11.236Z"
+      },
+      {
+        "_id": "6a8d26bf040f0b492576ea7f",
+        "section": "partnership",
+        "title": "Government Departments & Boards",
+        "description": "Strategic partnerships with central and state government departments for policy implementation and development initiatives.",
+        "objectives": [],
+        "activities": [],
+        "status": "Active",
+        "partnerType": "Government Departments & Boards",
+        "partners": [
+          {
+            "name": "Department of Fisheries (DOF)",
+            "description": "Central government department for fisheries policy and development",
+            "_id": "6a8d26bf040f0b492576ea80"
+          },
+          {
+            "name": "National Fisheries Development Board (NFDB)",
+            "description": "National board for fisheries development and infrastructure",
+            "_id": "6a8d26bf040f0b492576ea81"
+          },
+          {
+            "name": "Pradhan Mantri Matsya Sampada Yojana (PMMSY)",
+            "description": "Flagship scheme for fisheries sector development",
+            "_id": "6a8d26bf040f0b492576ea82"
+          }
+        ],
+        "sortOrder": 1,
+        "isPublished": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:11.236Z",
+        "updatedAt": "2026-08-25T05:23:11.236Z"
+      },
+      {
+        "_id": "6a8d26bf040f0b492576ea83",
+        "section": "partnership",
+        "title": "ICAR Research Institutes",
+        "description": "Collaboration with premier ICAR research institutes for cutting-edge research and technology transfer.",
+        "objectives": [],
+        "activities": [],
+        "status": "Active",
+        "partnerType": "ICAR (Indian Council of Agricultural Research) & Institutes",
+        "partners": [
+          {
+            "name": "ICAR-CMFRI, Kochi, Kerala",
+            "description": "Central Marine Fisheries Research Institute - Marine Research",
+            "_id": "6a8d26bf040f0b492576ea84"
+          },
+          {
+            "name": "ICAR-CIFRI, Barrackpore, West Bengal",
+            "description": "Central Inland Fisheries Research Institute - Inland Fisheries",
+            "_id": "6a8d26bf040f0b492576ea85"
+          },
+          {
+            "name": "ICAR-CIFA, Bhubaneswar, Odisha",
+            "description": "Central Institute of Freshwater Aquaculture - Freshwater Aquaculture",
+            "_id": "6a8d26bf040f0b492576ea86"
+          },
+          {
+            "name": "ICAR-CIBA, Chennai, Tamil Nadu",
+            "description": "Central Institute of Brackishwater Aquaculture - Brackishwater",
+            "_id": "6a8d26bf040f0b492576ea87"
+          },
+          {
+            "name": "ICAR-CIFT, Cochin, Kerala",
+            "description": "Central Institute of Fisheries Technology - Fisheries Technology",
+            "_id": "6a8d26bf040f0b492576ea88"
+          },
+          {
+            "name": "ICAR-CIFE, Mumbai, Maharashtra",
+            "description": "Central Institute of Fisheries Education (Deemed University) - Education",
+            "_id": "6a8d26bf040f0b492576ea89"
+          },
+          {
+            "name": "ICAR-NBFGR, Lucknow, Uttar Pradesh",
+            "description": "National Bureau of Fish Genetic Resources - Genetics",
+            "_id": "6a8d26bf040f0b492576ea8a"
+          },
+          {
+            "name": "ICAR-DCFR, Bhimtal, Uttarakhand",
+            "description": "Directorate of Coldwater Fisheries Research - Coldwater",
+            "_id": "6a8d26bf040f0b492576ea8b"
+          }
+        ],
+        "sortOrder": 2,
+        "isPublished": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:11.236Z",
+        "updatedAt": "2026-08-25T05:23:11.236Z"
+      },
+      {
+        "_id": "6a8d26bf040f0b492576ea8c",
+        "section": "partnership",
+        "title": "Development & Extension Organizations",
+        "description": "Partnership with organizations focused on agricultural extension and farmer development.",
+        "objectives": [],
+        "activities": [],
+        "status": "Active",
+        "partnerType": "Development & Extension Organizations",
+        "partners": [
+          {
+            "name": "MANAGE",
+            "description": "National Institute of Agricultural Extension Management",
+            "_id": "6a8d26bf040f0b492576ea8d"
+          },
+          {
+            "name": "SFAC",
+            "description": "Small Farmers' Agribusiness Consortium",
+            "_id": "6a8d26bf040f0b492576ea8e"
+          },
+          {
+            "name": "NERAMAC",
+            "description": "North Eastern Regional Agricultural Marketing Corporation",
+            "_id": "6a8d26bf040f0b492576ea8f"
+          }
+        ],
+        "sortOrder": 3,
+        "isPublished": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:11.236Z",
+        "updatedAt": "2026-08-25T05:23:11.236Z"
+      },
+      {
+        "_id": "6a8d26bf040f0b492576ea90",
+        "section": "partnership",
+        "title": "Marketing & Export Organizations",
+        "description": "Collaboration with marketing and export promotion agencies for market linkage and value chain development.",
+        "objectives": [],
+        "activities": [],
+        "status": "Active",
+        "partnerType": "Marketing & Export Organizations",
+        "partners": [
+          {
+            "name": "MPEDA",
+            "description": "Marine Products Export Development Authority",
+            "_id": "6a8d26bf040f0b492576ea91"
+          },
+          {
+            "name": "NAFED",
+            "description": "National Agricultural Cooperative Marketing Federation of India",
+            "_id": "6a8d26bf040f0b492576ea92"
+          },
+          {
+            "name": "NCDC",
+            "description": "National Cooperative Development Corporation",
+            "_id": "6a8d26bf040f0b492576ea93"
+          }
+        ],
+        "sortOrder": 4,
+        "isPublished": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:11.236Z",
+        "updatedAt": "2026-08-25T05:23:11.236Z"
+      },
+      {
+        "_id": "6a8d26bf040f0b492576ea94",
+        "section": "partnership",
+        "title": "Financial & Rural Development",
+        "description": "Strategic alliance with financial institutions for infrastructure development and farmer financing.",
+        "objectives": [],
+        "activities": [],
+        "status": "Active",
+        "partnerType": "Financial & Rural Development",
+        "partners": [
+          {
+            "name": "NABARD",
+            "description": "National Bank for Agriculture and Rural Development - Rural development financing, Agricultural infrastructure support, Capacity building programs",
+            "_id": "6a8d26bf040f0b492576ea95"
+          }
+        ],
+        "sortOrder": 5,
+        "isPublished": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:11.236Z",
+        "updatedAt": "2026-08-25T05:23:11.236Z"
+      },
+      {
+        "_id": "6a8d26bf040f0b492576ea96",
+        "section": "impact",
+        "title": "Active MoUs & Agreements",
+        "description": "Number of active memorandums of understanding and formal agreements",
+        "objectives": [],
+        "activities": [],
+        "status": "Active",
+        "impactType": "active_mous_&_agreements",
+        "icon": "Users2",
+        "value": "5+",
+        "label": "Active MoUs & Agreements",
+        "color": "blue",
+        "sortOrder": 1,
+        "isPublished": true,
+        "partners": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:11.236Z",
+        "updatedAt": "2026-09-04T12:44:14.026Z"
+      },
+      {
+        "_id": "6a8d26bf040f0b492576ea97",
+        "section": "impact",
+        "title": "Industry Partners",
+        "description": "Number of active industry and institutional partners",
+        "objectives": [],
+        "activities": [],
+        "status": "Active",
+        "impactType": "partners",
+        "icon": "Building2",
+        "value": "25+",
+        "label": "Industry Partners",
+        "color": "orange",
+        "sortOrder": 2,
+        "isPublished": true,
+        "partners": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:11.236Z",
+        "updatedAt": "2026-08-25T05:23:11.236Z"
+      },
+      {
+        "_id": "6a8d26bf040f0b492576ea98",
+        "section": "impact",
+        "title": "Farmers Benefited",
+        "description": "Total number of farmers benefited through collaborative programs",
+        "objectives": [],
+        "activities": [],
+        "status": "Active",
+        "impactType": "beneficiaries",
+        "icon": "Users",
+        "value": "5000+",
+        "label": "Farmers Benefited",
+        "color": "green",
+        "sortOrder": 3,
+        "isPublished": true,
+        "partners": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:11.236Z",
+        "updatedAt": "2026-08-25T05:23:11.236Z"
+      }
+    ],
+    "extensions": [
+      {
+        "_id": "6a8d282c86995c2a629e2437",
+        "title": "Integrated Fish Farming Training",
+        "section": "farmer-training",
+        "description": "Comprehensive training on integrated fish farming systems, pond management, and sustainable aquaculture practices.",
+        "order": 1,
+        "isPublished": true,
+        "duration": "5 Days",
+        "frequency": "Monthly",
+        "participants": "25-30 farmers",
+        "modules": [
+          "Pond construction and design",
+          "Fish seed selection and stocking",
+          "Feed management and nutrition",
+          "Water quality management",
+          "Disease prevention and treatment"
+        ],
+        "activities": [],
+        "features": [],
+        "impactPoints": [],
+        "tags": [
+          "integrated farming",
+          "pond management",
+          "aquaculture"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:16.340Z",
+        "updatedAt": "2026-08-25T05:29:16.340Z"
+      },
+      {
+        "_id": "6a8d282c86995c2a629e2438",
+        "title": "Fish Health Management Workshop",
+        "section": "farmer-training",
+        "description": "Specialized training on fish disease identification, prevention strategies, and treatment protocols.",
+        "order": 2,
+        "isPublished": true,
+        "duration": "3 Days",
+        "frequency": "Quarterly",
+        "participants": "20-25 farmers",
+        "modules": [
+          "Common fish diseases identification",
+          "Preventive health measures",
+          "Treatment and medication",
+          "Biosecurity protocols",
+          "Record keeping and monitoring"
+        ],
+        "activities": [],
+        "features": [],
+        "impactPoints": [],
+        "tags": [
+          "fish health",
+          "disease management",
+          "biosecurity"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:16.342Z",
+        "updatedAt": "2026-08-25T05:29:16.342Z"
+      },
+      {
+        "_id": "6a8d282c86995c2a629e2439",
+        "title": "Entrepreneurship Development Program",
+        "section": "farmer-training",
+        "description": "Training program for youth and women entrepreneurs in fisheries sector business development.",
+        "order": 3,
+        "isPublished": true,
+        "duration": "7 Days",
+        "frequency": "Bi-annually",
+        "participants": "15-20 youth",
+        "modules": [
+          "Business plan development",
+          "Financial planning and management",
+          "Marketing strategies",
+          "Government schemes and subsidies",
+          "Value addition techniques"
+        ],
+        "activities": [],
+        "features": [],
+        "impactPoints": [],
+        "tags": [
+          "entrepreneurship",
+          "business development",
+          "youth"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:16.342Z",
+        "updatedAt": "2026-08-25T05:29:16.342Z"
+      },
+      {
+        "_id": "6a8d282c86995c2a629e243a",
+        "title": "Ornamental Fish Culture Training",
+        "section": "farmer-training",
+        "description": "Specialized training on ornamental fish breeding, culture, and marketing for additional income generation.",
+        "order": 4,
+        "isPublished": true,
+        "duration": "4 Days",
+        "frequency": "Quarterly",
+        "participants": "20-25 farmers",
+        "modules": [
+          "Ornamental fish species selection",
+          "Breeding techniques",
+          "Tank management systems",
+          "Feed and nutrition",
+          "Marketing and export opportunities"
+        ],
+        "activities": [],
+        "features": [],
+        "impactPoints": [],
+        "tags": [
+          "ornamental fish",
+          "breeding",
+          "value addition"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:16.342Z",
+        "updatedAt": "2026-08-25T05:29:16.342Z"
+      },
+      {
+        "_id": "6a8d282c86995c2a629e243b",
+        "title": "Fish Farmer Producer Organization Development",
+        "section": "ffpo-shg",
+        "description": "Supporting formation and strengthening of FFPOs for collective marketing and resource sharing.",
+        "order": 1,
+        "isPublished": true,
+        "modules": [],
+        "type": "FFPO Support",
+        "activities": [
+          "FFPO registration and legal compliance",
+          "Capacity building of FFPO members",
+          "Market linkage development",
+          "Collective procurement of inputs",
+          "Financial literacy programs"
+        ],
+        "beneficiaries": "150+ farmers",
+        "impact": "25% increase in farmers income",
+        "features": [],
+        "impactPoints": [],
+        "tags": [
+          "FFPO",
+          "collective marketing",
+          "farmer organization"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:16.342Z",
+        "updatedAt": "2026-08-25T05:29:16.342Z"
+      },
+      {
+        "_id": "6a8d282c86995c2a629e243c",
+        "title": "Self Help Group Fisheries Activities",
+        "section": "ffpo-shg",
+        "description": "Empowering women SHGs through fisheries-based livelihood programs and skill development.",
+        "order": 2,
+        "isPublished": true,
+        "modules": [],
+        "type": "SHG Support",
+        "activities": [
+          "Fish processing and value addition",
+          "Micro-credit facility development",
+          "Group formation and training",
+          "Marketing support and branding",
+          "Quality certification assistance"
+        ],
+        "beneficiaries": "200+ women",
+        "impact": "40% increase in household income",
+        "features": [],
+        "impactPoints": [],
+        "tags": [
+          "SHG",
+          "women empowerment",
+          "value addition"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:16.342Z",
+        "updatedAt": "2026-08-25T05:29:16.342Z"
+      },
+      {
+        "_id": "6a8d282c86995c2a629e243d",
+        "title": "Fisheries Cooperative Strengthening",
+        "section": "ffpo-shg",
+        "description": "Strengthening existing fisheries cooperatives and forming new ones for better resource utilization.",
+        "order": 3,
+        "isPublished": true,
+        "modules": [],
+        "type": "Cooperative Support",
+        "activities": [
+          "Cooperative management training",
+          "Financial management systems",
+          "Equipment and infrastructure support",
+          "Technical assistance programs",
+          "Market development initiatives"
+        ],
+        "beneficiaries": "300+ members",
+        "impact": "30% reduction in input costs",
+        "features": [],
+        "impactPoints": [],
+        "tags": [
+          "cooperatives",
+          "resource utilization",
+          "management"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:16.342Z",
+        "updatedAt": "2026-08-25T05:29:16.342Z"
+      },
+      {
+        "_id": "6a8d282c86995c2a629e243e",
+        "title": "Biofloc Technology Demonstration",
+        "section": "demonstrations",
+        "description": "Demonstration of biofloc technology for sustainable and intensive fish production with minimal water exchange.",
+        "order": 1,
+        "isPublished": true,
+        "modules": [],
+        "activities": [],
+        "location": "College Demo Farm",
+        "area": "0.5 hectares",
+        "features": [
+          "Zero water exchange system",
+          "Microbial protein utilization",
+          "High stocking density trials",
+          "Cost-benefit analysis",
+          "Environmental impact assessment"
+        ],
+        "results": "30% higher productivity, 50% water savings",
+        "impactPoints": [],
+        "tags": [
+          "biofloc",
+          "sustainable aquaculture",
+          "water conservation"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:16.342Z",
+        "updatedAt": "2026-08-25T05:29:16.342Z"
+      },
+      {
+        "_id": "6a8d282c86995c2a629e243f",
+        "title": "Integrated Aquaculture Systems",
+        "section": "demonstrations",
+        "description": "Demonstration of integrated farming systems combining fish culture with agriculture and livestock.",
+        "order": 2,
+        "isPublished": true,
+        "modules": [],
+        "activities": [],
+        "location": "Field Demonstration Units",
+        "area": "2 hectares",
+        "features": [
+          "Fish-rice integration",
+          "Fish-poultry integration",
+          "Fish-vegetable farming",
+          "Nutrient cycling systems",
+          "Resource optimization"
+        ],
+        "results": "40% increase in overall farm income",
+        "impactPoints": [],
+        "tags": [
+          "integrated systems",
+          "diversification",
+          "income enhancement"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:16.342Z",
+        "updatedAt": "2026-08-25T05:29:16.342Z"
+      },
+      {
+        "_id": "6a8d282c86995c2a629e2440",
+        "title": "Cage Culture Technology",
+        "section": "demonstrations",
+        "description": "Demonstration of cage culture technology in open water bodies for community-based aquaculture.",
+        "order": 3,
+        "isPublished": true,
+        "modules": [],
+        "activities": [],
+        "location": "Narmada River",
+        "area": "1 hectare water area",
+        "features": [
+          "HDPE cage installation",
+          "Species selection trials",
+          "Feed management protocols",
+          "Environmental monitoring",
+          "Community participation"
+        ],
+        "results": "25% higher fish survival rates",
+        "impactPoints": [],
+        "tags": [
+          "cage culture",
+          "open water",
+          "community aquaculture"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:16.342Z",
+        "updatedAt": "2026-08-25T05:29:16.342Z"
+      },
+      {
+        "_id": "6a8d282c86995c2a629e2441",
+        "title": "Recirculating Aquaculture System (RAS)",
+        "section": "demonstrations",
+        "description": "Advanced RAS demonstration for intensive fish production with minimal environmental impact.",
+        "order": 4,
+        "isPublished": true,
+        "modules": [],
+        "activities": [],
+        "location": "College Campus",
+        "area": "500 sq.m",
+        "features": [
+          "Water recirculation system",
+          "Biological filtration",
+          "Automated monitoring",
+          "Energy efficiency trials",
+          "Production optimization"
+        ],
+        "results": "90% water savings, 3x higher productivity",
+        "impactPoints": [],
+        "tags": [
+          "RAS",
+          "intensive aquaculture",
+          "technology"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:16.343Z",
+        "updatedAt": "2026-08-25T05:29:16.343Z"
+      },
+      {
+        "_id": "6a8d282c86995c2a629e2442",
+        "title": "Integrated Fish Farming Success",
+        "section": "success-stories",
+        "description": "After attending our integrated fish farming training, Ramesh implemented fish-rice integration on his 2-hectare farm. With technical support from the college, he achieved remarkable success in fish production while maintaining rice cultivation.",
+        "order": 1,
+        "isPublished": true,
+        "modules": [],
+        "activities": [],
+        "features": [],
+        "name": "Ramesh Kumar Patel",
+        "program": "Integrated Fish Farming",
+        "achievement": "Increased income from ₹50,000 to ₹2,50,000 annually",
+        "story": "After attending our integrated fish farming training, Ramesh implemented fish-rice integration on his 2-hectare farm. With technical support from the college, he achieved remarkable success in fish production while maintaining rice cultivation.",
+        "impactPoints": [
+          "Income increased by 400%",
+          "Created employment for 5 workers",
+          "Became a model farmer in region",
+          "Now training other farmers"
+        ],
+        "year": "2023",
+        "tags": [
+          "success story",
+          "integrated farming",
+          "income increase"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:16.343Z",
+        "updatedAt": "2026-08-25T05:29:16.343Z"
+      },
+      {
+        "_id": "6a8d282c86995c2a629e2443",
+        "title": "Women SHG Processing Success",
+        "section": "success-stories",
+        "description": "A group of 12 women from Sunita Devi SHG received training in fish processing and value addition. They established a processing unit and are now supplying processed fish products to urban markets.",
+        "order": 2,
+        "isPublished": true,
+        "modules": [],
+        "activities": [],
+        "features": [],
+        "name": "Sunita Devi SHG",
+        "program": "Women SHG Fish Processing",
+        "achievement": "Established successful fish processing unit with ₹15 lakh annual turnover",
+        "story": "A group of 12 women from Sunita Devi SHG received training in fish processing and value addition. They established a processing unit and are now supplying processed fish products to urban markets.",
+        "impactPoints": [
+          "Generated livelihood for 12 women",
+          "Annual turnover of ₹15 lakhs",
+          "Reduced post-harvest losses by 80%",
+          "Inspired 5 other SHGs to start similar units"
+        ],
+        "year": "2023",
+        "tags": [
+          "success story",
+          "women empowerment",
+          "processing"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:16.343Z",
+        "updatedAt": "2026-08-25T05:29:16.343Z"
+      },
+      {
+        "_id": "6a8d282c86995c2a629e2444",
+        "title": "FFPO Collective Marketing Success",
+        "section": "success-stories",
+        "description": "With support from our extension team, 45 fish farmers formed an FFPO for collective input procurement and marketing. The organization now handles procurement and marketing for all member farmers.",
+        "order": 3,
+        "isPublished": true,
+        "modules": [],
+        "activities": [],
+        "features": [],
+        "name": "Rajesh Fish Farmers FFPO",
+        "program": "FFPO Development",
+        "achievement": "Collective marketing increased farmers profit by 35%",
+        "story": "With support from our extension team, 45 fish farmers formed an FFPO for collective input procurement and marketing. The organization now handles procurement and marketing for all member farmers.",
+        "impactPoints": [
+          "45 farmers benefited",
+          "Input costs reduced by 20%",
+          "Market price increased by 35%",
+          "Established direct market linkages"
+        ],
+        "year": "2024",
+        "tags": [
+          "success story",
+          "FFPO",
+          "collective marketing"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:16.343Z",
+        "updatedAt": "2026-08-25T05:29:16.343Z"
+      },
+      {
+        "_id": "6a8d282c86995c2a629e2445",
+        "title": "Youth Entrepreneurship Success",
+        "section": "success-stories",
+        "description": "Pradeep, a graduate, attended our entrepreneurship development program and started ornamental fish breeding. He now supplies ornamental fish to pet shops across MP and neighboring states.",
+        "order": 4,
+        "isPublished": true,
+        "modules": [],
+        "activities": [],
+        "features": [],
+        "name": "Pradeep Youth Entrepreneur",
+        "program": "Entrepreneurship Development",
+        "achievement": "Started ornamental fish business with ₹8 lakh annual income",
+        "story": "Pradeep, a graduate, attended our entrepreneurship development program and started ornamental fish breeding. He now supplies ornamental fish to pet shops across MP and neighboring states.",
+        "impactPoints": [
+          "Self-employment generation",
+          "Annual income of ₹8 lakhs",
+          "Created jobs for 3 youth",
+          "Established export linkages"
+        ],
+        "year": "2024",
+        "tags": [
+          "success story",
+          "youth entrepreneurship",
+          "ornamental fish"
+        ],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:29:16.343Z",
+        "updatedAt": "2026-08-25T05:29:16.343Z"
+      }
+    ],
+    "galleries": [],
+    "partners": [
+      {
+        "_id": "6a8d26c64e26865116a3f682",
+        "name": "Department of Fisheries",
+        "logo": "dof.jpg",
+        "altText": "India Department of Fisheries Logo",
+        "link": "https://dof.gov.in/",
+        "isActive": true,
+        "order": 1,
+        "description": "Central Government Department responsible for fisheries development in India",
+        "category": "government",
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:18.764Z",
+        "updatedAt": "2026-08-25T05:23:18.764Z"
+      },
+      {
+        "_id": "6a8d26c64e26865116a3f683",
+        "name": "National Fisheries Development Board",
+        "logo": "nfdb.jpg",
+        "altText": "National Fisheries Development Board Logo",
+        "link": "http://nfdb.gov.in/",
+        "isActive": true,
+        "order": 2,
+        "description": "Nodal agency for fisheries development and coordination",
+        "category": "government",
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:18.764Z",
+        "updatedAt": "2026-08-25T05:23:18.764Z"
+      },
+      {
+        "_id": "6a8d26c64e26865116a3f684",
+        "name": "ICAR-CMFRI",
+        "logo": "icar-cmfri.jpg",
+        "altText": "ICAR-CMFRI Logo",
+        "link": "https://www.cmfri.org.in/",
+        "isActive": true,
+        "order": 3,
+        "description": "Central Marine Fisheries Research Institute",
+        "category": "research",
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:18.765Z",
+        "updatedAt": "2026-08-25T05:23:18.765Z"
+      },
+      {
+        "_id": "6a8d26c64e26865116a3f685",
+        "name": "CIFRI",
+        "logo": "cifri.jpeg",
+        "altText": "CIFRI Logo",
+        "link": "http://cifri.icar.gov.in/",
+        "isActive": true,
+        "order": 4,
+        "description": "Central Inland Fisheries Research Institute",
+        "category": "research",
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:18.765Z",
+        "updatedAt": "2026-08-25T05:23:18.765Z"
+      },
+      {
+        "_id": "6a8d26c64e26865116a3f686",
+        "name": "CIFA",
+        "logo": "cifa.jpeg",
+        "altText": "CIFA Logo",
+        "link": "http://cifa.nic.in/",
+        "isActive": true,
+        "order": 5,
+        "description": "Central Institute of Freshwater Aquaculture",
+        "category": "research",
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:18.765Z",
+        "updatedAt": "2026-08-25T05:23:18.765Z"
+      },
+      {
+        "_id": "6a8d26c64e26865116a3f687",
+        "name": "CIBA",
+        "logo": "ciba.png",
+        "altText": "CIBA Logo",
+        "link": "https://ciba.icar.gov.in/",
+        "isActive": true,
+        "order": 6,
+        "description": "Central Institute of Brackishwater Aquaculture",
+        "category": "research",
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:18.765Z",
+        "updatedAt": "2026-08-25T05:23:18.765Z"
+      },
+      {
+        "_id": "6a8d26c64e26865116a3f688",
+        "name": "CIFT",
+        "logo": "cift.png",
+        "altText": "CIFT Logo",
+        "link": "https://cift.res.in/",
+        "isActive": true,
+        "order": 7,
+        "description": "Central Institute of Fisheries Technology",
+        "category": "research",
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:18.765Z",
+        "updatedAt": "2026-08-25T05:23:18.765Z"
+      },
+      {
+        "_id": "6a8d26c64e26865116a3f689",
+        "name": "CIFE",
+        "logo": "cife.jpeg",
+        "altText": "CIFE Logo",
+        "link": "https://www.cife.edu.in/",
+        "isActive": true,
+        "order": 8,
+        "description": "Central Institute of Fisheries Education",
+        "category": "academic",
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:18.765Z",
+        "updatedAt": "2026-08-25T05:23:18.765Z"
+      },
+      {
+        "_id": "6a8d26c64e26865116a3f68a",
+        "name": "NBFGR",
+        "logo": "nbfgr.jpeg",
+        "altText": "NBFGR Logo",
+        "link": "https://nbfgr.res.in/",
+        "isActive": true,
+        "order": 9,
+        "description": "National Bureau of Fish Genetic Resources",
+        "category": "research",
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:18.765Z",
+        "updatedAt": "2026-08-25T05:23:18.765Z"
+      },
+      {
+        "_id": "6a8d26c64e26865116a3f68b",
+        "name": "DCFR",
+        "logo": "dcfr.png",
+        "altText": "DCFR Logo",
+        "link": "https://dcfr.res.in/",
+        "isActive": true,
+        "order": 10,
+        "description": "Directorate of Coldwater Fisheries Research",
+        "category": "research",
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:18.765Z",
+        "updatedAt": "2026-08-25T05:23:18.765Z"
+      }
+    ],
+    "contacts": [
+      {
+        "_id": "6a8d26bf040f0b492576ea9c",
+        "contactInfo": {
+          "phone": {
+            "main": "0761-2688862",
+            "office": " ",
+            "fax": " "
+          },
+          "email": {
+            "main": "info.cofsjabalpur@gmail.com",
+            "registrar": "",
+            "info": ""
+          },
+          "address": {
+            "institution": "College of Fishery Science Jabalpur",
+            "university": "Livestock Farm ",
+            "street": "Adhartal",
+            "city": "Jabalpur",
+            "state": "Madhya Pradesh",
+            "pincode": "482004",
+            "country": "India"
+          },
+          "officeHours": {
+            "weekdays": "Monday - Friday: 10:00 AM - 5:00 PM",
+            "saturday": " ",
+            "sunday": "Sunday: Closed"
+          }
+        },
+        "mapConfig": {
+          "title": "College of Fishery, Jabalpur",
+          "description": "Find us at our beautiful campus in Jabalpur, Madhya Pradesh",
+          "latitude": 23.1815,
+          "longitude": 79.9864,
+          "zoom": 15
+        },
+        "directions": {
+          "byRoad": "NH 34 from Bhopal (300 km), NH 7 from Nagpur (250 km). Well connected by state highways from nearby cities.",
+          "byAir": "Nearest airport: Jabalpur Airport (15 km from campus). Regular flights from Delhi, Mumbai, and other major cities.",
+          "byTrain": "Jabalpur Railway Station (12 km from campus). Major trains from Delhi, Mumbai, Chennai, and Kolkata."
+        },
+        "departments": [
+          {
+            "name": "Department of Aquaculture",
+            "phone": "+91-761-2681972",
+            "email": "aquaculture@ndvsu.ac.in",
+            "head": "Dr. Rajesh Kumar",
+            "description": "Specializes in fish farming, breeding techniques, and sustainable aquaculture practices.",
+            "_id": "6a8d26bf040f0b492576ea9d"
+          },
+          {
+            "name": "Department of Fisheries Biology",
+            "phone": "+91-761-2681973",
+            "email": "fishbiology@ndvsu.ac.in",
+            "head": "Dr. Priya Sharma",
+            "description": "Focuses on fish physiology, genetics, nutrition, and disease management.",
+            "_id": "6a8d26bf040f0b492576ea9e"
+          },
+          {
+            "name": "Department of Fish Processing Technology",
+            "phone": "+91-761-2681974",
+            "email": "fishtech@ndvsu.ac.in",
+            "head": "Dr. Amit Verma",
+            "description": "Covers fish processing, preservation, value addition, and quality control.",
+            "_id": "6a8d26bf040f0b492576ea9f"
+          },
+          {
+            "name": "Department of Fisheries Resource Management",
+            "phone": "+91-761-2681975",
+            "email": "resource@ndvsu.ac.in",
+            "head": "Dr. Sunita Jain",
+            "description": "Deals with fisheries economics, management, and sustainable resource utilization.",
+            "_id": "6a8d26bf040f0b492576eaa0"
+          },
+          {
+            "name": "Department of Aquatic Environment Management",
+            "phone": "+91-761-2681976",
+            "email": "environment@ndvsu.ac.in",
+            "head": "Dr. Ravi Gupta",
+            "description": "Focuses on water quality management, aquatic ecology, and environmental conservation.",
+            "_id": "6a8d26bf040f0b492576eaa1"
+          },
+          {
+            "name": "Administrative Office",
+            "phone": "+91-761-2681971",
+            "email": "admin@ndvsu.ac.in",
+            "head": "Registrar",
+            "description": "Handles admissions, examinations, academic records, and general administration.",
+            "_id": "6a8d26bf040f0b492576eaa2"
+          }
+        ],
+        "emergencyContacts": [
+          {
+            "title": "Medical Emergency",
+            "name": "Dr. Health Officer",
+            "phone": "+91-761-2681980",
+            "description": "For any medical emergencies on campus including first aid and health consultations.",
+            "_id": "6a8d26bf040f0b492576eaa3"
+          },
+          {
+            "title": "Security Control Room",
+            "name": "Security Chief",
+            "phone": "+91-761-2681981",
+            "description": "24/7 security assistance for campus safety, lost items, and emergency situations.",
+            "_id": "6a8d26bf040f0b492576eaa4"
+          },
+          {
+            "title": "Hostel Warden",
+            "name": "Hostel Administration",
+            "phone": "+91-761-2681982",
+            "description": "For hostel-related emergencies, accommodation issues, and student welfare.",
+            "_id": "6a8d26bf040f0b492576eaa5"
+          },
+          {
+            "title": "Transport Emergency",
+            "name": "Transport In-charge",
+            "phone": "+91-761-2681983",
+            "description": "Emergency transport services and vehicle breakdown assistance.",
+            "_id": "6a8d26bf040f0b492576eaa6"
+          },
+          {
+            "title": "IT Help Desk",
+            "name": "IT Support Team",
+            "phone": "+91-761-2681984",
+            "description": "Technical support for online services, Wi-Fi issues, and digital platforms.",
+            "_id": "6a8d26bf040f0b492576eaa7"
+          }
+        ],
+        "socialMedia": {
+          "facebook": "https://facebook.com/cofjabalpur",
+          "twitter": "https://twitter.com/cofjabalpur",
+          "linkedin": "https://linkedin.com/school/college-of-fishery-jabalpur",
+          "instagram": "https://instagram.com/cofjabalpur",
+          "youtube": "https://youtube.com/@cofjabalpur"
+        },
+        "createdAt": "2026-08-25T05:23:11.316Z",
+        "updatedAt": "2026-09-04T12:41:37.922Z",
+        "__v": 0
+      }
+    ],
+    "studentcorners": [
+      {
+        "_id": "6a8d26be040f0b492576ea5d",
+        "type": "admission",
+        "description": "Step-by-step procedure for submitting admission applications.",
+        "category": "Application Process",
+        "guidelines": [
+          "Online application through university portal",
+          "Upload required documents in prescribed format",
+          "Payment of application fee through online mode",
+          "Print application form after successful submission",
+          "Submit hard copy with documents at college office"
+        ],
+        "benefits": [],
+        "activities": [],
+        "positions": [],
+        "isActive": true,
+        "sortOrder": 2,
+        "documents": [],
+        "createdAt": "2026-08-25T05:23:10.919Z",
+        "updatedAt": "2026-08-25T05:23:10.921Z",
+        "__v": 0
+      },
+      {
+        "_id": "6a8d26be040f0b492576ea5c",
+        "type": "admission",
+        "description": "Academic qualifications and requirements for admission to B.F.Sc and M.F.Sc programs.",
+        "category": "Eligibility Criteria",
+        "guidelines": [
+          "B.F.Sc: 10+2 with Physics, Chemistry, Biology/Mathematics (50% marks)",
+          "M.F.Sc: B.F.Sc or equivalent degree (55% marks)",
+          "Age limit: 17-25 years for UG, 21-35 years for PG",
+          "Relaxation in marks and age as per Government norms",
+          "Valid entrance test score (AUAT/NET/GATE as applicable)"
+        ],
+        "benefits": [],
+        "activities": [],
+        "positions": [],
+        "isActive": true,
+        "sortOrder": 1,
+        "documents": [],
+        "createdAt": "2026-08-25T05:23:10.919Z",
+        "updatedAt": "2026-08-25T05:23:10.921Z",
+        "__v": 0
+      },
+      {
+        "_id": "6a8d26be040f0b492576ea5e",
+        "type": "admission",
+        "description": "List of documents to be submitted along with the application form.",
+        "category": "Required Documents",
+        "guidelines": [
+          "Mark sheets and certificates of qualifying examination",
+          "Transfer certificate and migration certificate",
+          "Character certificate from head of last institution",
+          "Caste certificate (if applicable)",
+          "Income certificate (for fee concession)",
+          "Medical fitness certificate",
+          "Recent passport size photographs"
+        ],
+        "benefits": [],
+        "activities": [],
+        "positions": [],
+        "isActive": true,
+        "sortOrder": 3,
+        "documents": [],
+        "createdAt": "2026-08-25T05:23:10.919Z",
+        "updatedAt": "2026-08-25T05:23:10.921Z",
+        "__v": 0
+      },
+      {
+        "_id": "6a8d26be040f0b492576ea61",
+        "type": "scholarships",
+        "name": "SC/ST Scholarship",
+        "description": "Special scholarship scheme for scheduled caste and scheduled tribe students.",
+        "guidelines": [],
+        "eligibility": "Students belonging to SC/ST category",
+        "amount": "₹15,000 per year",
+        "duration": "Throughout the course",
+        "benefits": [
+          "Complete fee waiver",
+          "Monthly stipend",
+          "Hostel accommodation",
+          "Medical assistance"
+        ],
+        "activities": [],
+        "positions": [],
+        "isActive": true,
+        "sortOrder": 2,
+        "documents": [],
+        "createdAt": "2026-08-25T05:23:10.920Z",
+        "updatedAt": "2026-08-25T05:23:10.921Z",
+        "__v": 0
+      },
+      {
+        "_id": "6a8d26be040f0b492576ea5f",
+        "type": "admission",
+        "description": "Key dates and deadlines for admission process.",
+        "category": "Important Dates",
+        "guidelines": [
+          "Application Start Date: May 15, 2025",
+          "Last Date for Application: June 15, 2025",
+          "Entrance Test Date: June 25, 2025",
+          "Merit List Publication: July 5, 2025",
+          "Counseling and Admission: July 10-20, 2025",
+          "Commencement of Classes: August 1, 2025"
+        ],
+        "benefits": [],
+        "activities": [],
+        "positions": [],
+        "isActive": true,
+        "sortOrder": 4,
+        "documents": [],
+        "createdAt": "2026-08-25T05:23:10.920Z",
+        "updatedAt": "2026-08-25T05:23:10.921Z",
+        "__v": 0
+      },
+      {
+        "_id": "6a8d26be040f0b492576ea62",
+        "type": "scholarships",
+        "name": "Research Fellowship (PG)",
+        "description": "Fellowship for postgraduate students engaged in research activities.",
+        "guidelines": [],
+        "eligibility": "M.F.Sc students with >60% marks",
+        "amount": "₹8,000 per month",
+        "duration": "2 years",
+        "benefits": [
+          "Monthly stipend",
+          "Research contingency",
+          "Conference participation support",
+          "Publication assistance"
+        ],
+        "activities": [],
+        "positions": [],
+        "isActive": true,
+        "sortOrder": 3,
+        "documents": [],
+        "createdAt": "2026-08-25T05:23:10.920Z",
+        "updatedAt": "2026-08-25T05:23:10.921Z",
+        "__v": 0
+      },
+      {
+        "_id": "6a8d26be040f0b492576ea60",
+        "type": "scholarships",
+        "name": "Merit-cum-Means Scholarship",
+        "description": "Government scholarship for meritorious students from economically weaker sections.",
+        "guidelines": [],
+        "eligibility": "Students with >75% marks and annual family income <₹2 lakh",
+        "amount": "₹12,000 per year",
+        "duration": "Throughout the course",
+        "benefits": [
+          "Tuition fee waiver",
+          "Maintenance allowance",
+          "Book allowance",
+          "Hostel fee concession"
+        ],
+        "activities": [],
+        "positions": [],
+        "isActive": true,
+        "sortOrder": 1,
+        "documents": [],
+        "createdAt": "2026-08-25T05:23:10.920Z",
+        "updatedAt": "2026-08-25T05:23:10.921Z",
+        "__v": 0
+      },
+      {
+        "_id": "6a8d26be040f0b492576ea65",
+        "type": "clubs",
+        "name": "Aquaculture Club",
+        "description": "Club focused on practical aspects of aquaculture and fishery management.",
+        "guidelines": [],
+        "benefits": [],
+        "role": "Technical Activities",
+        "activities": [
+          "Technical workshops and seminars",
+          "Field visits to fish farms",
+          "Hands-on training programs",
+          "Research project discussions",
+          "Industry interaction sessions"
+        ],
+        "positions": [
+          "President",
+          "Secretary",
+          "Technical Coordinator",
+          "Event Manager"
+        ],
+        "isActive": true,
+        "sortOrder": 2,
+        "documents": [],
+        "createdAt": "2026-08-25T05:23:10.920Z",
+        "updatedAt": "2026-08-25T05:23:10.921Z",
+        "__v": 0
+      },
+      {
+        "_id": "6a8d26be040f0b492576ea66",
+        "type": "clubs",
+        "name": "Cultural Club",
+        "description": "Organizing cultural events, festivals, and artistic activities on campus.",
+        "guidelines": [],
+        "benefits": [],
+        "role": "Cultural Activities",
+        "activities": [
+          "Annual cultural festival",
+          "Traditional and modern dance performances",
+          "Music and drama competitions",
+          "Art and craft exhibitions",
+          "Inter-college cultural competitions"
+        ],
+        "positions": [
+          "Cultural Secretary",
+          "Dance Coordinator",
+          "Music Coordinator",
+          "Drama Coordinator"
+        ],
+        "isActive": true,
+        "sortOrder": 3,
+        "documents": [],
+        "createdAt": "2026-08-25T05:23:10.920Z",
+        "updatedAt": "2026-08-25T05:23:10.921Z",
+        "__v": 0
+      },
+      {
+        "_id": "6a8d26be040f0b492576ea67",
+        "type": "clubs",
+        "name": "Sports Club",
+        "description": "Promoting sports activities and physical fitness among students.",
+        "guidelines": [],
+        "benefits": [],
+        "role": "Sports & Recreation",
+        "activities": [
+          "Inter-college sports competitions",
+          "Annual sports meet",
+          "Fitness and health awareness programs",
+          "Sports equipment management",
+          "Coaching and training sessions"
+        ],
+        "positions": [
+          "Sports Secretary",
+          "Indoor Games Coordinator",
+          "Outdoor Games Coordinator"
+        ],
+        "isActive": true,
+        "sortOrder": 4,
+        "documents": [],
+        "createdAt": "2026-08-25T05:23:10.921Z",
+        "updatedAt": "2026-08-25T05:23:10.921Z",
+        "__v": 0
+      },
+      {
+        "_id": "6a8d26be040f0b492576ea69",
+        "type": "clubs",
+        "name": "Environmental Club",
+        "description": "Promoting environmental awareness and conservation activities.",
+        "guidelines": [],
+        "benefits": [],
+        "role": "Environmental Conservation",
+        "activities": [
+          "Campus tree plantation drives",
+          "Water conservation awareness",
+          "Waste management initiatives",
+          "Environmental seminars and workshops",
+          "Clean campus campaigns"
+        ],
+        "positions": [
+          "Environmental Secretary",
+          "Conservation Coordinator",
+          "Awareness Head"
+        ],
+        "isActive": true,
+        "sortOrder": 6,
+        "documents": [],
+        "createdAt": "2026-08-25T05:23:10.921Z",
+        "updatedAt": "2026-08-25T05:23:10.921Z",
+        "__v": 0
+      },
+      {
+        "_id": "6a8d26be040f0b492576ea68",
+        "type": "clubs",
+        "name": "Literary Society",
+        "description": "Encouraging literary activities, debates, and academic discussions.",
+        "guidelines": [],
+        "benefits": [],
+        "role": "Academic & Literary",
+        "activities": [
+          "Debates and elocution competitions",
+          "Essay writing competitions",
+          "Book reading sessions",
+          "Academic seminars",
+          "College magazine publication"
+        ],
+        "positions": [
+          "Editor",
+          "Literary Secretary",
+          "Debate Coordinator",
+          "Publication Head"
+        ],
+        "isActive": true,
+        "sortOrder": 5,
+        "documents": [],
+        "createdAt": "2026-08-25T05:23:10.921Z",
+        "updatedAt": "2026-08-25T05:23:10.921Z",
+        "__v": 0
+      },
+      {
+        "_id": "6a8d26be040f0b492576ea63",
+        "type": "scholarships",
+        "name": "Girl Child Incentive",
+        "description": "Special incentive scheme to promote higher education among girls.",
+        "guidelines": [],
+        "eligibility": "Female students with >65% marks",
+        "amount": "₹10,000 per year",
+        "duration": "Throughout the course",
+        "benefits": [
+          "Financial assistance",
+          "Priority in hostel allocation",
+          "Safety and security measures",
+          "Career guidance support"
+        ],
+        "activities": [],
+        "positions": [],
+        "isActive": true,
+        "sortOrder": 4,
+        "documents": [],
+        "createdAt": "2026-08-25T05:23:10.920Z",
+        "updatedAt": "2026-08-25T05:23:10.921Z",
+        "__v": 0
+      },
+      {
+        "_id": "6a8d26be040f0b492576ea64",
+        "type": "clubs",
+        "name": "Student Council",
+        "description": "Representative body for student welfare and academic matters.",
+        "guidelines": [],
+        "benefits": [],
+        "role": "Student Governance",
+        "activities": [
+          "Student grievance redressal",
+          "Academic and administrative liaison",
+          "Cultural and sports event organization",
+          "Student welfare initiatives",
+          "Discipline and conduct management"
+        ],
+        "positions": [
+          "President",
+          "Vice-President",
+          "Secretary",
+          "Cultural Secretary",
+          "Sports Secretary"
+        ],
+        "isActive": true,
+        "sortOrder": 1,
+        "documents": [],
+        "createdAt": "2026-08-25T05:23:10.920Z",
+        "updatedAt": "2026-08-25T05:23:10.921Z",
+        "__v": 0
+      }
+    ],
+    "academicspages": [
+      {
+        "_id": "6a8d281d918e08872055bdf5",
+        "departments": [
+          {
+            "name": "Aquaculture",
+            "description": "Fish culture, breeding, and production techniques",
+            "icon": "fish",
+            "_id": "6a8d281d918e08872055bdf6"
+          },
+          {
+            "name": "Fishery Resource Management",
+            "description": "Sustainable fishery and resource conservation",
+            "icon": "shield",
+            "_id": "6a8d281d918e08872055bdf7"
+          },
+          {
+            "name": "Fish Processing Technology",
+            "description": "Food technology and value addition in fishery",
+            "icon": "gear",
+            "_id": "6a8d281d918e08872055bdf8"
+          },
+          {
+            "name": "Aquatic Environment Management",
+            "description": "Environmental aspects of aquatic ecosystems",
+            "icon": "leaf",
+            "_id": "6a8d281d918e08872055bdf9"
+          }
+        ],
+        "calendar": {
+          "events": [
+            {
+              "event": "Admission Opens",
+              "date": "June 2025",
+              "_id": "6a8d281d918e08872055bdfa"
+            },
+            {
+              "event": "Classes Begin",
+              "date": "July 2025",
+              "_id": "6a8d281d918e08872055bdfb"
+            },
+            {
+              "event": "Mid-term Examinations",
+              "date": "October 2025",
+              "_id": "6a8d281d918e08872055bdfc"
+            },
+            {
+              "event": "Final Examinations",
+              "date": "December 2025",
+              "_id": "6a8d281d918e08872055bdfd"
+            },
+            {
+              "event": "Results Declaration",
+              "date": "January 2026",
+              "_id": "6a8d281d918e08872055bdfe"
+            },
+            {
+              "event": "Summer Vacation",
+              "date": "April-May 2026",
+              "_id": "6a8d281d918e08872055bdff"
+            }
+          ]
+        },
+        "regulations": [
+          {
+            "title": "Attendance",
+            "description": "Minimum 75% attendance required for all subjects",
+            "_id": "6a8d281d918e08872055be00"
+          },
+          {
+            "title": "Examinations",
+            "description": "Mid-term and final examination system with continuous assessment",
+            "_id": "6a8d281d918e08872055be01"
+          },
+          {
+            "title": "Grading",
+            "description": "Credit-based grading system (CBGS) with letter grades",
+            "_id": "6a8d281d918e08872055be02"
+          },
+          {
+            "title": "Practical Work",
+            "description": "Mandatory field work and laboratory practicals",
+            "_id": "6a8d281d918e08872055be03"
+          }
+        ],
+        "faculty": {
+          "title": "Expert Faculty Members",
+          "description": "Our highly qualified and experienced faculty members specialize in various fields of fishery science, bringing decades of research and industry experience to provide world-class education."
+        },
+        "isActive": true,
+        "createdAt": "2026-08-25T05:29:01.740Z",
+        "updatedAt": "2026-08-25T05:29:01.740Z",
+        "__v": 0
+      }
+    ],
+    "admins": [
+      {
+        "_id": "6a8d26be040f0b492576ea27",
+        "username": "admin",
+        "email": "admin@fisherycollegejabalpur.edu.in",
+        "password": "$2a$12$bnl04Z5NqhFuYC9nnayV0O2eTyUFbmjFZyvFzpzkcO3jqSz8FcBnK",
+        "role": "admin",
+        "isActive": true,
+        "createdAt": "2026-08-25T05:23:10.076Z",
+        "updatedAt": "2026-08-25T09:55:58.106Z",
+        "__v": 0,
+        "lastLogin": "2026-08-25T09:54:29.306Z"
+      }
+    ],
+    "infrastructures": [
+      {
+        "_id": "6a8d26be040f0b492576ea51",
+        "name": "Aquaculture Research Laboratory",
+        "type": "laboratory",
+        "description": "Modern laboratory equipped with advanced instruments for water quality analysis, fish health monitoring, and feed analysis.",
+        "capacity": "50 students",
+        "area": "200 sq meters",
+        "location": "Academic Block A, Ground Floor",
+        "facilities": [
+          "Water quality testing equipment",
+          "Microscopes and imaging systems",
+          "Feed analysis instruments",
+          "Fish health monitoring tools"
+        ],
+        "equipment": [
+          {
+            "name": "DO Meter",
+            "quantity": 5,
+            "specifications": "Digital dissolved oxygen meter with temperature compensation",
+            "_id": "6a8d26be040f0b492576ea52"
+          },
+          {
+            "name": "pH Meter",
+            "quantity": 8,
+            "specifications": "Digital pH meter with automatic calibration",
+            "_id": "6a8d26be040f0b492576ea53"
+          }
+        ],
+        "yearEstablished": 2020,
+        "incharge": "Dr. Anil Kumar Jain",
+        "contactInfo": {
+          "phone": "+91 761 2345681",
+          "email": "lab@fisherycollegejabalpur.edu.in"
+        },
+        "operatingHours": "9:00 AM - 5:00 PM (Monday to Saturday)",
+        "isActive": true,
+        "createdBy": "6a8d26be040f0b492576ea27",
+        "images": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:10.842Z",
+        "updatedAt": "2026-08-25T05:23:10.842Z"
+      },
+      {
+        "_id": "6a8d26be040f0b492576ea54",
+        "name": "Fish Hatchery Unit",
+        "type": "hatchery",
+        "description": "Commercial scale fish hatchery for breeding and production of fish seed for research and commercial purposes.",
+        "capacity": "1 million fry per cycle",
+        "area": "500 sq meters",
+        "location": "Behind Academic Block",
+        "facilities": [
+          "Breeding pools",
+          "Nursery tanks",
+          "Water circulation system",
+          "Temperature control system"
+        ],
+        "yearEstablished": 2012,
+        "incharge": "Mr. Suresh Kumar",
+        "operatingHours": "24/7 monitoring",
+        "isActive": true,
+        "createdBy": "6a8d26be040f0b492576ea27",
+        "equipment": [],
+        "images": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:10.842Z",
+        "updatedAt": "2026-08-25T05:23:10.842Z"
+      },
+      {
+        "_id": "6a8d26be040f0b492576ea55",
+        "name": "Central Library",
+        "type": "library",
+        "description": "Well-equipped library with extensive collection of books, journals, and digital resources related to fishery science.",
+        "capacity": "100 readers",
+        "area": "300 sq meters",
+        "location": "Academic Block B, First Floor",
+        "facilities": [
+          "Book collection (5000+ titles)",
+          "Digital library access",
+          "Reading halls",
+          "Computer terminals"
+        ],
+        "yearEstablished": 1999,
+        "incharge": "Mrs. Sunita Sharma",
+        "operatingHours": "8:00 AM - 8:00 PM (Monday to Saturday)",
+        "isActive": true,
+        "createdBy": "6a8d26be040f0b492576ea27",
+        "equipment": [],
+        "images": [],
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:10.842Z",
+        "updatedAt": "2026-08-25T05:23:10.842Z"
+      }
+    ],
+    "slideshows": [
+      {
+        "_id": "6a8d2816ac30c879ca4ac8a2",
+        "image": "https://res.cloudinary.com/dzonvsfnr/image/upload/v1788525229/fishery_college/slideshow/COFS_JABALPUR_1788525229873.png",
+        "order": 0,
+        "isActive": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:28:54.452Z",
+        "updatedAt": "2026-09-04T12:33:50.765Z"
+      },
+      {
+        "_id": "6a8d2816ac30c879ca4ac8a3",
+        "image": "https://res.cloudinary.com/dzonvsfnr/image/upload/v1788525408/fishery_college/slideshow/AI_INAGAURATION_1788525408015.jpg",
+        "order": 1,
+        "isActive": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:28:54.452Z",
+        "updatedAt": "2026-09-04T12:36:48.925Z"
+      },
+      {
+        "_id": "6a8d2816ac30c879ca4ac8a4",
+        "image": "https://res.cloudinary.com/dzonvsfnr/image/upload/v1788525279/fishery_college/slideshow/210NOV_1788525279575.png",
+        "order": 2,
+        "isActive": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:28:54.452Z",
+        "updatedAt": "2026-09-04T12:34:40.395Z"
+      },
+      {
+        "_id": "6a8d2816ac30c879ca4ac8a5",
+        "image": "https://res.cloudinary.com/dzonvsfnr/image/upload/v1788525301/fishery_college/slideshow/WhatsApp_Image_2026_04_04_at_14_00_22__1__1788525301259.jpg",
+        "order": 3,
+        "isActive": true,
+        "__v": 0,
+        "createdAt": "2026-08-25T05:28:54.452Z",
+        "updatedAt": "2026-09-04T12:35:02.014Z"
+      },
+      {
+        "_id": "6a9abba538f208009ef3cb58",
+        "image": "https://res.cloudinary.com/dzonvsfnr/image/upload/v1788526403/fishery_college/slideshow/PHOTO_SLIDE_page_0005_1788526403093.jpg",
+        "order": 4,
+        "isActive": true,
+        "createdAt": "2026-09-04T12:37:57.493Z",
+        "updatedAt": "2026-09-04T12:53:24.177Z",
+        "__v": 0
+      },
+      {
+        "_id": "6a9abbc09011e1d66dc03543",
+        "image": "https://res.cloudinary.com/dzonvsfnr/image/upload/v1788526378/fishery_college/slideshow/PHOTO_SLIDE_page_0006_1788526378046.jpg",
+        "order": 5,
+        "isActive": true,
+        "createdAt": "2026-09-04T12:38:24.209Z",
+        "updatedAt": "2026-09-04T12:53:01.648Z",
+        "__v": 0
+      },
+      {
+        "_id": "6a9abeb85bd1afc57ae04bb2",
+        "image": "https://res.cloudinary.com/dzonvsfnr/image/upload/v1788526263/fishery_college/slideshow/IMG_20240423_WA0245_1788526263815.jpg",
+        "order": 6,
+        "isActive": true,
+        "createdAt": "2026-09-04T12:51:04.244Z",
+        "updatedAt": "2026-09-04T12:51:04.244Z",
+        "__v": 0
+      },
+      {
+        "_id": "6a9abec75bd1afc57ae04bb7",
+        "image": "https://res.cloudinary.com/dzonvsfnr/image/upload/v1788526278/fishery_college/slideshow/Training_Programme_18_20_Sep__2024_1788526278585.jpg",
+        "order": 7,
+        "isActive": true,
+        "createdAt": "2026-09-04T12:51:19.140Z",
+        "updatedAt": "2026-09-04T12:51:19.140Z",
+        "__v": 0
+      }
+    ],
+    "programs": [
+      {
+        "_id": "6a8d26be040f0b492576ea2e",
+        "title": "Bachelor of Fishery Science (B.F.Sc)",
+        "slug": "bachelor-fishery-science",
+        "description": "A comprehensive 4-year undergraduate program covering all aspects of fishery science including aquaculture, fish biology, fishery management, and processing technology.",
+        "overview": "",
+        "duration": "4 Years",
+        "curriculum": [
+          {
+            "semester": "Semester 1",
+            "subjects": [
+              "General Biology",
+              "Chemistry",
+              "Mathematics",
+              "English",
+              "Computer Applications"
+            ],
+            "_id": "6a8d26be040f0b492576ea2f"
+          },
+          {
+            "semester": "Semester 2",
+            "subjects": [
+              "Fish Biology",
+              "Water Chemistry",
+              "Statistics",
+              "Economics",
+              "Environmental Science"
+            ],
+            "_id": "6a8d26be040f0b492576ea30"
+          }
+        ],
+        "detailedCurriculum": {
+          "semester1": [],
+          "semester2": [],
+          "semester3": [],
+          "semester4": [],
+          "semester5": [],
+          "semester6": [],
+          "semester7": [],
+          "semester8": []
+        },
+        "fees": {
+          "annual": 50000
+        },
+        "intake": 60,
+        "highlights": [],
+        "careerOpportunities": [],
+        "facilities": [],
+        "admissionProcess": {
+          "documents": [],
+          "importantDates": []
+        },
+        "department": "Fishery Science",
+        "level": "undergraduate",
+        "image": "",
+        "isActive": true,
+        "createdBy": "6a8d26be040f0b492576ea27",
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:10.446Z",
+        "updatedAt": "2026-08-25T05:23:10.446Z"
+      },
+      {
+        "_id": "6a8d26be040f0b492576ea31",
+        "title": "Master of Fishery Science (M.F.Sc)",
+        "slug": "master-fishery-science",
+        "description": "Advanced 2-year postgraduate program with specializations in Aquaculture, Fish Processing Technology, and Fishery Resource Management.",
+        "overview": "",
+        "duration": "2 Years",
+        "curriculum": [
+          {
+            "semester": "Semester 1",
+            "subjects": [
+              "Advanced Aquaculture",
+              "Research Methodology",
+              "Biostatistics",
+              "Fish Nutrition"
+            ],
+            "_id": "6a8d26be040f0b492576ea32"
+          }
+        ],
+        "detailedCurriculum": {
+          "semester1": [],
+          "semester2": [],
+          "semester3": [],
+          "semester4": [],
+          "semester5": [],
+          "semester6": [],
+          "semester7": [],
+          "semester8": []
+        },
+        "fees": {
+          "annual": 60000
+        },
+        "intake": 30,
+        "highlights": [],
+        "careerOpportunities": [],
+        "facilities": [],
+        "admissionProcess": {
+          "documents": [],
+          "importantDates": []
+        },
+        "department": "Fishery Science",
+        "level": "postgraduate",
+        "image": "",
+        "isActive": true,
+        "createdBy": "6a8d26be040f0b492576ea27",
+        "__v": 0,
+        "createdAt": "2026-08-25T05:23:10.446Z",
+        "updatedAt": "2026-08-25T05:23:10.446Z"
+      }
+    ]
+  }
+}

@@ -10,7 +10,9 @@
     "seed-partners": "node utils/seedPartners.js",
     "seed-news": "node utils/seedNewsEvents.js",
     "seed-contact": "node utils/seedContact.js",
-    "migrate-slugs": "node utils/migrateNewsEventsToSlugs.js"
+    "migrate-slugs": "node utils/migrateNewsEventsToSlugs.js",
+    "backup-db": "node scripts/backup-db.js",
+    "restore-db": "node scripts/restore-db.js"
   },
   "keywords": [
     "express",

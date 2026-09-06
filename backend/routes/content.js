@@ -4,6 +4,7 @@ const fs = require('fs');
 const Content = require('../models/Content');
 const { protect, adminOnly } = require('../middleware/auth');
 const { upload, deleteFile } = require('../middleware/upload');
+const { logContentChange } = require('../utils/versionHelper');
 
 const router = express.Router();
 
@@ -99,6 +100,8 @@ router.post('/', protect, adminOnly, async (req, res) => {
         { new: true, runValidators: true }
       );
 
+      logContentChange('Content', updatedContent._id, 'UPDATE', existingContent, updatedContent, req);
+
       return res.json({
         success: true,
         message: 'Content updated successfully',
@@ -112,6 +115,8 @@ router.post('/', protect, adminOnly, async (req, res) => {
       };
 
       const content = await Content.create(contentData);
+
+      logContentChange('Content', content._id, 'CREATE', null, content, req);
 
       return res.status(201).json({
         success: true,
@@ -150,6 +155,14 @@ router.put('/:id', protect, adminOnly, async (req, res) => {
         message: 'Content must be a string. Arrays should be JSON stringified.'
       });
     }
+
+    const existingContent = await Content.findById(req.params.id);
+    if (!existingContent) {
+      return res.status(404).json({
+        success: false,
+        message: 'Content not found'
+      });
+    }
     
     const updatedContent = await Content.findByIdAndUpdate(
       req.params.id,
@@ -157,12 +170,7 @@ router.put('/:id', protect, adminOnly, async (req, res) => {
       { new: true, runValidators: true }
     );
 
-    if (!updatedContent) {
-      return res.status(404).json({
-        success: false,
-        message: 'Content not found'
-      });
-    }
+    logContentChange('Content', updatedContent._id, 'UPDATE', existingContent, updatedContent, req);
 
     res.json({
       success: true,
@@ -210,6 +218,8 @@ router.delete('/:id', protect, adminOnly, async (req, res) => {
     }
 
     await Content.findByIdAndDelete(req.params.id);
+
+    logContentChange('Content', content._id, 'DELETE', content, null, req);
 
     res.json({
       success: true,

@@ -26,7 +26,8 @@ import {
   Network,
   UserCheck,
   Phone,
-  Settings
+  Settings,
+  History
 } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { programsAPI, facultyAPI, newsAPI, userManagementAPI } from '../../services/api'
@@ -51,6 +52,7 @@ import ExtensionManagement from './ExtensionManagement'
 import InfrastructureStatic from './InfrastructureStatic'
 import IncubationManagement from './IncubationManagement'
 import ContactManagement from './ContactManagement'
+import VersionControlManagement from './VersionControlManagement'
 
 // Admin Page Components
 const DashboardHome = () => {
@@ -348,6 +350,7 @@ const AdminDashboard = () => {
     { name: 'Content', href: '/admin/content', icon: FileText },
     { name: 'Farmer Corner', href: '/admin/resources', icon: Tractor },
     { name: 'Contact', href: '/admin/contact', icon: Phone },
+    { name: 'Version History & Backup', href: '/admin/versions', icon: History },
     { name: 'User Management', href: '/admin/settings', icon: Settings }
   ]
 
@@ -541,6 +544,7 @@ const AdminDashboard = () => {
                 <Route path="/content" element={<ContentManagement />} />
                 <Route path="/resources" element={<FarmersResourceManagement />} />
                 <Route path="/contact" element={<ContactManagement />} />
+                <Route path="/versions" element={<VersionControlManagement />} />
                 <Route path="/settings" element={<UserManagement />} />
                 <Route path="*" element={<Navigate to="/admin" replace />} />
               </Routes>

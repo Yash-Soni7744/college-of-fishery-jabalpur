@@ -1,11 +1,17 @@
 require('dotenv').config();
 
 const express = require('express');
+const mongoose = require('mongoose');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const path = require('path');
 const connectDB = require('./config/database');
+const versionPlugin = require('./models/plugins/versionPlugin');
+const { requestContextMiddleware } = require('./utils/requestContext');
+
+// Register global version control plugin on all Mongoose models
+mongoose.plugin(versionPlugin);
 
 // Connect to database
 connectDB();
@@ -20,6 +26,9 @@ try {
 }
 
 const app = express();
+
+// Request context for audit tracking
+app.use(requestContextMiddleware);
 
 // Security middleware
 app.use(helmet({
@@ -91,8 +100,17 @@ app.use('/uploads', (req, res, next) => {
   next();
 }, express.static(path.join(__dirname, 'uploads')));
 
+// Specific rate limiter for auth/login to prevent brute-force attacks
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 20, // limit each IP to 20 login attempts per windowMs
+  message: { success: false, message: 'Too many login attempts from this IP, please try again after 15 minutes.' }
+});
+app.use('/api/auth/login', authLimiter);
+
 // Routes
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/versions', require('./routes/versions'));
 app.use('/api/programs', require('./routes/programs'));
 app.use('/api/news', require('./routes/news'));
 app.use('/api/faculty', require('./routes/faculty'));

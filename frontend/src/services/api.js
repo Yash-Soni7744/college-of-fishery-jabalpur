@@ -467,5 +467,19 @@ export const contactAPI = {
   deleteEmergencyContact: (id) => api.delete(`/contact/emergency/${id}`),
 }
 
+export const versionsAPI = {
+  getAll: (params) => api.get('/versions', { params }),
+  getById: (id) => api.get(`/versions/${id}`),
+  restore: (id) => api.post(`/versions/${id}/restore`),
+  getSnapshots: () => api.get('/versions/snapshots/list'),
+  createSnapshot: (data) => api.post('/versions/snapshots/create', data),
+  restoreSnapshot: (data) => api.post('/versions/snapshots/restore', data),
+  getDownloadUrl: (filename) => {
+    const baseURL = import.meta.env.VITE_SERVER_HOST || '/api';
+    return `${baseURL}/versions/snapshots/download/${filename}`;
+  }
+}
+
 export default api
+
 
